@@ -3,8 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FluidCanvas } from "@/components/ui/FluidCanvas";
 import { CodeCompareFeature } from "@/features/code-compare/CodeCompareFeature";
-
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://devstudio-tools.vercel.app";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Free Online Code Compare & Diff Tool — Side-by-Side Monaco Editor",
@@ -31,7 +30,7 @@ export const metadata: Metadata = {
       "Compare source code side-by-side or inline with Monaco diff engine, syntax highlighting, and dual 5MB file upload.",
     url: `${APP_URL}/tools/code-compare`,
     siteName: "CodeLens",
-    images: ["/logo-large.jpg"],
+    images: [`${APP_URL}/logo-large.jpg`],
     type: "website",
   },
   twitter: {
@@ -39,7 +38,7 @@ export const metadata: Metadata = {
     title: "Online Code Compare Tool — CodeLens",
     description:
       "Compare code side-by-side or inline with Monaco diff engine and syntax highlighting.",
-    images: ["/logo-large.jpg"],
+    images: [`${APP_URL}/logo-large.jpg`],
   },
 };
 

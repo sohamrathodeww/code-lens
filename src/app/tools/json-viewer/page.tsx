@@ -3,8 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FluidCanvas } from "@/components/ui/FluidCanvas";
 import { JsonViewerFeature } from "@/features/json-viewer/JsonViewerFeature";
-
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://devstudio-tools.vercel.app";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Free Online JSON Viewer, Beautifier, Table Grid & Diagram Inspector",
@@ -33,7 +32,7 @@ export const metadata: Metadata = {
       "Format, beautify, minify, inspect tree nodes, view tabular data, and generate interactive flow chart diagrams online for free.",
     url: `${APP_URL}/tools/json-viewer`,
     siteName: "CodeLens",
-    images: ["/logo-large.jpg"],
+    images: [`${APP_URL}/logo-large.jpg`],
     type: "website",
   },
   twitter: {
@@ -41,7 +40,7 @@ export const metadata: Metadata = {
     title: "Online JSON Viewer, Beautifier & Diagram Inspector — CodeLens",
     description:
       "Format, beautify, minify, inspect tree nodes, view tables, and generate flow chart diagrams online.",
-    images: ["/logo-large.jpg"],
+    images: [`${APP_URL}/logo-large.jpg`],
   },
 };
 

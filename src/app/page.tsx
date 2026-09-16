@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { FluidCanvas } from "@/components/ui/FluidCanvas";
 import { SlideUp } from "@/components/motion/MotionPrimitives";
 import { TOOLS_REGISTRY } from "@/lib/tools-registry";
+import { APP_URL } from "@/lib/constants";
 
 const ICON_MAP: Record<string, React.ElementType> = {
   FileJson,
@@ -18,8 +19,6 @@ const ICON_MAP: Record<string, React.ElementType> = {
   Regex,
   Sparkles,
 };
-
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://devstudio-tools.vercel.app";
 
 const websiteSchema = {
   "@context": "https://schema.org",

@@ -153,3 +153,11 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(99, 102, 241, 0.5);
 }
+
+/* Clean up Monaco Diff Editor Overview Ruler & Margin Clutter */
+.monaco-diff-editor .overlayWidgets,
+.monaco-editor .margin-view-overlays .overview-ruler,
+.monaco-diff-editor .decorationsOverviewRuler {
+  display: none !important;
+  width: 0 !important;
+}

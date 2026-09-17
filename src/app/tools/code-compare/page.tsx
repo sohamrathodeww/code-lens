@@ -8,13 +8,13 @@ import { APP_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Free Online Code Compare & Diff Tool — Side-by-Side Monaco Editor",
   description:
-    "Free online code diff tool powered by Monaco Engine. Compare source code side-by-side or inline with syntax highlighting across 13+ languages and dual 5MB file upload.",
+    "Free online code diff tool powered by Monaco Engine. Compare source code side-by-side with syntax highlighting across 13+ languages, sample datasets, swap sides, and dual 5MB file upload.",
   keywords: [
     "code compare online",
     "online code diff tool",
     "monaco diff editor",
     "side by side code diff",
-    "inline text diff",
+    "swap code sides",
     "compare javascript online",
     "compare python code",
     "diff checker 5mb",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Free Online Code Compare & Diff Tool | CodeLens",
     description:
-      "Compare source code side-by-side or inline with Monaco diff engine, syntax highlighting, and dual 5MB file upload.",
+      "Compare source code side-by-side with Monaco diff engine, syntax highlighting, sample datasets, side swapping, and dual 5MB file upload.",
     url: `${APP_URL}/tools/code-compare`,
     siteName: "CodeLens",
     images: [`${APP_URL}/logo-large.jpg`],
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Online Code Compare Tool — CodeLens",
     description:
-      "Compare code side-by-side or inline with Monaco diff engine and syntax highlighting.",
+      "Compare code side-by-side with Monaco diff engine, sample data, swap sides, and syntax highlighting.",
     images: [`${APP_URL}/logo-large.jpg`],
   },
 };
@@ -51,7 +51,7 @@ const jsonLdSchema = {
       name: "CodeLens Online Code Compare Studio",
       url: `${APP_URL}/tools/code-compare`,
       description:
-        "Free online code diff tool powered by Monaco Engine for comparing source code side-by-side or inline.",
+        "Free online code diff tool powered by Monaco Engine for comparing source code side-by-side.",
       applicationCategory: "DeveloperApplication",
       operatingSystem: "All",
       offers: {
@@ -69,23 +69,23 @@ const jsonLdSchema = {
           name: "How do I compare two code files online?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Paste your original code into the Original pane and your updated code into the Modified pane, or upload two files up to 5MB to see instant line-by-line diff highlighting.",
+            text: "Paste your original code into the Left pane and your updated code into the Right pane, click 'Sample' to load demonstration code, or upload two files up to 5MB to see instant line-by-line diff highlighting.",
           },
         },
         {
           "@type": "Question",
-          name: "What programming languages are supported?",
+          name: "How do I swap the original and modified code sides?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "CodeLens supports syntax highlighting for 13+ languages including JavaScript, TypeScript, Python, HTML, CSS, JSON, SQL, Java, C++, Go, Rust, Ruby, and PHP.",
+            text: "Click the 'Swap Sides' button in the control toolbar or pane headers to instantly swap the code content and filenames between left and right boxes.",
           },
         },
         {
           "@type": "Question",
-          name: "Can I switch between side-by-side and inline diff views?",
+          name: "How do I clean both comparison boxes?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Yes, use the Split / Inline view toggle button to switch between two-column split diff view and single-column unified diff view.",
+            text: "Click the 'Reset' button in the toolbar to clear both original and modified code boxes.",
           },
         },
         {
@@ -119,25 +119,25 @@ export default function CodeComparePage() {
         <section className="liquid-glass-surface p-8 space-y-6 text-slate-700 text-sm leading-relaxed border border-white/80">
           <div className="space-y-2">
             <h2 className="text-2xl font-bold text-slate-950 tracking-tight">
-              High-Performance Monaco Code Compare & Diff Studio
+              High-Performance Monaco Code Compare & Side-by-Side Diff Studio
             </h2>
             <p className="text-slate-600">
-              CodeLens Code Compare Studio provides a professional side-by-side and inline diff tool built on VS Code's Monaco Editor engine for instant code auditing.
+              CodeLens Code Compare Studio provides a professional side-by-side diff tool built on VS Code's Monaco Editor engine for instant code auditing, sample loading, side swapping, and real-time syntax comparison.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
             <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/80 space-y-2">
-              <h3 className="font-bold text-slate-950 text-base">⚡ Monaco Diff Engine</h3>
+              <h3 className="font-bold text-slate-950 text-base">⚡ Monaco Side-by-Side Diff</h3>
               <p className="text-xs text-slate-600">
-                Identifies additions, deletions, and line-level changes with exact line numbers and synchronized scrolling.
+                Identifies additions, deletions, and line-level changes with exact line numbers and synchronized scrolling in side-by-side mode.
               </p>
             </div>
 
             <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/80 space-y-2">
-              <h3 className="font-bold text-slate-950 text-base">🌐 13+ Syntax Highlighters</h3>
+              <h3 className="font-bold text-slate-950 text-base">🔄 One-Click Side Swapping & Sample Data</h3>
               <p className="text-xs text-slate-600">
-                Switch syntax modes dynamically for JavaScript, TypeScript, Python, JSON, SQL, HTML, CSS, C++, Java, and Go.
+                Quickly swap original and modified sides with one click, load curated code sample data, or reset and clean both boxes instantly.
               </p>
             </div>
 

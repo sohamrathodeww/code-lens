@@ -6,22 +6,26 @@ import { JsonViewerFeature } from "@/features/json-viewer/JsonViewerFeature";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Free Online JSON Viewer, Beautifier, Table Grid & Diagram Inspector",
+  title: "Free Online JSON Viewer, Formatter & Tree Inspector | CodeLens",
   description:
-    "Free online JSON viewer, beautifier, minifier, interactive tree inspector, tabular data grid, parent-child hierarchy map, and flow chart diagram viewer with 5MB instant payload validation.",
+    "CodeLens JSON Viewer is a free online JSON formatter, beautifier, minifier, validator, and tree inspector for developers working with API payloads, configuration files, and structured data.",
   keywords: [
+    "CodeLens JSON viewer",
     "online json viewer",
-    "json viewer",
+    "json viewer online",
     "json beautifier",
     "json formatter online",
     "json minifier",
     "json tree inspector",
+    "json validator",
     "json to table",
     "json diagram viewer",
     "json flowchart",
     "json hierarchy map",
     "json path copy",
     "free json validator",
+    "api payload formatter",
+    "developer JSON tools",
   ],
   alternates: {
     canonical: `${APP_URL}/tools/json-viewer`,
@@ -121,10 +125,10 @@ export default function JsonViewerPage() {
         <section className="liquid-glass-surface p-8 space-y-6 text-slate-700 text-sm leading-relaxed border border-white/80">
           <div className="space-y-2">
             <h2 className="text-2xl font-bold text-slate-950 tracking-tight">
-              High-Performance Online JSON Viewer, Beautifier & Inspection Suite
+              Free Online JSON Viewer for API Payloads, Schema Review, and Data Inspection
             </h2>
             <p className="text-slate-600">
-              CodeLens provides a free, instant developer environment to validate, beautify, minify, and analyze complex JSON payloads up to 5MB without sending data to server backends.
+              CodeLens JSON Viewer helps developers validate request and response payloads, inspect nested structures, and transform raw JSON into readable, developer-friendly output. It is designed for API teams, frontend engineers, and QA reviewers who need clean output and fast troubleshooting.
             </p>
           </div>
 
@@ -132,21 +136,21 @@ export default function JsonViewerPage() {
             <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/80 space-y-2">
               <h3 className="font-bold text-slate-950 text-base">🌳 Tree & Table Inspection</h3>
               <p className="text-xs text-slate-600">
-                Inspect nested JSON objects with expandable tree nodes, copy JSON paths (`$.users[0].name`), or switch to a structured tabular data grid.
+                Inspect nested JSON objects with expandable tree nodes, copy precise JSON paths such as <span className="font-mono text-slate-700">$.users[0].name</span>, and switch to a structured tabular grid for readable data analysis.
               </p>
             </div>
 
             <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/80 space-y-2">
               <h3 className="font-bold text-slate-950 text-base">🔀 Flow Chart Diagrams</h3>
               <p className="text-xs text-slate-600">
-                Visualize JSON hierarchy as an interactive parent-to-child diagram tree connecting root objects, sub-branches, and array entities.
+                Visualize JSON hierarchy as an interactive parent-to-child diagram tree connecting root objects, sub-branches, and array entities for content mapping and backend debugging.
               </p>
             </div>
 
             <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/80 space-y-2">
               <h3 className="font-bold text-slate-950 text-base">⚡ Instant Minifier & Validator</h3>
               <p className="text-xs text-slate-600">
-                Compress API responses into single-line minified JSON or validate syntax errors with real-time error line reporting.
+                Compress API responses into single-line minified JSON, validate syntax issues in real time, and keep data workflows moving without leaving the browser.
               </p>
             </div>
           </div>

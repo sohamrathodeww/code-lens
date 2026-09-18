@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { DiffEditor } from "@monaco-editor/react";
+import React, { useState, useRef, useEffect, useMemo, useCallback } from "react";
+import { Editor, DiffEditor } from "@monaco-editor/react";
 import {
   Code2,
   ArrowLeftRight,
@@ -16,6 +16,9 @@ import {
   Sun,
   Moon,
   Trash2,
+  Split,
+  GitCompare,
+  Edit3,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { FileUploadZone } from "@/components/ui/FileUploadZone";
@@ -72,6 +75,115 @@ const SUPPORTED_LANGUAGES = [
   { id: "markdown", name: "Markdown" },
 ];
 
+/**
+ * Line-by-line LCS diff logic for highlighted editor lines and margin icons
+ */
+function computeLineDiffs(originalText: string, modifiedText: string) {
+  const origLines = originalText ? originalText.split("\n") : [];
+  const modLines = modifiedText ? modifiedText.split("\n") : [];
+
+  const N = origLines.length;
+  const M = modLines.length;
+
+  if (N === 0 && M === 0) {
+    return {
+      origDecorations: [],
+      modDecorations: [],
+      addedCount: 0,
+      deletedCount: 0,
+      modifiedCount: 0,
+      totalLines: 0,
+      origLinesCount: 0,
+      modLinesCount: 0,
+    };
+  }
+
+  if (originalText === modifiedText) {
+    return {
+      origDecorations: [],
+      modDecorations: [],
+      addedCount: 0,
+      deletedCount: 0,
+      modifiedCount: 0,
+      totalLines: N,
+      origLinesCount: N,
+      modLinesCount: M,
+    };
+  }
+
+  const dp: number[][] = Array.from({ length: N + 1 }, () => new Array(M + 1).fill(0));
+
+  for (let i = 1; i <= N; i++) {
+    for (let j = 1; j <= M; j++) {
+      if (origLines[i - 1] === modLines[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1] + 1;
+      } else {
+        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+      }
+    }
+  }
+
+  let i = N;
+  let j = M;
+
+  const diffOps: { type: "same" | "delete" | "add"; origIdx?: number; modIdx?: number }[] = [];
+
+  while (i > 0 || j > 0) {
+    if (i > 0 && j > 0 && origLines[i - 1] === modLines[j - 1]) {
+      diffOps.push({ type: "same", origIdx: i - 1, modIdx: j - 1 });
+      i--;
+      j--;
+    } else if (j > 0 && (i === 0 || dp[i][j - 1] >= dp[i - 1][j])) {
+      diffOps.push({ type: "add", modIdx: j - 1 });
+      j--;
+    } else if (i > 0 && (j === 0 || dp[i][j - 1] < dp[i - 1][j])) {
+      diffOps.push({ type: "delete", origIdx: i - 1 });
+      i--;
+    }
+  }
+
+  diffOps.reverse();
+
+  const origDecorations: { line: number; type: "deleted" | "modified" }[] = [];
+  const modDecorations: { line: number; type: "added" | "modified" }[] = [];
+
+  let addedCount = 0;
+  let deletedCount = 0;
+  let modifiedCount = 0;
+
+  let opIdx = 0;
+  while (opIdx < diffOps.length) {
+    const op = diffOps[opIdx];
+    if (op.type === "delete") {
+      if (opIdx + 1 < diffOps.length && diffOps[opIdx + 1].type === "add") {
+        origDecorations.push({ line: op.origIdx! + 1, type: "modified" });
+        modDecorations.push({ line: diffOps[opIdx + 1].modIdx! + 1, type: "modified" });
+        modifiedCount++;
+        opIdx += 2;
+        continue;
+      } else {
+        origDecorations.push({ line: op.origIdx! + 1, type: "deleted" });
+        deletedCount++;
+      }
+    } else if (op.type === "add") {
+      modDecorations.push({ line: op.modIdx! + 1, type: "added" });
+      addedCount++;
+    }
+    opIdx++;
+  }
+
+  return {
+    origDecorations,
+    modDecorations,
+    addedCount,
+    deletedCount,
+    modifiedCount,
+    totalLines: Math.max(N, M),
+    origLinesCount: N,
+    modLinesCount: M,
+  };
+}
+
 export const CodeCompareFeature: React.FC = () => {
   const [originalCode, setOriginalCode] = useState<string>(SAMPLE_ORIGINAL);
   const [modifiedCode, setModifiedCode] = useState<string>(SAMPLE_MODIFIED);
@@ -80,22 +192,69 @@ export const CodeCompareFeature: React.FC = () => {
   const [language, setLanguage] = useState<string>("typescript");
   const [editorTheme, setEditorTheme] = useState<"vs" | "vs-dark">("vs");
   const [showInlineUpload, setShowInlineUpload] = useState<boolean>(false);
+  const [viewMode, setViewMode] = useState<"cards" | "diff">("cards");
 
   const [copiedOriginal, setCopiedOriginal] = useState<boolean>(false);
   const [copiedModified, setCopiedModified] = useState<boolean>(false);
 
-  const getDiffStats = () => {
-    const origLines = originalCode.trim() ? originalCode.split("\n") : [];
-    const modLines = modifiedCode.trim() ? modifiedCode.split("\n") : [];
+  // Monaco Editor references for applying dynamic diff line decorations
+  const origEditorRef = useRef<any>(null);
+  const modEditorRef = useRef<any>(null);
+  const monacoRef = useRef<any>(null);
+  const origDecorationsRef = useRef<string[]>([]);
+  const modDecorationsRef = useRef<string[]>([]);
 
-    const added = Math.max(0, modLines.length - origLines.length);
-    const deleted = Math.max(0, origLines.length - modLines.length);
-    const totalLines = modLines.length;
+  const stats = useMemo(() => computeLineDiffs(originalCode, modifiedCode), [originalCode, modifiedCode]);
 
-    return { added, deleted, totalLines, origLinesCount: origLines.length, modLinesCount: modLines.length };
+  const applyDecorations = useCallback(() => {
+    if (!monacoRef.current) return;
+
+    if (origEditorRef.current) {
+      const newOrigDecs = stats.origDecorations.map((d) => ({
+        range: new monacoRef.current.Range(d.line, 1, d.line, 1),
+        options: {
+          isWholeLine: true,
+          className: d.type === "deleted" ? "diff-line-deleted" : "diff-line-modified",
+          linesDecorationsClassName: d.type === "deleted" ? "diff-margin-deleted" : "diff-margin-modified",
+        },
+      }));
+      origDecorationsRef.current = origEditorRef.current.deltaDecorations(
+        origDecorationsRef.current,
+        newOrigDecs
+      );
+    }
+
+    if (modEditorRef.current) {
+      const newModDecs = stats.modDecorations.map((d) => ({
+        range: new monacoRef.current.Range(d.line, 1, d.line, 1),
+        options: {
+          isWholeLine: true,
+          className: d.type === "added" ? "diff-line-added" : "diff-line-modified",
+          linesDecorationsClassName: d.type === "added" ? "diff-margin-added" : "diff-margin-modified",
+        },
+      }));
+      modDecorationsRef.current = modEditorRef.current.deltaDecorations(
+        modDecorationsRef.current,
+        newModDecs
+      );
+    }
+  }, [stats]);
+
+  useEffect(() => {
+    applyDecorations();
+  }, [applyDecorations, viewMode]);
+
+  const handleOrigMount = (editor: any, monaco: any) => {
+    origEditorRef.current = editor;
+    monacoRef.current = monaco;
+    applyDecorations();
   };
 
-  const stats = getDiffStats();
+  const handleModMount = (editor: any, monaco: any) => {
+    modEditorRef.current = editor;
+    monacoRef.current = monaco;
+    applyDecorations();
+  };
 
   const handleOriginalUpload = (content: string, filename: string) => {
     setOriginalCode(content);
@@ -107,7 +266,6 @@ export const CodeCompareFeature: React.FC = () => {
     setModifiedFilename(filename);
   };
 
-  // Reset functionality: cleans both code compare boxes
   const handleReset = () => {
     setOriginalCode("");
     setModifiedCode("");
@@ -115,7 +273,6 @@ export const CodeCompareFeature: React.FC = () => {
     setModifiedFilename("Modified Source");
   };
 
-  // Sample functionality: loads the sample dataset
   const handleLoadSample = () => {
     setOriginalCode(SAMPLE_ORIGINAL);
     setModifiedCode(SAMPLE_MODIFIED);
@@ -124,7 +281,6 @@ export const CodeCompareFeature: React.FC = () => {
     setLanguage("typescript");
   };
 
-  // Swap code functionality: swaps left and right boxes
   const handleSwapSides = () => {
     setOriginalCode(modifiedCode);
     setModifiedCode(originalCode);
@@ -161,15 +317,20 @@ export const CodeCompareFeature: React.FC = () => {
           </div>
           <div>
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950 flex items-center gap-2">
-              Code Compare Studio
+              Online Code Compare
             </h1>
             <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-slate-600 font-bold mt-1.5">
               <span className="flex items-center gap-1 text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/60">
-                <PlusCircle className="w-3.5 h-3.5" /> +{stats.added} Added
+                <PlusCircle className="w-3.5 h-3.5" /> +{stats.addedCount} Added
               </span>
               <span className="flex items-center gap-1 text-rose-700 bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200/60">
-                <MinusCircle className="w-3.5 h-3.5" /> -{stats.deleted} Deleted
+                <MinusCircle className="w-3.5 h-3.5" /> -{stats.deletedCount} Deleted
               </span>
+              {stats.modifiedCount > 0 && (
+                <span className="flex items-center gap-1 text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200/60">
+                  <Edit3 className="w-3.5 h-3.5" /> ~{stats.modifiedCount} Modified
+                </span>
+              )}
               <span className="bg-slate-100/90 text-slate-700 px-2.5 py-0.5 rounded-full border border-slate-200/80">
                 Total: {stats.totalLines} lines
               </span>
@@ -179,6 +340,34 @@ export const CodeCompareFeature: React.FC = () => {
 
         {/* Action Controls Toolbar */}
         <div className="flex flex-wrap items-center gap-2.5 relative z-10">
+          {/* View Mode Toggle */}
+          <div className="flex items-center gap-1 p-1 rounded-full bg-white/90 border border-slate-200/80 shadow-[inset_0_1.5px_2px_#ffffff]">
+            <button
+              onClick={() => setViewMode("cards")}
+              className={`px-3 py-1.5 rounded-full text-xs font-sans font-extrabold transition-all flex items-center gap-1.5 ${
+                viewMode === "cards"
+                  ? "bg-indigo-600 text-white shadow-xs"
+                  : "text-slate-600 hover:text-slate-950 hover:bg-slate-50"
+              }`}
+              title="Side-by-side Cards View (JSON Viewer Box style)"
+            >
+              <Split className="w-3.5 h-3.5" />
+              <span>Cards View</span>
+            </button>
+            <button
+              onClick={() => setViewMode("diff")}
+              className={`px-3 py-1.5 rounded-full text-xs font-sans font-extrabold transition-all flex items-center gap-1.5 ${
+                viewMode === "diff"
+                  ? "bg-indigo-600 text-white shadow-xs"
+                  : "text-slate-600 hover:text-slate-950 hover:bg-slate-50"
+              }`}
+              title="Monaco Diff Engine View"
+            >
+              <GitCompare className="w-3.5 h-3.5" />
+              <span>Monaco Diff</span>
+            </button>
+          </div>
+
           {/* Language Selector */}
           <select
             value={language}
@@ -226,7 +415,7 @@ export const CodeCompareFeature: React.FC = () => {
             Swap Sides
           </Button>
 
-          {/* Reset Button (Cleans both boxes) */}
+          {/* Reset Button */}
           <Button
             variant="ghost"
             size="sm"
@@ -279,113 +468,208 @@ export const CodeCompareFeature: React.FC = () => {
         </FadeIn>
       )}
 
-      {/* Side-by-Side Monaco Diff Editor Container */}
-      <div className="liquid-glass-surface p-4 sm:p-6 flex flex-col h-[780px] relative bg-white/80 border border-slate-200/90 shadow-lg">
-        <span className="lens-sheen" />
-
-        {/* Crisp Light Side-by-Side Pane Headers */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-3 border-b border-slate-200/90 relative z-10 items-center">
-          {/* Left Pane Header */}
-          <div className="flex items-center justify-between bg-slate-100/90 border border-slate-200/90 px-3.5 py-2.5 rounded-xl shadow-xs">
-            <div className="flex items-center gap-2 overflow-hidden">
-              <span className="w-2.5 h-2.5 rounded-full bg-rose-500 shrink-0" />
-              <FileCode className="w-4 h-4 text-indigo-600 shrink-0" />
-              <span className="text-xs font-mono font-bold text-slate-900 truncate">
-                {originalFilename}
-              </span>
-              <span className="text-[11px] font-mono text-slate-500 font-semibold shrink-0">
-                ({stats.origLinesCount} lines)
-              </span>
+      {viewMode === "cards" ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+          {/* Box 1: Source Code (Original Input) */}
+          <div className="liquid-glass-surface p-6 sm:p-7 flex flex-col h-[780px] relative">
+            <span className="lens-sheen" />
+            <div className="flex items-center justify-between pb-3.5 border-b border-slate-900/10 relative z-10">
+              <div className="flex items-center gap-2.5 overflow-hidden">
+                <span className="w-2.5 h-2.5 rounded-full bg-rose-500 shrink-0" />
+                <FileCode className="w-4.5 h-4.5 text-indigo-600 shrink-0" />
+                <span className="text-xs sm:text-sm font-mono font-extrabold text-slate-900 truncate">
+                  Original Source ({originalFilename})
+                </span>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <span className="text-xs font-mono text-slate-500 font-bold">
+                  {stats.origLinesCount} Lines
+                </span>
+                {stats.deletedCount > 0 && (
+                  <span className="text-xs font-mono font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200/70">
+                    -{stats.deletedCount} Removed
+                  </span>
+                )}
+                {stats.modifiedCount > 0 && (
+                  <span className="text-xs font-mono font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200/70">
+                    ~{stats.modifiedCount} Modified
+                  </span>
+                )}
+                <button
+                  onClick={handleCopyOriginal}
+                  disabled={!originalCode}
+                  title="Copy original code"
+                  className="p-1.5 text-slate-600 hover:text-indigo-600 hover:bg-white rounded-xl transition-colors border border-slate-200/80 bg-white/80 shadow-2xs disabled:opacity-40"
+                >
+                  {copiedOriginal ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
+                </button>
+                <button
+                  onClick={() => setOriginalCode("")}
+                  disabled={!originalCode}
+                  title="Clear original code"
+                  className="p-1.5 text-slate-600 hover:text-rose-600 hover:bg-white rounded-xl transition-colors border border-slate-200/80 bg-white/80 shadow-2xs disabled:opacity-40"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
             </div>
-            <div className="flex items-center gap-1.5 shrink-0">
-              <button
-                onClick={handleCopyOriginal}
-                disabled={!originalCode}
-                title="Copy original code"
-                className="p-1.5 text-slate-600 hover:text-indigo-600 hover:bg-white rounded-lg transition-colors border border-transparent hover:border-slate-200 disabled:opacity-40"
-              >
-                {copiedOriginal ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-              </button>
-              <button
-                onClick={() => setOriginalCode("")}
-                disabled={!originalCode}
-                title="Clear original side"
-                className="p-1.5 text-slate-600 hover:text-rose-600 hover:bg-white rounded-lg transition-colors border border-transparent hover:border-slate-200 disabled:opacity-40"
-              >
-                <Trash2 className="w-3.5 h-3.5" />
-              </button>
+
+            <div className="flex-1 mt-3.5 rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-white relative z-10">
+              <Editor
+                height="100%"
+                language={language}
+                value={originalCode}
+                onChange={(v) => setOriginalCode(v || "")}
+                theme={editorTheme}
+                onMount={handleOrigMount}
+                loading={<ShimmerLoader variant="editor" />}
+                options={{
+                  fontSize: 13.5,
+                  fontFamily: "var(--font-jetbrains-mono)",
+                  minimap: { enabled: false },
+                  scrollBeyondLastLine: false,
+                  smoothScrolling: true,
+                  cursorBlinking: "smooth",
+                  padding: { top: 16 },
+                  lineDecorationsWidth: 16,
+                  lineNumbersMinChars: 3,
+                  glyphMargin: false,
+                }}
+              />
             </div>
           </div>
 
-          {/* Right Pane Header */}
-          <div className="flex items-center justify-between bg-slate-100/90 border border-slate-200/90 px-3.5 py-2.5 rounded-xl shadow-xs">
-            <div className="flex items-center gap-2 overflow-hidden">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" />
-              <FileCode className="w-4 h-4 text-cyan-600 shrink-0" />
-              <span className="text-xs font-mono font-bold text-slate-900 truncate">
-                {modifiedFilename}
-              </span>
-              <span className="text-[11px] font-mono text-slate-500 font-semibold shrink-0">
-                ({stats.modLinesCount} lines)
-              </span>
+          {/* Box 2: Modified Code (Refactored Output) */}
+          <div className="liquid-glass-surface p-6 sm:p-7 flex flex-col h-[780px] relative">
+            <span className="lens-sheen" />
+            <div className="flex items-center justify-between pb-3.5 border-b border-slate-900/10 relative z-10">
+              <div className="flex items-center gap-2.5 overflow-hidden">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" />
+                <FileCode className="w-4.5 h-4.5 text-cyan-600 shrink-0" />
+                <span className="text-xs sm:text-sm font-mono font-extrabold text-slate-900 truncate">
+                  Modified Source ({modifiedFilename})
+                </span>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <span className="text-xs font-mono text-slate-500 font-bold">
+                  {stats.modLinesCount} Lines
+                </span>
+                {stats.addedCount > 0 && (
+                  <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/70">
+                    +{stats.addedCount} Added
+                  </span>
+                )}
+                {stats.modifiedCount > 0 && (
+                  <span className="text-xs font-mono font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200/70">
+                    ~{stats.modifiedCount} Modified
+                  </span>
+                )}
+                <button
+                  onClick={handleCopyModified}
+                  disabled={!modifiedCode}
+                  title="Copy modified code"
+                  className="p-1.5 text-slate-600 hover:text-indigo-600 hover:bg-white rounded-xl transition-colors border border-slate-200/80 bg-white/80 shadow-2xs disabled:opacity-40"
+                >
+                  {copiedModified ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
+                </button>
+                <button
+                  onClick={() => setModifiedCode("")}
+                  disabled={!modifiedCode}
+                  title="Clear modified code"
+                  className="p-1.5 text-slate-600 hover:text-rose-600 hover:bg-white rounded-xl transition-colors border border-slate-200/80 bg-white/80 shadow-2xs disabled:opacity-40"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
             </div>
-            <div className="flex items-center gap-1.5 shrink-0">
-              <button
-                onClick={handleCopyModified}
-                disabled={!modifiedCode}
-                title="Copy modified code"
-                className="p-1.5 text-slate-600 hover:text-indigo-600 hover:bg-white rounded-lg transition-colors border border-transparent hover:border-slate-200 disabled:opacity-40"
-              >
-                {copiedModified ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-              </button>
-              <button
-                onClick={() => setModifiedCode("")}
-                disabled={!modifiedCode}
-                title="Clear modified side"
-                className="p-1.5 text-slate-600 hover:text-rose-600 hover:bg-white rounded-lg transition-colors border border-transparent hover:border-slate-200 disabled:opacity-40"
-              >
-                <Trash2 className="w-3.5 h-3.5" />
-              </button>
+
+            <div className="flex-1 mt-3.5 rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-white relative z-10">
+              <Editor
+                height="100%"
+                language={language}
+                value={modifiedCode}
+                onChange={(v) => setModifiedCode(v || "")}
+                theme={editorTheme}
+                onMount={handleModMount}
+                loading={<ShimmerLoader variant="editor" />}
+                options={{
+                  fontSize: 13.5,
+                  fontFamily: "var(--font-jetbrains-mono)",
+                  minimap: { enabled: false },
+                  scrollBeyondLastLine: false,
+                  smoothScrolling: true,
+                  cursorBlinking: "smooth",
+                  padding: { top: 16 },
+                  lineDecorationsWidth: 16,
+                  lineNumbersMinChars: 3,
+                  glyphMargin: false,
+                }}
+              />
             </div>
           </div>
         </div>
+      ) : (
+        <div className="liquid-glass-surface p-6 sm:p-7 flex flex-col h-[780px] relative bg-white/80 border border-slate-200/90 shadow-lg">
+          <span className="lens-sheen" />
 
-        {/* Clean Monaco Diff Editor Box */}
-        <div className="flex-1 mt-3 rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-white relative z-10">
-          <DiffEditor
-            height="100%"
-            language={language}
-            original={originalCode}
-            modified={modifiedCode}
-            theme={editorTheme}
-            loading={<ShimmerLoader variant="diff" />}
-            options={{
-              renderSideBySide: true,
-              readOnly: false,
-              originalEditable: true,
-              fontSize: 13,
-              fontFamily: "var(--font-jetbrains-mono)",
-              minimap: { enabled: false },
-              overviewRulerLanes: 0,
-              overviewRulerBorder: false,
-              renderOverviewRuler: false,
-              scrollBeyondLastLine: false,
-              hideUnchangedRegions: { enabled: false },
-              scrollbar: {
-                vertical: "visible",
-                horizontal: "auto",
-                verticalScrollbarSize: 8,
-                horizontalScrollbarSize: 8,
-                useShadows: false,
-              },
-              glyphMargin: false,
-              folding: true,
-              lineNumbersMinChars: 3,
-              padding: { top: 12, bottom: 12 },
-            }}
-          />
+          {/* Diff Header */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-3.5 border-b border-slate-900/10 relative z-10 items-center">
+            <div className="flex items-center justify-between bg-slate-100/90 border border-slate-200/90 px-4 py-2.5 rounded-2xl shadow-2xs">
+              <div className="flex items-center gap-2 overflow-hidden">
+                <span className="w-2.5 h-2.5 rounded-full bg-rose-500 shrink-0" />
+                <span className="text-xs font-mono font-bold text-slate-900 truncate">
+                  Original ({originalFilename}) — {stats.origLinesCount} Lines
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center justify-between bg-slate-100/90 border border-slate-200/90 px-4 py-2.5 rounded-2xl shadow-2xs">
+              <div className="flex items-center gap-2 overflow-hidden">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" />
+                <span className="text-xs font-mono font-bold text-slate-900 truncate">
+                  Modified ({modifiedFilename}) — {stats.modLinesCount} Lines
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex-1 mt-3.5 rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-white relative z-10">
+            <DiffEditor
+              height="100%"
+              language={language}
+              original={originalCode}
+              modified={modifiedCode}
+              theme={editorTheme}
+              loading={<ShimmerLoader variant="diff" />}
+              options={{
+                renderSideBySide: true,
+                readOnly: false,
+                originalEditable: true,
+                automaticLayout: true,
+                fontSize: 13,
+                fontFamily: "var(--font-jetbrains-mono)",
+                minimap: { enabled: false },
+                overviewRulerLanes: 0,
+                overviewRulerBorder: false,
+                renderOverviewRuler: false,
+                scrollBeyondLastLine: false,
+                hideUnchangedRegions: { enabled: false },
+                scrollbar: {
+                  vertical: "visible",
+                  horizontal: "auto",
+                  verticalScrollbarSize: 8,
+                  horizontalScrollbarSize: 8,
+                  useShadows: false,
+                },
+                glyphMargin: false,
+                folding: true,
+                lineNumbersMinChars: 3,
+                padding: { top: 12, bottom: 12 },
+              }}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </SlideUp>
   );
 };
+

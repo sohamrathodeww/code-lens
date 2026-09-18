@@ -13,7 +13,7 @@ const INITIALIZATION_STEPS = [
   { id: 1, text: "Initializing Liquid Glass Canvas Engine...", icon: Zap },
   { id: 2, text: "Loading Monaco Code & Diff Engine...", icon: Code2 },
   { id: 3, text: "Configuring 5MB Payload File Validator...", icon: ShieldCheck },
-  { id: 4, text: "Preparing DevStudio Productivity Suite...", icon: Cpu },
+  { id: 4, text: "Preparing CodeLens Developer Suite...", icon: Cpu },
 ];
 
 export const LiquidPreloader: React.FC<LiquidPreloaderProps> = ({
@@ -73,7 +73,7 @@ export const LiquidPreloader: React.FC<LiquidPreloaderProps> = ({
         <div className="relative z-10 w-full max-w-7xl mx-auto flex items-center justify-between pt-2">
           <div className="flex items-center gap-2">
             <span className="font-extrabold text-sm tracking-tight text-slate-950 font-sans">
-              DevStudio
+              CodeLens
             </span>
             <span className="text-slate-300">•</span>
             <span className="text-xs font-mono font-bold text-indigo-600 bg-indigo-50 border border-indigo-200/80 px-2.5 py-0.5 rounded-full shadow-sm">
@@ -98,20 +98,22 @@ export const LiquidPreloader: React.FC<LiquidPreloaderProps> = ({
               className="absolute w-36 h-36 rounded-full border-2 border-dashed border-indigo-400/40 pointer-events-none"
             />
 
-            {/* Inner Pulsing Glass Orb */}
-            <div className="liquid-glass-surface p-7 rounded-3xl bg-white/80 border border-white shadow-[0_20px_50px_rgba(79,70,229,0.25),inset_0_2px_3px_#ffffff] relative z-10 flex items-center justify-center group">
+            {/* Inner Pulsing Glass Orb with Official CodeLens Logo */}
+            <div className="liquid-glass-surface p-5 rounded-3xl bg-white/90 border border-white shadow-[0_20px_50px_rgba(79,70,229,0.22),inset_0_2px_3px_#ffffff] relative z-10 flex items-center justify-center group">
               <span className="lens-sheen" />
-              <Sparkles className="w-10 h-10 text-indigo-600 animate-bounce relative z-10" />
+              <div className="w-14 h-14 rounded-2xl overflow-hidden border border-slate-200/80 shadow-md bg-white p-0.5 relative z-10 transition-transform duration-300 group-hover:scale-105">
+                <img src="/logo-dark-medium.jpg" alt="CodeLens Logo" className="w-full h-full object-cover rounded-xl" />
+              </div>
             </div>
           </div>
 
           {/* Brand Titles */}
           <div className="space-y-1">
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950">
-              DevStudio
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950 font-sans">
+              CodeLens
             </h2>
             <p className="text-xs font-mono font-bold text-slate-500">
-              Liquid Glass Developer Tools Platform
+              Code Inspection & Developer Suite
             </p>
           </div>
 

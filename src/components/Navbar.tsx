@@ -12,8 +12,8 @@ export const Navbar: React.FC = () => {
   const [isToolsDropdownOpen, setIsToolsDropdownOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Filter active tools for the dropdown
   const activeTools = TOOLS_REGISTRY.filter((t: ToolDefinition) => t.status === "active");
+  const featuredTools = activeTools.length >= 3 ? activeTools.slice(0, 3) : TOOLS_REGISTRY.slice(0, 3);
 
   const handleBrandClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (pathname === "/") {
@@ -22,7 +22,6 @@ export const Navbar: React.FC = () => {
     }
   };
 
-  // Close dropdown on click outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -37,7 +36,6 @@ export const Navbar: React.FC = () => {
     <header className="sticky top-0 z-40 w-full px-4 sm:px-8 py-3.5 backdrop-blur-3xl bg-white/70 border-b border-slate-200/80 shadow-[0_8px_32px_rgba(15,23,42,0.05),inset_0_1.5px_2px_#ffffff] transition-colors duration-300">
       <div className="max-w-[1750px] mx-auto flex items-center justify-between gap-4">
 
-        {/* Brand Logo & Title */}
         <Link href="/" onClick={handleBrandClick} className="flex items-center gap-3 group">
           <div className="w-9 h-9 rounded-2xl overflow-hidden border border-white/90 shadow-[inset_0_1.5px_2px_#ffffff,0_4px_12px_rgba(15,23,42,0.1)] group-hover:scale-105 transition-transform duration-200 bg-white">
             <img src="/logo-dark-small.jpg" alt="CodeLens Logo" className="w-full h-full object-cover" />
@@ -52,22 +50,22 @@ export const Navbar: React.FC = () => {
           </div>
         </Link>
 
-        {/* Header Right Actions & Navigation */}
         <div className="flex items-center gap-3 relative" ref={dropdownRef}>
-
-          {/* Active Tools Navigation Dropdown Button */}
           <button
             onClick={() => setIsToolsDropdownOpen(!isToolsDropdownOpen)}
-            className="px-4 py-2 text-xs sm:text-sm font-extrabold rounded-full bg-white/90 border border-slate-200/90 text-slate-900 hover:bg-white shadow-[inset_0_1.5px_2px_#ffffff,0_4px_16px_rgba(15,23,42,0.06)] flex items-center gap-2 transition-all cursor-pointer font-sans"
+            className="px-3.5 py-2 rounded-full bg-white/90 border border-slate-200/90 text-slate-900 hover:bg-white hover:border-slate-300 shadow-[inset_0_1.5px_2px_#ffffff,0_4px_16px_rgba(15,23,42,0.06)] flex items-center gap-2 transition-all cursor-pointer font-sans font-bold text-xs"
             aria-expanded={isToolsDropdownOpen}
             aria-label="Active Tools Menu"
           >
-            <Sparkles className="w-4 h-4 text-indigo-600" />
-            <span>Active Tools</span>
-            <ChevronDown className={`w-3.5 h-3.5 text-slate-500 transition-transform duration-200 ${isToolsDropdownOpen ? "rotate-180" : ""}`} />
+            <LayoutGrid className="w-4 h-4 text-indigo-600" />
+            <span className="font-extrabold text-xs text-slate-900">Tools</span>
+            <ChevronDown
+              className={`w-3.5 h-3.5 text-slate-500 transition-transform duration-200 ${
+                isToolsDropdownOpen ? "rotate-180 text-indigo-600" : ""
+              }`}
+            />
           </button>
 
-          {/* Floating Liquid Glass Dropdown Menu */}
           <AnimatePresence>
             {isToolsDropdownOpen && (
               <motion.div
@@ -82,12 +80,12 @@ export const Navbar: React.FC = () => {
                     Direct Tool Switcher
                   </span>
                   <span className="text-[10px] font-bold font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/60">
-                    {activeTools.length} Ready
+                    {featuredTools.length} Ready
                   </span>
                 </div>
 
                 <div className="space-y-1 pt-1">
-                  {activeTools.map((tool: ToolDefinition) => {
+                  {featuredTools.map((tool: ToolDefinition) => {
                     const isToolActive = pathname === tool.route;
                     const IconComponent = tool.id === "code-compare" ? Code2 : FileJson;
 
@@ -136,26 +134,12 @@ export const Navbar: React.FC = () => {
                     className="w-full py-2 px-3 text-xs font-bold text-slate-700 hover:text-slate-950 hover:bg-slate-100/70 rounded-xl flex items-center justify-center gap-2 transition-colors font-sans"
                   >
                     <LayoutGrid className="w-3.5 h-3.5 text-indigo-600" />
-                    <span>View All Tools Hub</span>
+                    <span>Browse All Tools</span>
                   </Link>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
-
-          {/* Tools Hub Home Pill */}
-          <Link
-            href="/"
-            onClick={handleBrandClick}
-            className={`px-4 py-2 text-xs sm:text-sm font-extrabold rounded-full transition-all flex items-center gap-2 font-sans ${
-              pathname === "/"
-                ? "bg-indigo-600 text-white shadow-[0_4px_16px_rgba(99,102,241,0.3)]"
-                : "bg-white/80 border border-slate-200/90 text-slate-700 hover:text-slate-950 hover:bg-white"
-            }`}
-          >
-            <LayoutGrid className="w-4 h-4" />
-            <span className="hidden sm:inline">Tools Hub</span>
-          </Link>
         </div>
       </div>
     </header>

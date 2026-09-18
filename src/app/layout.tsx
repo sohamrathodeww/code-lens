@@ -19,11 +19,11 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
   title: {
-    default: "CodeLens — Online Code Inspection & Developer Suite",
+    default: "CodeLens — Free Online JSON Viewer, Code Compare & Developer Tools",
     template: "%s | CodeLens",
   },
   description:
-    "Free, high-performance developer productivity suite featuring Online JSON Viewer, Beautifier, Tree Inspector, Flow Chart Diagram Visualizer, and Monaco Code Compare Studio.",
+    "CodeLens is a free online developer tools suite for JSON inspection, code comparison, API payload validation, and browser-based productivity workflows for engineers and teams.",
   icons: {
     icon: "/favicon-light.png",
     shortcut: "/favicon-light.png",
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: APP_URL,
-    title: "CodeLens — Online Code Inspection & Developer Suite",
+    title: "CodeLens — Free Online JSON Viewer, Code Compare & Developer Tools",
     description:
-      "Free high-performance developer utilities: Online JSON Viewer & Inspector, Flow Chart Diagram Visualizer, and Monaco Code Compare Studio with 5MB file validation.",
+      "CodeLens helps developers inspect JSON, compare code, validate API payloads, and review files in-browser using high-performance, privacy-first tools.",
     siteName: "CodeLens",
     images: [
       {
@@ -62,9 +62,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "CodeLens — Developer Tools Suite",
+    title: "CodeLens — Free JSON Viewer & Code Compare Tools",
     description:
-      "Free online developer utilities: JSON Viewer, Beautifier, Minifier, Diagram Visualizer & Monaco Code Compare Studio.",
+      "Free online JSON viewer, code diff tool, and developer utilities for API inspection, code review, and file comparison.",
     creator: "@codelens",
     images: [`${APP_URL}/logo-large.jpg`],
   },

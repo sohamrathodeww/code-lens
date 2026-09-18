@@ -1,7 +1,6 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { ArrowRight, FileJson, Code2, Database, KeyRound, Regex, Sparkles } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -10,6 +9,25 @@ import { FluidCanvas } from "@/components/ui/FluidCanvas";
 import { SlideUp } from "@/components/motion/MotionPrimitives";
 import { TOOLS_REGISTRY } from "@/lib/tools-registry";
 import { APP_URL } from "@/lib/constants";
+
+export const metadata: Metadata = {
+  title: "CodeLens — Free Online JSON Viewer, Code Compare & Developer Tools",
+  description:
+    "CodeLens offers free online JSON viewer, code comparison, API payload inspection, and developer productivity utilities for modern engineering teams.",
+  keywords: [
+    "CodeLens",
+    "online developer tools",
+    "json viewer online",
+    "code compare online",
+    "free json formatter",
+    "online code diff tool",
+    "developer utilities",
+    "browser based code review",
+    "api payload validator",
+    "CodeLens JSON tools",
+    "CodeLens code tools",
+  ],
+};
 
 const ICON_MAP: Record<string, React.ElementType> = {
   FileJson,
@@ -43,7 +61,7 @@ const websiteSchema = {
           name: "What developer tools are available on CodeLens?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "CodeLens offers a free suite of developer utilities including Online JSON Viewer, Beautifier, Tree Inspector, Tabular Data Grid, Flow Chart Diagram Visualizer, and Monaco Code Compare Studio.",
+            text: "CodeLens offers a free suite of developer utilities including Online JSON Viewer, Beautifier, Tree Inspector, Tabular Data Grid, Flow Chart Diagram Visualizer, and Online Code Compare.",
           },
         },
         {
@@ -74,20 +92,15 @@ export default function Home() {
       <main className="relative z-10 max-w-7xl w-full mx-auto px-4 sm:px-8 pt-12 pb-24 flex-1 space-y-16">
         {/* Product Hero Section */}
         <SlideUp className="text-center max-w-3xl mx-auto space-y-6 pt-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 border border-white backdrop-blur-2xl text-indigo-700 text-xs font-mono font-bold shadow-[inset_0_1.5px_2px_#ffffff,0_8px_20px_rgba(99,102,241,0.12)] mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-indigo-600 animate-pulse" />
-            <span>Developer Productivity Suite</span>
-          </div>
-
           <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-950 leading-[1.1]">
-            Developer tools, <br className="hidden sm:inline" />
+            Free Online Tools for <br className="hidden sm:inline" />
             <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-cyan-600 bg-clip-text text-transparent">
-              without the friction.
+              JSON, code review, and API workflows.
             </span>
           </h1>
 
           <p className="text-base sm:text-lg text-slate-700 font-normal leading-relaxed max-w-2xl mx-auto">
-            High-performance developer utilities powered by Monaco Engine. Format, inspect, compare code, and process payloads with instant file validation.
+            CodeLens helps engineers format JSON, inspect payloads, compare code changes, and streamline API and debugging workflows with browser-based tools designed for speed and privacy.
           </p>
 
           {/* Launch Buttons CTA */}
@@ -191,18 +204,18 @@ export default function Home() {
         <section className="liquid-glass-surface p-8 space-y-6 text-slate-700 text-sm leading-relaxed border border-white/80 mt-12">
           <div className="space-y-2">
             <h2 className="text-2xl font-bold text-slate-950 tracking-tight">
-              CodeLens — High-Performance Online Developer Tools & Code Inspector Suite
+              CodeLens — Free Online JSON Viewer, Online Code Compare, and Developer Utility Platform
             </h2>
             <p className="text-slate-600">
-              CodeLens is built for software engineers, data analysts, and web developers needing fast, privacy-first online utilities. From instant JSON formatting and flow chart rendering to side-by-side Monaco code comparison, CodeLens delivers desktop-grade performance directly inside your web browser.
+              CodeLens is built for frontend engineers, backend developers, QA teams, and API specialists who need instant access to online developer tools. The platform simplifies JSON formatting, request validation, code review, and side-by-side comparison directly in the browser with no setup required.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
             <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/80 space-y-2">
-              <h3 className="font-bold text-slate-950 text-base">⚡ Online JSON Viewer & Diagram Inspector</h3>
+              <h3 className="font-bold text-slate-950 text-base">⚡ JSON Viewer & Payload Inspector</h3>
               <p className="text-xs text-slate-600">
-                Format, beautify, and minify API payloads with up to 5MB file support. Toggle seamlessly between expandable tree node view, structured tabular grid, hierarchy path maps, and visual node flow charts.
+                Use CodeLens to format, beautify, minify, and inspect JSON payloads in seconds. It is ideal for API debugging, validation, schema review, and data export workflows for developers working across REST, GraphQL, and backend services.
               </p>
               <Link href="/tools/json-viewer" className="inline-block pt-1 text-xs font-semibold text-indigo-600 hover:text-indigo-800">
                 Open Free JSON Viewer →
@@ -210,12 +223,12 @@ export default function Home() {
             </div>
 
             <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/80 space-y-2">
-              <h3 className="font-bold text-slate-950 text-base">🔍 Side-by-Side Code Compare Studio</h3>
+              <h3 className="font-bold text-slate-950 text-base">🔍 Online Code Compare & Diff Review</h3>
               <p className="text-xs text-slate-600">
-                Compare text, source code files, and SQL/JSON payloads with VS Code's Monaco Engine. Features dual-panel split view, inline diffs, language syntax highlighting, and instantaneous change auditing.
+                CodeLens helps teams compare code changes with side-by-side Monaco diff views, syntax highlighting, sample datasets, and file-based review workflows. It is useful for pull request reviews, feature validation, and migration debugging.
               </p>
               <Link href="/tools/code-compare" className="inline-block pt-1 text-xs font-semibold text-indigo-600 hover:text-indigo-800">
-                Open Code Compare Studio →
+                Open Online Code Compare →
               </Link>
             </div>
           </div>

@@ -1,7 +1,12 @@
-export const APP_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  process.env.NEXT_PUBLIC_APP_URL ||
-  "https://codelens-dev.vercel.app";
+const getCanonicalUrl = (): string => {
+  const envUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_APP_URL;
+  if (envUrl && !envUrl.includes("onrender.com")) {
+    return envUrl.replace(/\/$/, "");
+  }
+  return "https://codelens-dev.vercel.app";
+};
+
+export const APP_URL = getCanonicalUrl();
 
 export const SITE_NAME = "CodeLens";
 export const SITE_TAGLINE = "Online Code Inspection & Developer Suite";

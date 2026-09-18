@@ -6,7 +6,7 @@ import { JsonViewerFeature } from "@/features/json-viewer/JsonViewerFeature";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Free Online JSON Viewer, Formatter & Tree Inspector | CodeLens",
+  title: "Online JSON Viewer & Formatter – Free, No Upload | CodeLens",
   description:
     "CodeLens JSON Viewer is a free online JSON formatter, beautifier, minifier, validator, and tree inspector for developers working with API payloads, configuration files, and structured data.",
   keywords: [
@@ -52,7 +52,7 @@ const jsonLdSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "WebApplication",
+      "@type": ["SoftwareApplication", "WebApplication"],
       "@id": `${APP_URL}/tools/json-viewer/#webapp`,
       name: "CodeLens Online JSON Viewer",
       url: `${APP_URL}/tools/json-viewer`,

@@ -6,7 +6,7 @@ import { CodeCompareFeature } from "@/features/code-compare/CodeCompareFeature";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Online Code Compare — Free Side-by-Side Code Diff Tool | CodeLens",
+  title: "Online Code Diff & Compare Tool – Free | CodeLens",
   description:
     "Online Code Compare is a free, high-performance browser code diff tool powered by Monaco Engine. Compare source code, text files, JSON, and scripts side-by-side with syntax highlighting across 13+ languages.",
   keywords: [
@@ -53,7 +53,7 @@ const jsonLdSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "WebApplication",
+      "@type": ["SoftwareApplication", "WebApplication"],
       "@id": `${APP_URL}/tools/code-compare/#webapp`,
       name: "CodeLens Online Code Compare",
       url: `${APP_URL}/tools/code-compare`,

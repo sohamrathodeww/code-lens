@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Code2, FileJson, LayoutGrid, ChevronDown, Sparkles, ExternalLink } from "lucide-react";
+import { Code2, FileJson, LayoutGrid, ChevronDown, Sparkles, ExternalLink, KeyRound } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { TOOLS_REGISTRY, ToolDefinition } from "@/lib/tools-registry";
 
@@ -87,7 +87,12 @@ export const Navbar: React.FC = () => {
                 <div className="space-y-1 pt-1">
                   {featuredTools.map((tool: ToolDefinition) => {
                     const isToolActive = pathname === tool.route;
-                    const IconComponent = tool.id === "code-compare" ? Code2 : FileJson;
+                    const IconComponent =
+                      tool.id === "code-compare"
+                        ? Code2
+                        : tool.id === "jwt-decoder"
+                        ? KeyRound
+                        : FileJson;
 
                     return (
                       <Link

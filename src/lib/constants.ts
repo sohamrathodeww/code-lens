@@ -44,6 +44,10 @@ export const DEFAULT_KEYWORDS = [
   "json minifier",
   "json tree inspector",
   "json validator",
+  "online jwt decoder",
+  "jwt decoder online",
+  "decode jwt token",
+  "jwt claims inspector",
   "developer utilities",
   "online dev tools",
 ];

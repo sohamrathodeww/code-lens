@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, FileJson, Code2, Database, KeyRound, Regex, Sparkles } from "lucide-react";
+import { ArrowRight, FileJson, Code2, Database, KeyRound, Regex, Sparkles, Languages } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/Button";
@@ -36,6 +36,7 @@ const ICON_MAP: Record<string, React.ElementType> = {
   KeyRound,
   Regex,
   Sparkles,
+  Languages,
 };
 
 const websiteSchema = {

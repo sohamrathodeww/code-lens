@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Code2, FileJson, LayoutGrid, ChevronDown, Sparkles, ExternalLink, KeyRound } from "lucide-react";
+import { Code2, FileJson, LayoutGrid, ChevronDown, Sparkles, ExternalLink, KeyRound, Languages } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { TOOLS_REGISTRY, ToolDefinition } from "@/lib/tools-registry";
 
@@ -13,7 +13,7 @@ export const Navbar: React.FC = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const activeTools = TOOLS_REGISTRY.filter((t: ToolDefinition) => t.status === "active");
-  const featuredTools = activeTools.length >= 3 ? activeTools.slice(0, 3) : TOOLS_REGISTRY.slice(0, 3);
+  const featuredTools = activeTools;
 
   const handleBrandClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (pathname === "/") {
@@ -92,6 +92,8 @@ export const Navbar: React.FC = () => {
                         ? Code2
                         : tool.id === "jwt-decoder"
                         ? KeyRound
+                        : tool.id === "online-translator"
+                        ? Languages
                         : FileJson;
 
                     return (

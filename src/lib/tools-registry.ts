@@ -53,5 +53,24 @@ export const TOOLS_REGISTRY: ToolDefinition[] = [
     status: "active",
     tags: ["jwt", "auth", "token", "decoder", "base64"],
   },
+  {
+    id: "online-translator",
+    name: "Online Translator",
+    shortDescription: "Accurate multi-language online text translator with auto-fallback engine.",
+    description: "Instant free online text translation supporting 100+ languages, auto language detection, side-by-side view, character counter, and multi-engine failover.",
+    category: "Converters",
+    route: "/tools/online-translator",
+    iconName: "Languages",
+    status: "active",
+    tags: [
+      "online translator",
+      "free translator online",
+      "text translate",
+      "language converter",
+      "multi language translator",
+      "auto detect language",
+    ],
+  },
 ];
+
 

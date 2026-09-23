@@ -76,6 +76,24 @@ export const TOOLS_REGISTRY: ToolDefinition[] = [
       "auto detect language",
     ],
   },
+  {
+    id: "code-playground",
+    name: "Online Code Editor",
+    shortDescription: "Write, compile, and execute code in multiple languages online.",
+    description: "Professional online code editor supporting syntax highlighting, multiple languages (JavaScript, Python, C++, Java, etc.), and instant cloud execution.",
+    category: "Code & Diff",
+    route: "/tools/code-playground",
+    iconName: "Terminal",
+    status: "active",
+    tags: [
+      "online code editor",
+      "code playground",
+      "compile online",
+      "execute code",
+      "javascript online",
+      "python compiler",
+    ],
+  },
 ];
 
 

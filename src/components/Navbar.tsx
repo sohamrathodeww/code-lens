@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Code2, FileJson, LayoutGrid, ChevronDown, Sparkles, ExternalLink, KeyRound, Languages } from "lucide-react";
+import { Code2, FileJson, LayoutGrid, ChevronDown, Sparkles, ExternalLink, KeyRound, Languages, Terminal } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { TOOLS_REGISTRY, ToolDefinition } from "@/lib/tools-registry";
 
@@ -94,6 +94,8 @@ export const Navbar: React.FC = () => {
                         ? KeyRound
                         : tool.id === "online-translator"
                         ? Languages
+                        : tool.id === "code-playground"
+                        ? Terminal
                         : FileJson;
 
                     return (

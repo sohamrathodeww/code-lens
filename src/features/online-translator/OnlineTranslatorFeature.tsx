@@ -38,7 +38,7 @@ const SAMPLE_TEXTS = [
 
 export const OnlineTranslatorFeature: React.FC = () => {
   const [sourceLang, setSourceLang] = useState<string>("auto");
-  const [targetLang, setTargetLang] = useState<string>("es");
+  const [targetLang, setTargetLang] = useState<string>("en");
   const [inputText, setInputText] = useState<string>("");
   const [translatedText, setTranslatedText] = useState<string>("");
   const [detectedLang, setDetectedLang] = useState<string>("");
@@ -205,6 +205,14 @@ export const OnlineTranslatorFeature: React.FC = () => {
   const wordCount = inputText.trim() ? inputText.trim().split(/\s+/).length : 0;
   const isMaxReached = charCount >= MAX_CHAR_LIMIT;
 
+  // Source language display text for dropdown button
+  const sourceLangDisplayText =
+    sourceLang === "auto"
+      ? detectedLang && inputText.trim()
+        ? getLangName(detectedLang)
+        : "Auto Detect"
+      : getLangName(sourceLang);
+
   return (
     <div className="space-y-6">
       {/* Header Banner */}
@@ -216,14 +224,14 @@ export const OnlineTranslatorFeature: React.FC = () => {
               <Languages className="w-6 h-6" />
             </span>
             <span className="px-3 py-1 text-xs font-mono font-bold rounded-full bg-emerald-500/15 text-emerald-800 border border-emerald-300">
-              Automatic Silent Failover
+              Online Translation
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight font-sans">
-            Accurate Online Translator
+            Online Translator
           </h1>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans">
-            Translate text across 100+ languages with automatic backup failover and a 5,000 character limit for maximum reliability.
+            Translate text effortlessly across 100+ languages with automatic language detection and a 5,000 character limit for maximum accuracy.
           </p>
         </div>
 
@@ -244,13 +252,13 @@ export const OnlineTranslatorFeature: React.FC = () => {
         </div>
       </div>
 
-      {/* Silent backup engine notification banner */}
+      {/* Backup engine notification banner */}
       {usedBackupEngine && (
         <div className="p-3.5 rounded-2xl bg-indigo-50/80 border border-indigo-200/80 text-indigo-950 text-xs font-sans flex items-center justify-between gap-3 shadow-2xs">
           <div className="flex items-center gap-2.5">
             <Sparkles className="w-4 h-4 text-indigo-600 shrink-0" />
             <span>
-              <strong>Backup Service Active:</strong> Translation completed seamlessly using our secondary high-performance pipeline.
+              <strong>Translation Ready:</strong> Translation processed using secondary high-precision translation engine.
             </span>
           </div>
           <button
@@ -277,12 +285,7 @@ export const OnlineTranslatorFeature: React.FC = () => {
             >
               <div className="flex items-center gap-2 truncate">
                 <span className="text-xs text-slate-400 uppercase font-mono font-semibold">From:</span>
-                <span className="text-slate-950 truncate font-semibold">{getLangName(sourceLang)}</span>
-                {sourceLang === "auto" && detectedLang && (
-                  <span className="text-[10px] font-mono font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-200/60">
-                    Detected: {getLangName(detectedLang)}
-                  </span>
-                )}
+                <span className="text-slate-950 truncate font-semibold">{sourceLangDisplayText}</span>
               </div>
               <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${isSourceDropdownOpen ? "rotate-180" : ""}`} />
             </button>
@@ -562,10 +565,6 @@ export const OnlineTranslatorFeature: React.FC = () => {
             {/* Bottom Output Status */}
             <div className="p-3 bg-slate-950/60 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400 font-mono">
               <span>Status: {isLoading ? "Translating..." : translatedText ? "Ready" : "Idle"}</span>
-              <span className="flex items-center gap-1">
-                <Info className="w-3 h-3 text-slate-500" />
-                Silent Multi-Engine Failover Enabled
-              </span>
             </div>
           </div>
         </div>
@@ -573,3 +572,4 @@ export const OnlineTranslatorFeature: React.FC = () => {
     </div>
   );
 };
+

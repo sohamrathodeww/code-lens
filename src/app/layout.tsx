@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     canonical: APP_URL,
   },
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || "",
+    google: ["M6Yf023eUnfRIzdRXM51SOlO7XraCE-iKSWq4fI1KWw", "_euwH9UmO-8vxd0LJb4HABnxeuuKY0O3wzskTrFvdCs"],
   },
   keywords: DEFAULT_KEYWORDS,
   authors: [{ name: "CodeLens Team", url: APP_URL }],
@@ -101,7 +101,7 @@ const globalJsonLd = {
       publisher: { "@id": `${APP_URL}/#organization` },
       potentialAction: {
         "@type": "SearchAction",
-        target: `${APP_URL}/tools/json-viewer?q={search_term_string}`,
+        target: `${APP_URL}/json-viewer?q={search_term_string}`,
         "query-input": "required name=search_term_string",
       },
     },

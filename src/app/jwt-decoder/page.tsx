@@ -2,40 +2,46 @@ import { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FluidCanvas } from "@/components/ui/FluidCanvas";
-import { OnlineTranslatorFeature } from "@/features/online-translator/OnlineTranslatorFeature";
+import { JwtDecoderFeature } from "@/features/jwt-decoder/JwtDecoderFeature";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Online Translator – Free Accurate Text & Language Converter | CodeLens",
+  title: "Online JWT Decoder & Claims Inspector – Free | CodeLens",
   description:
-    "CodeLens Free Online Translator supports accurate text translation across 100+ languages with auto language detection, multi-engine failover, and client privacy.",
+    "CodeLens Online JWT Decoder is a free tool to decode, inspect, and parse JSON Web Tokens (JWT) online. View color-coded header, payload claims, expiration timestamps, and signature structure safely in browser.",
   keywords: [
-    "CodeLens online translator",
-    "free online translator",
-    "text translator online",
-    "accurate language converter",
-    "auto detect language translator",
-    "translate developer docs",
-    "multi language translation tool",
-    "free translate api online",
-    "browser text translator",
+    "CodeLens JWT decoder",
+    "online jwt decoder",
+    "jwt decoder online",
+    "jwt debugger online",
+    "decode jwt token",
+    "parse json web token",
+    "jwt token inspector",
+    "jwt claims viewer",
+    "jwt expiration checker",
+    "oauth2 token decoder",
+    "oidc token inspector",
+    "jwt header payload viewer",
+    "free jwt decoder tool",
+    "browser side jwt decoder",
   ],
   alternates: {
-    canonical: `${APP_URL}/tools/online-translator`,
+    canonical: `${APP_URL}/jwt-decoder`,
   },
   openGraph: {
-    title: "Free Online Translator & Multi-Language Converter — CodeLens",
+    title: "Free Online JWT Decoder & Inspector — CodeLens",
     description:
-      "Accurate online text translation for 100+ languages with auto language detection and multi-provider failover.",
-    url: `${APP_URL}/tools/online-translator`,
+      "Decode and inspect JSON Web Tokens (JWT) online for free. Color-coded header, payload claims, and expiration date converter.",
+    url: `${APP_URL}/jwt-decoder`,
     siteName: "CodeLens",
     images: [`${APP_URL}/logo-large.jpg`],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free Online Translator — CodeLens",
-    description: "Translate text online across 100+ languages with client privacy and failover backup.",
+    title: "Online JWT Decoder & Claims Inspector — CodeLens",
+    description:
+      "Decode, inspect, and validate JSON Web Tokens (JWT) online with client-side privacy.",
     images: [`${APP_URL}/logo-large.jpg`],
   },
 };
@@ -45,11 +51,11 @@ const jsonLdSchema = {
   "@graph": [
     {
       "@type": ["SoftwareApplication", "WebApplication"],
-      "@id": `${APP_URL}/tools/online-translator/#webapp`,
-      name: "CodeLens Free Online Translator",
-      url: `${APP_URL}/tools/online-translator`,
+      "@id": `${APP_URL}/jwt-decoder/#webapp`,
+      name: "CodeLens Online JWT Decoder",
+      url: `${APP_URL}/jwt-decoder`,
       description:
-        "Free accurate online translation utility supporting 100+ languages, auto-language detection, side-by-side view, character counter, and multi-engine failover.",
+        "Free online JWT decoder tool to parse, inspect, and analyze JSON Web Token headers, payload claims, and expiration timestamps.",
       applicationCategory: "DeveloperApplication",
       operatingSystem: "All",
       offers: {
@@ -60,30 +66,30 @@ const jsonLdSchema = {
     },
     {
       "@type": "FAQPage",
-      "@id": `${APP_URL}/tools/online-translator/#faq`,
+      "@id": `${APP_URL}/jwt-decoder/#faq`,
       mainEntity: [
         {
           "@type": "Question",
-          name: "How does CodeLens Online Translator handle translation rate limits?",
+          name: "How do I decode a JWT token online?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "CodeLens features a multi-provider failover engine. When a primary translation engine reaches free usage limits, CodeLens prompts you to confirm and automatically switches to a backup engine to complete your translation.",
+            text: "Paste your encoded JSON Web Token (JWT) into the input box. CodeLens automatically splits it into Header, Payload, and Signature, decoding base64url data live in your browser.",
           },
         },
         {
           "@type": "Question",
-          name: "Which languages are supported by CodeLens Online Translator?",
+          name: "Is my JWT token transmitted to any server?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "CodeLens supports over 100 global languages including English, Spanish, French, German, Chinese, Japanese, Korean, Hindi, Arabic, Russian, Portuguese, Italian, Dutch, and auto-detect mode.",
+            text: "No. All JWT parsing and Base64URL decoding is executed 100% locally in your client web browser. No token data or secrets leave your device.",
           },
         },
         {
           "@type": "Question",
-          name: "Is my text saved or logged on CodeLens servers?",
+          name: "How does CodeLens parse JWT expiration timestamps?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "No, CodeLens does not store or persist your input or translated text. All operations are processed live in-memory for maximum developer privacy.",
+            text: "CodeLens automatically converts Unix epoch timestamps for claims like exp (Expires At), iat (Issued At), and nbf (Not Before) into human-readable local dates and remaining active durations.",
           },
         },
       ],
@@ -91,7 +97,7 @@ const jsonLdSchema = {
   ],
 };
 
-export default function OnlineTranslatorPage() {
+export default function JwtDecoderPage() {
   return (
     <>
       <script
@@ -103,54 +109,54 @@ export default function OnlineTranslatorPage() {
         <Navbar />
 
         <main className="flex-1 max-w-[1750px] w-full mx-auto px-4 sm:px-8 py-8 sm:py-10 space-y-12 relative z-10">
-          <OnlineTranslatorFeature />
+          <JwtDecoderFeature />
 
-          {/* Educational SEO & Developer Guide Section */}
+          {/* Educational SEO & Guide Section */}
           <section className="liquid-glass-surface p-6 sm:p-10 space-y-8">
             <span className="lens-sheen" />
             <div className="max-w-3xl space-y-3">
               <h2 className="text-xl sm:text-2xl font-extrabold text-slate-950 font-sans">
-                Why Use CodeLens Free Online Translator?
+                What is a JSON Web Token (JWT)?
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans">
-                Engineering teams and developers often need to translate technical documentation, API error messages, commit messages, and internationalized (i18n) content into different languages without hitting strict paywalls or manual service disruptions.
+                A JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/90 shadow-2xs space-y-2">
                 <span className="text-xs font-mono font-extrabold text-indigo-600 uppercase">
-                  1. Automatic Failover
+                  1. Header
                 </span>
                 <h3 className="text-sm font-bold text-slate-950 font-sans">
-                  Multi-Provider Backup
+                  Algorithm & Token Type
                 </h3>
                 <p className="text-xs text-slate-500 leading-relaxed font-sans">
-                  If one free engine experiences rate limits or high load, CodeLens prompts you to confirm and seamlessly continues translation using backup engines.
+                  Contains metadata about the token, such as the signing algorithm (e.g., HS256, RS256) and token type (`JWT`).
                 </p>
               </div>
 
               <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/90 shadow-2xs space-y-2">
                 <span className="text-xs font-mono font-extrabold text-emerald-600 uppercase">
-                  2. 100+ Languages
+                  2. Payload
                 </span>
                 <h3 className="text-sm font-bold text-slate-950 font-sans">
-                  Global Coverage
+                  Claims & Identity Data
                 </h3>
                 <p className="text-xs text-slate-500 leading-relaxed font-sans">
-                  Supports English, Spanish, French, German, Chinese, Japanese, Hindi, Arabic, Russian, Portuguese, and dozens of regional languages.
+                  Contains statements about an entity (typically user identity, roles, permissions) and metadata claims like `exp` and `iat`.
                 </p>
               </div>
 
               <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/90 shadow-2xs space-y-2">
                 <span className="text-xs font-mono font-extrabold text-rose-600 uppercase">
-                  3. Privacy First
+                  3. Signature
                 </span>
                 <h3 className="text-sm font-bold text-slate-950 font-sans">
-                  No Database Persistence
+                  Integrity Verification
                 </h3>
                 <p className="text-xs text-slate-500 leading-relaxed font-sans">
-                  Your code snippets, strings, and developer text remain ephemeral and are never stored in databases or user profiling tools.
+                  Used to verify the sender of the JWT and to ensure that the message wasn&apos;t changed along the way.
                 </p>
               </div>
             </div>

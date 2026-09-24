@@ -30,13 +30,13 @@ export const metadata: Metadata = {
     "CodeLens Online Text Compare",
   ],
   alternates: {
-    canonical: `${APP_URL}/tools/code-compare`,
+    canonical: `${APP_URL}/text-diff`,
   },
   openGraph: {
     title: "Online Text Compare — Free Side-by-Side Text Diff Tool | CodeLens",
     description:
       "Compare text and code side-by-side online with line-by-line & character diff highlighting, sample datasets, side swapping, and instant line count metrics.",
-    url: `${APP_URL}/tools/code-compare`,
+    url: `${APP_URL}/text-diff`,
     siteName: "CodeLens",
     images: [`${APP_URL}/logo-large.jpg`],
     type: "website",
@@ -55,9 +55,9 @@ const jsonLdSchema = {
   "@graph": [
     {
       "@type": ["SoftwareApplication", "WebApplication"],
-      "@id": `${APP_URL}/tools/code-compare/#webapp`,
+      "@id": `${APP_URL}/text-diff/#webapp`,
       name: "CodeLens Online Text Compare",
-      url: `${APP_URL}/tools/code-compare`,
+      url: `${APP_URL}/text-diff`,
       description:
         "Free online text compare and diff tool for comparing text and code side-by-side with line and character diff highlighting.",
       applicationCategory: "DeveloperApplication",
@@ -70,7 +70,7 @@ const jsonLdSchema = {
     },
     {
       "@type": "HowTo",
-      "@id": `${APP_URL}/tools/code-compare/#howto`,
+      "@id": `${APP_URL}/text-diff/#howto`,
       name: "How to Compare Text Online using CodeLens Online Text Compare",
       description:
         "Step-by-step instructions for comparing two text snippets or documents side-by-side online.",
@@ -99,7 +99,7 @@ const jsonLdSchema = {
     },
     {
       "@type": "FAQPage",
-      "@id": `${APP_URL}/tools/code-compare/#faq`,
+      "@id": `${APP_URL}/text-diff/#faq`,
       mainEntity: [
         {
           "@type": "Question",

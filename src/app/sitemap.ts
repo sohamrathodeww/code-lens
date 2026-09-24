@@ -4,9 +4,14 @@ import { APP_URL } from "@/lib/constants";
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
-    "/tools/json-viewer",
-    "/tools/code-compare",
-    "/tools/jwt-decoder",
+    "/json-viewer",
+    "/json-formatter",
+    "/json-validator",
+    "/code-compare",
+    "/text-diff",
+    "/jwt-decoder",
+    "/online-code-editor",
+    "/translator"
   ];
 
   return routes.map((route) => ({

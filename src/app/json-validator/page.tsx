@@ -28,13 +28,13 @@ export const metadata: Metadata = {
     "developer JSON tools",
   ],
   alternates: {
-    canonical: `${APP_URL}/tools/json-viewer`,
+    canonical: `${APP_URL}/json-validator`,
   },
   openGraph: {
     title: "Free Online JSON Viewer, Beautifier & Flow Chart Diagram | CodeLens",
     description:
       "Format, beautify, minify, inspect tree nodes, view tabular data, and generate interactive flow chart diagrams online for free.",
-    url: `${APP_URL}/tools/json-viewer`,
+    url: `${APP_URL}/json-validator`,
     siteName: "CodeLens",
     images: [`${APP_URL}/logo-large.jpg`],
     type: "website",
@@ -53,9 +53,9 @@ const jsonLdSchema = {
   "@graph": [
     {
       "@type": ["SoftwareApplication", "WebApplication"],
-      "@id": `${APP_URL}/tools/json-viewer/#webapp`,
+      "@id": `${APP_URL}/json-validator/#webapp`,
       name: "CodeLens Online JSON Viewer",
-      url: `${APP_URL}/tools/json-viewer`,
+      url: `${APP_URL}/json-validator`,
       description:
         "Free online JSON viewer, beautifier, minifier, tree node inspector, tabular data grid, and flow chart diagram viewer.",
       applicationCategory: "DeveloperApplication",
@@ -68,7 +68,7 @@ const jsonLdSchema = {
     },
     {
       "@type": "FAQPage",
-      "@id": `${APP_URL}/tools/json-viewer/#faq`,
+      "@id": `${APP_URL}/json-validator/#faq`,
       mainEntity: [
         {
           "@type": "Question",

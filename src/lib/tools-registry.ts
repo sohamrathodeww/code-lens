@@ -111,6 +111,23 @@ export const TOOLS_REGISTRY: ToolDefinition[] = [
       "python compiler",
     ],
   },
+  {
+    id: "currency-converter",
+    name: "Online Currency Converter",
+    shortDescription: "Real-time exchange rates and multi-currency conversions.",
+    description: "Professional online currency converter featuring real-time live exchange rates, historical fallback data, and an intuitive UI for global finance calculations.",
+    category: "Converters",
+    route: "/currency-converter",
+    iconName: "Banknote",
+    status: "active",
+    tags: [
+      "currency converter",
+      "exchange rates",
+      "online currency converter",
+      "live exchange rates",
+      "fiat converter",
+    ],
+  },
 ];
 
 

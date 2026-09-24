@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { 
   ArrowRight, FileJson, Code2, Database, KeyRound, 
   Regex, Sparkles, Languages, Terminal, 
-  CheckCircle2, ShieldCheck, Zap, Lock, Cpu, Globe
+  CheckCircle2, ShieldCheck, Zap, Lock, Cpu, Globe, Banknote
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -17,7 +17,7 @@ import { APP_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "CodeLens — Next-Gen Developer Utilities",
   description:
-    "CodeLens is a modern, high-performance suite of developer tools. Format JSON, compare code, inspect API payloads, and execute code directly in your browser with absolute privacy.",
+    "Free online developer tools: JSON formatter, code compare, API payload inspector, and more. Run high-performance utilities directly in your browser.",
   keywords: [
     "CodeLens",
     "online developer tools",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 };
 
 const ICON_MAP: Record<string, React.ElementType> = {
-  FileJson, Code2, Database, KeyRound, Regex, Sparkles, Languages, Terminal,
+  FileJson, Code2, Database, KeyRound, Regex, Sparkles, Languages, Terminal, Banknote
 };
 
 const FEATURES = [
@@ -78,8 +78,6 @@ export default function Home() {
                   <span className="relative z-10 bg-gradient-to-br from-indigo-600 via-violet-600 to-indigo-500 bg-clip-text text-transparent">
                     Code Compare & Developer Tools.
                   </span>
-                  {/* Decorative underline */}
-                  <span className="absolute -bottom-2 left-0 right-0 h-3 bg-indigo-500/10 -rotate-1 skew-x-12 -z-0" />
                 </span>
               </h1>
             </SlideUp>
@@ -90,21 +88,6 @@ export default function Home() {
               </p>
             </SlideUp>
           </div>
-
-          <SlideUp delay={0.4}>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 w-full sm:w-auto">
-              <Link href="/json-viewer" className="w-full sm:w-auto">
-                <Button variant="primary" size="lg" className="w-full h-14 px-8 text-base shadow-[0_8px_24px_rgba(79,70,229,0.25)] hover:shadow-[0_12px_32px_rgba(79,70,229,0.35)] transition-all">
-                  Open JSON Viewer
-                </Button>
-              </Link>
-              <Link href="/code-compare" className="w-full sm:w-auto">
-                <Button variant="secondary" size="lg" className="w-full h-14 px-8 text-base bg-white shadow-sm border-slate-200/80 hover:bg-slate-50 transition-all">
-                  Compare Code
-                </Button>
-              </Link>
-            </div>
-          </SlideUp>
           
           <FadeIn delay={0.6} className="pt-16 w-full max-w-4xl mx-auto">
             <div className="relative">
@@ -150,7 +133,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {TOOLS_REGISTRY.map((tool, idx) => {
+            {TOOLS_REGISTRY.slice(0, 6).map((tool, idx) => {
               const Icon = ICON_MAP[tool.iconName] || Code2;
               const isActive = tool.status === "active";
               // Calculate a staggered delay based on index for the grid items
@@ -204,8 +187,8 @@ export default function Home() {
 
                     <div className="pt-8 relative z-10 mt-auto">
                       {isActive ? (
-                        <Link href={tool.route} className="w-full block">
-                          <button className="w-full py-3 px-4 rounded-xl font-bold text-sm flex items-center justify-between bg-slate-50 text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 border border-slate-200/80 hover:border-indigo-200 transition-all duration-300">
+                        <Link href={tool.route} className="w-full block cursor-pointer">
+                          <button className="w-full py-3 px-4 rounded-xl font-bold text-sm flex items-center justify-between bg-slate-50 text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 border border-slate-200/80 hover:border-indigo-200 transition-all duration-300 cursor-pointer">
                             Launch Tool
                             <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-1.5 transition-all duration-300" />
                           </button>
@@ -221,6 +204,27 @@ export default function Home() {
               );
             })}
           </div>
+          
+          <SlideUp delay={0.4}>
+            <div className="mt-14 flex justify-center">
+              <Link href="/tools" className="group inline-flex relative cursor-pointer">
+                {/* Glowing Aura Background */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 rounded-2xl blur-lg opacity-30 group-hover:opacity-70 transition duration-500 group-hover:duration-200"></div>
+                
+                {/* Main Button Body */}
+                <button className="relative flex items-center gap-3 px-8 py-4 bg-white/95 backdrop-blur-xl border border-indigo-100 rounded-2xl text-indigo-700 font-extrabold text-lg shadow-sm group-hover:shadow-[0_12px_24px_rgba(79,70,229,0.25)] group-hover:-translate-y-1 transition-all duration-300">
+                  <span className="bg-gradient-to-br from-indigo-700 to-purple-600 bg-clip-text text-transparent">
+                    Explore All Platform Tools
+                  </span>
+                  
+                  {/* Arrow Icon Wrapper */}
+                  <div className="p-1.5 rounded-full bg-indigo-50 group-hover:bg-indigo-600 transition-colors duration-300">
+                    <ArrowRight className="w-5 h-5 text-indigo-600 group-hover:text-white group-hover:translate-x-0.5 transition-all duration-300" />
+                  </div>
+                </button>
+              </Link>
+            </div>
+          </SlideUp>
         </section>
 
         {/* Elegant SEO / Deep Dive Section */}

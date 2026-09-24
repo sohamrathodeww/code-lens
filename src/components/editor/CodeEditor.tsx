@@ -31,8 +31,8 @@ export default function CodeEditor({ language, value, onChange }: CodeEditorProp
           },
         }}
         loading={
-          <div className="flex items-center justify-center h-full text-gray-500">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mr-3"></div>
+          <div className="flex items-center justify-center h-full text-slate-500 bg-[#1e1e1e]/5 rounded-xl font-mono text-sm">
+            <div className="animate-spin rounded-full h-5 w-5 border-2 border-transparent border-t-indigo-600 border-l-indigo-600 mr-3"></div>
             Loading Editor...
           </div>
         }

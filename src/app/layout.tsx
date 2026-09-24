@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | CodeLens",
   },
   description:
-    "CodeLens is a free online developer tools suite for JSON inspection, code comparison, API payload validation, and browser-based productivity workflows for engineers and teams.",
+    "Free online developer tools suite for JSON inspection, code comparison, API validation, and browser-based productivity workflows for engineers.",
   icons: {
     icon: "/favicon-light.png",
     shortcut: "/favicon-light.png",

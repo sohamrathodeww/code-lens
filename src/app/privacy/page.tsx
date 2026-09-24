@@ -18,49 +18,72 @@ export default function PrivacyPage() {
       <FluidCanvas />
       <Navbar />
 
-      <main className="relative z-10 max-w-4xl w-full mx-auto px-4 sm:px-8 pt-12 pb-24 flex-1">
-        <section className="liquid-glass-surface p-8 sm:p-12 space-y-8 text-slate-700 text-base leading-relaxed border border-white/80 rounded-[2.5rem]">
-          <div className="space-y-4">
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-950 tracking-tight">
+      <main className="relative z-10 w-full mx-auto px-4 sm:px-8 py-16 lg:py-24 flex-1">
+        <div className="max-w-7xl mx-auto">
+          
+          <div className="text-center space-y-6 max-w-4xl mx-auto mb-16">
+            <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tighter text-slate-950 leading-[1.1]">
               Privacy Policy
             </h1>
-            <p className="text-sm text-slate-500 font-medium">
+            <p className="text-xl text-slate-500 font-medium leading-relaxed text-balance">
+              At CodeLens, we build the fastest, privacy-first online developer tools suite. Learn exactly how we protect your proprietary code, payloads, and sensitive tokens.
+            </p>
+            <p className="text-sm text-slate-400 font-bold uppercase tracking-widest">
               Last updated: September 2026
             </p>
           </div>
 
-          <article className="prose prose-slate max-w-none">
-            <p>
-              At CodeLens, we take your privacy incredibly seriously. Our primary architectural decision was to build a toolset that <strong>does not</strong> rely on backend servers to process your data.
-            </p>
+          <section className="bg-white p-8 sm:p-16 border border-slate-200 rounded-[2.5rem] shadow-sm relative overflow-hidden">
+            <article className="prose prose-slate prose-lg md:prose-xl max-w-4xl mx-auto">
+              <p>
+                CodeLens is dedicated to providing secure, client-side online developer tools, including our premium JSON Viewer, JSON Formatter, Text Diff Checker, Code Compare utility, and JWT Decoder. Because developers often work with highly sensitive production data, our primary architectural decision was to build a toolset that <strong>does not</strong> rely on backend servers to process your data.
+              </p>
 
-            <h3>1. Data Processing & Storage</h3>
-            <p>
-              All core tools (including the JSON Viewer, JSON Compare, Text Compare, and JWT Decoder) execute entirely within your browser using Client-Side JavaScript and WebAssembly. 
-              <strong> We do not upload, transmit, or store your code, payloads, or tokens on our servers.</strong>
-            </p>
+              <h3 className="text-3xl font-extrabold text-slate-900 mt-12 mb-6">1. 100% Client-Side Data Processing</h3>
+              <p>
+                The majority of the developer tools provided by CodeLens execute entirely within your browser using Client-Side JavaScript and WebAssembly (via the Monaco Editor engine). 
+                <strong> We do not upload, transmit, log, or store your code snippets, JSON payloads, or JWT tokens on any remote servers.</strong> 
+                This guarantees maximum security for your proprietary algorithms and API responses.
+              </p>
+              
+              <h4 className="text-xl font-bold text-slate-900 mt-8 mb-4">Our Suite of Secure Tools Includes:</h4>
+              <ul className="list-disc pl-6 space-y-2 text-slate-700">
+                <li><strong>Online JSON Viewer & Formatter:</strong> Parses and minifies JSON locally. No data leaves your machine.</li>
+                <li><strong>Online JSON Compare & Diff:</strong> Compares payloads strictly inside your browser's memory.</li>
+                <li><strong>Online Text Compare:</strong> Diff checking executed via local web workers.</li>
+                <li><strong>JWT Decoder:</strong> Decodes tokens instantly without transmitting sensitive claims or signatures.</li>
+                <li><strong>Online Code Editor:</strong> Writes and formats code locally. (Execution may involve secure, isolated cloud containers depending on the language).</li>
+                <li><strong>Online Translator:</strong> Relies on secure third-party APIs to process text without storing it locally on our servers.</li>
+                <li><strong>Online Currency Converter:</strong> Fetches live exchange rates via API, but performs all conversions locally on your device.</li>
+              </ul>
 
-            <h3>2. Information We Collect</h3>
-            <p>
-              Because our tools are client-side, we collect minimal data. We may use privacy-friendly, anonymized analytics (like Vercel Web Analytics) to understand page views and performance metrics. This data does not contain any personally identifiable information (PII) or user input data.
-            </p>
+              <h3 className="text-3xl font-extrabold text-slate-900 mt-12 mb-6">2. Information We Collect</h3>
+              <p>
+                Because our secure developer utilities are processed client-side, we collect absolute minimal data. We use privacy-friendly, anonymized analytics to monitor general page views and performance metrics across our platform. This data does not contain any personally identifiable information (PII) or user input data from the tools.
+              </p>
 
-            <h3>3. Cookies</h3>
-            <p>
-              CodeLens may use local storage (like <code>localStorage</code>) strictly to save your UI preferences (like Dark/Light mode or editor settings). We do not use third-party tracking cookies.
-            </p>
+              <h3 className="text-3xl font-extrabold text-slate-900 mt-12 mb-6">3. Cookies & Local Storage</h3>
+              <p>
+                CodeLens utilizes browser local storage (<code>localStorage</code>) strictly to save your UI preferences (such as Dark/Light mode, font sizes, and editor configurations) so that your preferred developer environment is ready the next time you visit. We do not use third-party tracking cookies or advertising trackers.
+              </p>
 
-            <h3>4. Third-Party Services</h3>
-            <p>
-              Our application is hosted on Vercel. Standard server access logs (like IP addresses and user agents) may be temporarily stored by our hosting provider for security and DDoS mitigation purposes.
-            </p>
+              <h3 className="text-3xl font-extrabold text-slate-900 mt-12 mb-6">4. Hosting & Infrastructure Services</h3>
+              <p>
+                Our global online developer suite is hosted on premium edge networks. Standard server access logs (which may include IP addresses and user agents) are temporarily stored by our hosting provider strictly for security monitoring, DDoS mitigation, and maintaining the highest availability for our web tools.
+              </p>
 
-            <h3>5. Contact Us</h3>
-            <p>
-              If you have any questions or concerns about this Privacy Policy, please contact us at <a href="mailto:privacy@codelens.dev">privacy@codelens.dev</a>.
-            </p>
-          </article>
-        </section>
+              <h3 className="text-3xl font-extrabold text-slate-900 mt-12 mb-6">5. Updates to this Policy</h3>
+              <p>
+                We may update this Privacy Policy periodically as we add new secure developer tools to our platform. We encourage you to review this page occasionally to stay informed about how we are protecting your data.
+              </p>
+
+              <h3 className="text-3xl font-extrabold text-slate-900 mt-12 mb-6">6. Contact Us</h3>
+              <p>
+                If you have any questions, concerns, or feedback about this Privacy Policy or our developer toolset, please contact our team via the <a href="/contact" className="text-indigo-600 font-bold hover:underline">Contact Us</a> page.
+              </p>
+            </article>
+          </section>
+        </div>
       </main>
 
       <Footer />

@@ -6,7 +6,7 @@ import { clsx } from "clsx";
 import { Loader2 } from "lucide-react";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "ghost" | "destructive" | "icon" | "toolAction" | "floatingAction";
+  variant?: "primary" | "secondary" | "solid" | "ghost" | "destructive" | "icon" | "toolAction" | "floatingAction";
   size?: "sm" | "md" | "lg";
   children?: React.ReactNode;
   icon?: React.ReactNode;
@@ -55,6 +55,8 @@ export const Button: React.FC<ButtonProps> = ({
   const variantStyles = {
     primary:
       "bg-white/90 hover:bg-white text-slate-950 font-extrabold border-white shadow-[inset_0_1.5px_2px_#ffffff,0_8px_20px_rgba(15,23,42,0.08)] hover:shadow-[inset_0_2px_3px_#ffffff,0_12px_28px_rgba(99,102,241,0.18)]",
+    solid:
+      "bg-slate-950 hover:bg-slate-900 text-white font-extrabold border-slate-950 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15),0_8px_20px_rgba(15,23,42,0.15)] hover:shadow-[0_12px_28px_rgba(15,23,42,0.25)]",
     secondary:
       "bg-white/90 hover:bg-white text-slate-950 font-extrabold border-white shadow-[inset_0_1.5px_2px_#ffffff,0_8px_20px_rgba(15,23,42,0.08)] hover:shadow-[inset_0_2px_3px_#ffffff,0_12px_28px_rgba(99,102,241,0.18)]",
     ghost:
@@ -69,22 +71,19 @@ export const Button: React.FC<ButtonProps> = ({
       "bg-white/95 backdrop-blur-3xl text-slate-950 font-extrabold border-white shadow-[inset_0_2px_3px_#ffffff,0_16px_36px_rgba(15,23,42,0.1)]",
   };
 
-
-
-
-
-
   return (
     <motion.button
-      whileHover={disabled || isLoading ? undefined : { scale: 1.03, y: -1 }}
-      whileTap={disabled || isLoading ? undefined : { scale: 0.96, y: 1 }}
+      whileHover={disabled || isLoading ? undefined : { scale: 1.02, y: -1 }}
+      whileTap={disabled || isLoading ? undefined : { scale: 0.98, y: 1 }}
       disabled={disabled || isLoading}
       onClick={handleClick}
       className={clsx(baseStyles, sizeStyles[size], variantStyles[variant], className)}
       {...(props as any)}
     >
-      {/* Specular Diagonal Lens Flare Curve */}
-      <span className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/70 via-white/20 to-transparent pointer-events-none rounded-t-full" />
+      {/* Specular Diagonal Lens Flare Curve - ONLY for light glossy variants */}
+      {(variant === "primary" || variant === "secondary") && (
+        <span className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/70 via-white/20 to-transparent pointer-events-none rounded-t-full" />
+      )}
 
       {/* Water Ripple Physics */}
       {isRippling && coords && (
@@ -106,7 +105,11 @@ export const Button: React.FC<ButtonProps> = ({
         <span className="text-current shrink-0 relative z-10">{icon}</span>
       ) : null}
 
-      {children && <span className="relative z-10 tracking-tight font-extrabold">{children}</span>}
+      {children && (
+        <span className="relative z-10 tracking-tight font-extrabold flex items-center justify-center gap-2">
+          {children}
+        </span>
+      )}
     </motion.button>
   );
 };

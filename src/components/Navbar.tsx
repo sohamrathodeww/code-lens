@@ -50,20 +50,34 @@ export const Navbar: React.FC = () => {
           </div>
         </Link>
 
-        <div className="flex items-center gap-3 relative" ref={dropdownRef}>
-          <button
-            onClick={() => setIsToolsDropdownOpen(!isToolsDropdownOpen)}
-            className="px-3.5 py-2 rounded-full bg-white/90 border border-slate-200/90 text-slate-900 hover:bg-white hover:border-slate-300 shadow-[inset_0_1.5px_2px_#ffffff,0_4px_16px_rgba(15,23,42,0.06)] flex items-center gap-2 transition-all cursor-pointer font-sans font-bold text-xs"
-            aria-expanded={isToolsDropdownOpen}
-            aria-label="Active Tools Menu"
-          >
-            <LayoutGrid className="w-4 h-4 text-indigo-600" />
-            <span className="font-extrabold text-xs text-slate-900">Tools</span>
-            <ChevronDown
-              className={`w-3.5 h-3.5 text-slate-500 transition-transform duration-200 ${isToolsDropdownOpen ? "rotate-180 text-indigo-600" : ""
-                }`}
-            />
-          </button>
+        <div className="flex items-center gap-2 sm:gap-6">
+          <nav className="hidden md:flex items-center gap-8 mr-4">
+            <Link href="/tools" className="text-[13px] font-extrabold text-slate-600 hover:text-indigo-600 transition-colors">
+              Tools
+            </Link>
+            <Link href="/about" className="text-[13px] font-extrabold text-slate-600 hover:text-indigo-600 transition-colors">
+              About Us
+            </Link>
+            <Link href="/contact" className="text-[13px] font-extrabold text-slate-600 hover:text-indigo-600 transition-colors">
+              Contact Us
+            </Link>
+          </nav>
+
+          <div className="flex items-center gap-3 relative" ref={dropdownRef}>
+            <button
+              onClick={() => setIsToolsDropdownOpen(!isToolsDropdownOpen)}
+              className="px-3.5 py-2 rounded-full bg-white/90 border border-slate-200/90 text-slate-900 hover:bg-white hover:border-slate-300 shadow-[inset_0_1.5px_2px_#ffffff,0_4px_16px_rgba(15,23,42,0.06)] flex items-center gap-2 transition-all cursor-pointer font-sans font-bold text-xs"
+              aria-expanded={isToolsDropdownOpen}
+              aria-label="Active Tools Menu"
+            >
+              <LayoutGrid className="w-4 h-4 text-indigo-600" />
+              <span className="font-extrabold text-xs text-slate-900 hidden sm:inline">Quick Switch</span>
+              <span className="font-extrabold text-xs text-slate-900 sm:hidden">Tools</span>
+              <ChevronDown
+                className={`w-3.5 h-3.5 text-slate-500 transition-transform duration-200 ${isToolsDropdownOpen ? "rotate-180 text-indigo-600" : ""
+                  }`}
+              />
+            </button>
 
           <AnimatePresence>
             {isToolsDropdownOpen && (
@@ -146,6 +160,7 @@ export const Navbar: React.FC = () => {
               </motion.div>
             )}
           </AnimatePresence>
+          </div>
         </div>
       </div>
     </header>

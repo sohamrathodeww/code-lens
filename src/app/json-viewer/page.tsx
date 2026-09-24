@@ -6,10 +6,13 @@ import { JsonViewerFeature } from "@/features/json-viewer/JsonViewerFeature";
 import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Online JSON Viewer & Formatter – Free, No Upload | CodeLens",
+  title: "Online JSON Viewer CodeLens Vercel App – Free, No Upload",
   description:
-    "CodeLens JSON Viewer is a free online JSON formatter, beautifier, minifier, validator, and tree inspector for developers working with API payloads, configuration files, and structured data.",
+    "CodeLens JSON Viewer is a free online JSON formatter, beautifier, minifier, validator, and tree inspector for developers working with API payloads, deployed as a Vercel app.",
   keywords: [
+    "online json viewer codelens vercel app",
+    "codelens vercel app",
+    "codelens-dev.vercel.app",
     "CodeLens JSON viewer",
     "online json viewer",
     "json viewer online",
@@ -31,17 +34,17 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/json-viewer`,
   },
   openGraph: {
-    title: "Free Online JSON Viewer, Beautifier & Flow Chart Diagram | CodeLens",
+    title: "Online JSON Viewer CodeLens Vercel App | CodeLens",
     description:
       "Format, beautify, minify, inspect tree nodes, view tabular data, and generate interactive flow chart diagrams online for free.",
     url: `${APP_URL}/json-viewer`,
-    siteName: "CodeLens",
+    siteName: "CodeLens Vercel App",
     images: [`${APP_URL}/logo-large.jpg`],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Online JSON Viewer, Beautifier & Diagram Inspector — CodeLens",
+    title: "Online JSON Viewer CodeLens Vercel App",
     description:
       "Format, beautify, minify, inspect tree nodes, view tables, and generate flow chart diagrams online.",
     images: [`${APP_URL}/logo-large.jpg`],
@@ -124,9 +127,9 @@ export default function JsonViewerPage() {
         {/* High-Ranking SEO Information Section */}
         <section className="liquid-glass-surface p-8 space-y-6 text-slate-700 text-sm leading-relaxed border border-white/80">
           <div className="space-y-2">
-            <h2 className="text-2xl font-bold text-slate-950 tracking-tight">
+            <h1 className="text-2xl font-bold text-slate-950 tracking-tight">
               Free Online JSON Viewer for API Payloads, Schema Review, and Data Inspection
-            </h2>
+            </h1>
             <p className="text-slate-600">
               CodeLens JSON Viewer helps developers validate request and response payloads, inspect nested structures, and transform raw JSON into readable, developer-friendly output. It is designed for API teams, frontend engineers, and QA reviewers who need clean output and fast troubleshooting.
             </p>

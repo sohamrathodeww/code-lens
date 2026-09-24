@@ -16,6 +16,12 @@ export const SITE_DESCRIPTION =
 export const DEFAULT_KEYWORDS = [
   "CodeLens",
   "CodeLens online",
+  "codelens vercel app",
+  "online json viewer codelens vercel app",
+  "codelens-dev.vercel.app",
+  "vercel app online developer tools",
+  "json viewer codelens",
+  "code-lens vercel",
   "Online Code Compare",
   "online code compare",
   "compare code online",

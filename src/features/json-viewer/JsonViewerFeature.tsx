@@ -226,6 +226,7 @@ export const JsonViewerFeature: React.FC = () => {
                 cursorBlinking: "smooth",
                 formatOnPaste: true,
                 padding: { top: 16 },
+                scrollbar: { alwaysConsumeMouseWheel: false },
               }}
             />
           </div>

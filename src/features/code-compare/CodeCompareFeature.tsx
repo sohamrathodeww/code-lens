@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect, useMemo, useCallback } from "react";
-import { Editor } from "@monaco-editor/react";
+import { DiffEditor } from "@monaco-editor/react";
 import {
   Code2,
   ArrowLeftRight,
@@ -103,35 +103,8 @@ export function formatCodeString(code: string, lang: string = "typescript"): str
   }
 }
 
-function getCharDiffRange(lineA: string = "", lineB: string = "") {
-  const lenA = lineA.length;
-  const lenB = lineB.length;
-
-  if (lenA === 0) return { startA: 1, endA: 1, startB: 1, endB: lenB + 1 };
-  if (lenB === 0) return { startA: 1, endA: lenA + 1, startB: 1, endB: 1 };
-
-  let start = 0;
-  while (start < lenA && start < lenB && lineA[start] === lineB[start]) {
-    start++;
-  }
-
-  let endA = lenA - 1;
-  let endB = lenB - 1;
-  while (endA >= start && endB >= start && lineA[endA] === lineB[endB]) {
-    endA--;
-    endB--;
-  }
-
-  return {
-    startA: start + 1,
-    endA: Math.max(start + 1, endA + 2),
-    startB: start + 1,
-    endB: Math.max(start + 1, endB + 2),
-  };
-}
-
 /**
- * Line-by-line & character-level LCS diff logic
+ * Line-by-line & character-level LCS diff logic for stats ONLY
  */
 function computeLineDiffs(originalText: string, modifiedText: string) {
   const origLines = originalText ? originalText.split("\n") : [];
@@ -141,29 +114,11 @@ function computeLineDiffs(originalText: string, modifiedText: string) {
   const M = modLines.length;
 
   if (N === 0 && M === 0) {
-    return {
-      origDecorations: [],
-      modDecorations: [],
-      addedCount: 0,
-      deletedCount: 0,
-      modifiedCount: 0,
-      totalLines: 0,
-      origLinesCount: 0,
-      modLinesCount: 0,
-    };
+    return { addedCount: 0, deletedCount: 0, modifiedCount: 0, totalLines: 0, origLinesCount: 0, modLinesCount: 0 };
   }
 
   if (originalText === modifiedText) {
-    return {
-      origDecorations: [],
-      modDecorations: [],
-      addedCount: 0,
-      deletedCount: 0,
-      modifiedCount: 0,
-      totalLines: N,
-      origLinesCount: N,
-      modLinesCount: M,
-    };
+    return { addedCount: 0, deletedCount: 0, modifiedCount: 0, totalLines: N, origLinesCount: N, modLinesCount: M };
   }
 
   const dp: number[][] = Array.from({ length: N + 1 }, () => new Array(M + 1).fill(0));
@@ -199,9 +154,6 @@ function computeLineDiffs(originalText: string, modifiedText: string) {
 
   diffOps.reverse();
 
-  const origDecorations: { line: number; startCol: number; endCol: number; type: "deleted" | "modified" }[] = [];
-  const modDecorations: { line: number; startCol: number; endCol: number; type: "added" | "modified" }[] = [];
-
   let addedCount = 0;
   let deletedCount = 0;
   let modifiedCount = 0;
@@ -211,38 +163,19 @@ function computeLineDiffs(originalText: string, modifiedText: string) {
     const op = diffOps[opIdx];
     if (op.type === "delete") {
       if (opIdx + 1 < diffOps.length && diffOps[opIdx + 1].type === "add") {
-        const origLineStr = origLines[op.origIdx!] || "";
-        const modLineStr = modLines[diffOps[opIdx + 1].modIdx!] || "";
-        const { startA, endA, startB, endB } = getCharDiffRange(origLineStr, modLineStr);
-
-        origDecorations.push({ line: op.origIdx! + 1, startCol: startA, endCol: endA, type: "modified" });
-        modDecorations.push({ line: diffOps[opIdx + 1].modIdx! + 1, startCol: startB, endCol: endB, type: "modified" });
         modifiedCount++;
         opIdx += 2;
         continue;
       } else {
-        const origLineStr = origLines[op.origIdx!] || "";
-        origDecorations.push({ line: op.origIdx! + 1, startCol: 1, endCol: origLineStr.length + 1, type: "deleted" });
         deletedCount++;
       }
     } else if (op.type === "add") {
-      const modLineStr = modLines[op.modIdx!] || "";
-      modDecorations.push({ line: op.modIdx! + 1, startCol: 1, endCol: modLineStr.length + 1, type: "added" });
       addedCount++;
     }
     opIdx++;
   }
 
-  return {
-    origDecorations,
-    modDecorations,
-    addedCount,
-    deletedCount,
-    modifiedCount,
-    totalLines: Math.max(N, M),
-    origLinesCount: N,
-    modLinesCount: M,
-  };
+  return { addedCount, deletedCount, modifiedCount, totalLines: Math.max(N, M), origLinesCount: N, modLinesCount: M };
 }
 
 export const CodeCompareFeature: React.FC = () => {
@@ -255,62 +188,17 @@ export const CodeCompareFeature: React.FC = () => {
   const [copiedOriginal, setCopiedOriginal] = useState<boolean>(false);
   const [copiedModified, setCopiedModified] = useState<boolean>(false);
 
-  // Monaco Editor references for applying dynamic diff line decorations
-  const origEditorRef = useRef<any>(null);
-  const modEditorRef = useRef<any>(null);
-  const monacoRef = useRef<any>(null);
-  const origDecorationsRef = useRef<string[]>([]);
-  const modDecorationsRef = useRef<string[]>([]);
+  const diffEditorRef = useRef<any>(null);
 
   const stats = useMemo(() => computeLineDiffs(originalCode, modifiedCode), [originalCode, modifiedCode]);
-
-  const applyDecorations = useCallback(() => {
-    if (!monacoRef.current) return;
-
-    if (origEditorRef.current) {
-      const newOrigDecs = stats.origDecorations.map((d) => ({
-        range: new monacoRef.current.Range(d.line, d.startCol, d.line, d.endCol),
-        options: {
-          isWholeLine: d.type === "deleted",
-          className: d.type === "deleted" ? "diff-line-deleted" : "diff-line-modified",
-          inlineClassName: d.type === "modified" ? "diff-char-deleted" : undefined,
-          linesDecorationsClassName: d.type === "deleted" ? "diff-margin-deleted" : "diff-margin-modified",
-        },
-      }));
-      origDecorationsRef.current = origEditorRef.current.deltaDecorations(
-        origDecorationsRef.current,
-        newOrigDecs
-      );
-    }
-
-    if (modEditorRef.current) {
-      const newModDecs = stats.modDecorations.map((d) => ({
-        range: new monacoRef.current.Range(d.line, d.startCol, d.line, d.endCol),
-        options: {
-          isWholeLine: d.type === "added",
-          className: d.type === "added" ? "diff-line-added" : "diff-line-modified",
-          inlineClassName: d.type === "modified" ? "diff-char-added" : undefined,
-          linesDecorationsClassName: d.type === "added" ? "diff-margin-added" : "diff-margin-modified",
-        },
-      }));
-      modDecorationsRef.current = modEditorRef.current.deltaDecorations(
-        modDecorationsRef.current,
-        newModDecs
-      );
-    }
-  }, [stats]);
-
-  useEffect(() => {
-    applyDecorations();
-  }, [applyDecorations]);
 
   const handleFormatOriginal = useCallback(() => {
     if (!originalCode) return;
     const formatted = formatCodeString(originalCode);
     setOriginalCode(formatted);
-    if (origEditorRef.current) {
+    if (diffEditorRef.current) {
       setTimeout(() => {
-        origEditorRef.current.getAction("editor.action.formatDocument")?.run();
+        diffEditorRef.current.getOriginalEditor().getAction("editor.action.formatDocument")?.run();
       }, 50);
     }
   }, [originalCode]);
@@ -319,9 +207,9 @@ export const CodeCompareFeature: React.FC = () => {
     if (!modifiedCode) return;
     const formatted = formatCodeString(modifiedCode);
     setModifiedCode(formatted);
-    if (modEditorRef.current) {
+    if (diffEditorRef.current) {
       setTimeout(() => {
-        modEditorRef.current.getAction("editor.action.formatDocument")?.run();
+        diffEditorRef.current.getModifiedEditor().getAction("editor.action.formatDocument")?.run();
       }, 50);
     }
   }, [modifiedCode]);
@@ -331,39 +219,41 @@ export const CodeCompareFeature: React.FC = () => {
     handleFormatModified();
   }, [handleFormatOriginal, handleFormatModified]);
 
-  const handleOrigMount = (editor: any, monaco: any) => {
-    origEditorRef.current = editor;
-    monacoRef.current = monaco;
-    applyDecorations();
+  const handleDiffMount = (editor: any) => {
+    diffEditorRef.current = editor;
 
-    editor.onDidPaste(() => {
+    const originalEditor = editor.getOriginalEditor();
+    const modifiedEditor = editor.getModifiedEditor();
+
+    originalEditor.onDidChangeModelContent(() => {
+      setOriginalCode(originalEditor.getValue());
+    });
+
+    modifiedEditor.onDidChangeModelContent(() => {
+      setModifiedCode(modifiedEditor.getValue());
+    });
+    
+    // Attempt auto-format on paste for both editors
+    originalEditor.onDidPaste(() => {
       setTimeout(() => {
-        const val = editor.getValue();
+        const val = originalEditor.getValue();
         if (val) {
           const formatted = formatCodeString(val);
           if (formatted !== val) {
-            editor.setValue(formatted);
+            originalEditor.setValue(formatted);
           }
-          editor.getAction("editor.action.formatDocument")?.run();
         }
       }, 100);
     });
-  };
-
-  const handleModMount = (editor: any, monaco: any) => {
-    modEditorRef.current = editor;
-    monacoRef.current = monaco;
-    applyDecorations();
-
-    editor.onDidPaste(() => {
+    
+    modifiedEditor.onDidPaste(() => {
       setTimeout(() => {
-        const val = editor.getValue();
+        const val = modifiedEditor.getValue();
         if (val) {
           const formatted = formatCodeString(val);
           if (formatted !== val) {
-            editor.setValue(formatted);
+            modifiedEditor.setValue(formatted);
           }
-          editor.getAction("editor.action.formatDocument")?.run();
         }
       }, 100);
     });
@@ -499,12 +389,15 @@ export const CodeCompareFeature: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Dual Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-        {/* Box 1: Original Source */}
-        <div className="liquid-glass-surface p-6 sm:p-7 flex flex-col h-[780px] relative">
-          <span className="lens-sheen" />
-          <div className="flex items-center justify-between pb-3.5 border-b border-slate-900/10 relative z-10">
+      {/* Main Single Card for DiffEditor */}
+      <div className="liquid-glass-surface p-6 sm:p-7 flex flex-col h-[780px] relative">
+        <span className="lens-sheen" />
+        
+        {/* Dual Toolbars (Grid 2 cols to match the diff layout) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-4 border-b border-slate-900/10 relative z-10">
+          
+          {/* Original Toolbar */}
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5 overflow-hidden">
               <span className="w-2.5 h-2.5 rounded-full bg-rose-500 shrink-0" />
               <FileCode className="w-4.5 h-4.5 text-indigo-600 shrink-0" />
@@ -513,19 +406,9 @@ export const CodeCompareFeature: React.FC = () => {
               </span>
             </div>
             <div className="flex items-center gap-2 shrink-0">
-              <span className="text-xs font-mono text-slate-500 font-bold">
+              <span className="text-xs font-mono text-slate-500 font-bold hidden sm:inline-block">
                 {stats.origLinesCount} Lines
               </span>
-              {stats.deletedCount > 0 && (
-                <span className="text-xs font-mono font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200/70">
-                  -{stats.deletedCount} Removed
-                </span>
-              )}
-              {stats.modifiedCount > 0 && (
-                <span className="text-xs font-mono font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200/70">
-                  ~{stats.modifiedCount} Modified
-                </span>
-              )}
               <button
                 onClick={handleFormatOriginal}
                 disabled={!originalCode}
@@ -553,35 +436,8 @@ export const CodeCompareFeature: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex-1 mt-3.5 rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-white relative z-10">
-            <Editor
-              height="100%"
-              language="typescript"
-              value={originalCode}
-              onChange={(v) => setOriginalCode(v || "")}
-              theme={editorTheme}
-              onMount={handleOrigMount}
-              loading={<ShimmerLoader variant="editor" />}
-              options={{
-                fontSize: 13.5,
-                fontFamily: "var(--font-jetbrains-mono)",
-                minimap: { enabled: false },
-                scrollBeyondLastLine: false,
-                smoothScrolling: true,
-                cursorBlinking: "smooth",
-                padding: { top: 16 },
-                lineDecorationsWidth: 26,
-                lineNumbersMinChars: 3,
-                glyphMargin: false,
-              }}
-            />
-          </div>
-        </div>
-
-        {/* Box 2: Modified Source */}
-        <div className="liquid-glass-surface p-6 sm:p-7 flex flex-col h-[780px] relative">
-          <span className="lens-sheen" />
-          <div className="flex items-center justify-between pb-3.5 border-b border-slate-900/10 relative z-10">
+          {/* Modified Toolbar */}
+          <div className="flex items-center justify-between border-l-0 md:border-l border-slate-200/50 pl-0 md:pl-6 pt-4 md:pt-0 mt-4 md:mt-0 border-t md:border-t-0">
             <div className="flex items-center gap-2.5 overflow-hidden">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" />
               <FileCode className="w-4.5 h-4.5 text-cyan-600 shrink-0" />
@@ -590,19 +446,9 @@ export const CodeCompareFeature: React.FC = () => {
               </span>
             </div>
             <div className="flex items-center gap-2 shrink-0">
-              <span className="text-xs font-mono text-slate-500 font-bold">
+              <span className="text-xs font-mono text-slate-500 font-bold hidden sm:inline-block">
                 {stats.modLinesCount} Lines
               </span>
-              {stats.addedCount > 0 && (
-                <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/70">
-                  +{stats.addedCount} Added
-                </span>
-              )}
-              {stats.modifiedCount > 0 && (
-                <span className="text-xs font-mono font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200/70">
-                  ~{stats.modifiedCount} Modified
-                </span>
-              )}
               <button
                 onClick={handleFormatModified}
                 disabled={!modifiedCode}
@@ -630,29 +476,34 @@ export const CodeCompareFeature: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex-1 mt-3.5 rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-white relative z-10">
-            <Editor
-              height="100%"
-              language="typescript"
-              value={modifiedCode}
-              onChange={(v) => setModifiedCode(v || "")}
-              theme={editorTheme}
-              onMount={handleModMount}
-              loading={<ShimmerLoader variant="editor" />}
-              options={{
-                fontSize: 13.5,
-                fontFamily: "var(--font-jetbrains-mono)",
-                minimap: { enabled: false },
-                scrollBeyondLastLine: false,
-                smoothScrolling: true,
-                cursorBlinking: "smooth",
-                padding: { top: 16 },
-                lineDecorationsWidth: 26,
-                lineNumbersMinChars: 3,
-                glyphMargin: false,
-              }}
-            />
-          </div>
+        </div>
+
+        <div className="flex-1 mt-4 rounded-xl overflow-hidden border border-slate-200/90 shadow-[inset_0_2px_12px_rgba(15,23,42,0.04)] bg-white relative z-10">
+          <DiffEditor
+            height="100%"
+            language="typescript"
+            original={originalCode}
+            modified={modifiedCode}
+            theme={editorTheme}
+            onMount={handleDiffMount}
+            loading={<ShimmerLoader variant="editor" />}
+            options={{
+              renderSideBySide: true,
+              originalEditable: true,
+              fontSize: 13.5,
+              fontFamily: "var(--font-jetbrains-mono)",
+              minimap: { enabled: false },
+              scrollBeyondLastLine: false,
+              smoothScrolling: true,
+              cursorBlinking: "smooth",
+              padding: { top: 16 },
+              renderOverviewRuler: false,
+              ignoreTrimWhitespace: false,
+              scrollbar: {
+                alwaysConsumeMouseWheel: false,
+              },
+            }}
+          />
         </div>
       </div>
     </SlideUp>

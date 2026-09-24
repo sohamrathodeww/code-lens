@@ -26,6 +26,9 @@ export default function CodeEditor({ language, value, onChange }: CodeEditorProp
           cursorBlinking: "smooth",
           cursorSmoothCaretAnimation: "on",
           formatOnPaste: true,
+          scrollbar: {
+            alwaysConsumeMouseWheel: false,
+          },
         }}
         loading={
           <div className="flex items-center justify-center h-full text-gray-500">

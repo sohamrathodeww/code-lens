@@ -524,6 +524,7 @@ export const JsonCompareFeature: React.FC = () => {
                 lineDecorationsWidth: 26,
                 lineNumbersMinChars: 3,
                 glyphMargin: false,
+                scrollbar: { alwaysConsumeMouseWheel: false },
               }}
             />
           </div>
@@ -601,6 +602,7 @@ export const JsonCompareFeature: React.FC = () => {
                 lineDecorationsWidth: 26,
                 lineNumbersMinChars: 3,
                 glyphMargin: false,
+                scrollbar: { alwaysConsumeMouseWheel: false },
               }}
             />
           </div>

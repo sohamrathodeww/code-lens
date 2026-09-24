@@ -480,6 +480,7 @@ export const JwtDecoderFeature: React.FC = () => {
                         minimap: { enabled: false },
                         scrollBeyondLastLine: false,
                         padding: { top: 12 },
+                        scrollbar: { alwaysConsumeMouseWheel: false },
                       }}
                     />
                   </div>
@@ -518,6 +519,7 @@ export const JwtDecoderFeature: React.FC = () => {
                         minimap: { enabled: false },
                         scrollBeyondLastLine: false,
                         padding: { top: 12 },
+                        scrollbar: { alwaysConsumeMouseWheel: false },
                       }}
                     />
                   </div>

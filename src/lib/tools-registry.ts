@@ -23,6 +23,23 @@ export const TOOLS_REGISTRY: ToolDefinition[] = [
     tags: ["json", "format", "minify", "tree", "validate", "inspector"],
   },
   {
+    id: "json-compare",
+    name: "Online JSON Compare",
+    shortDescription: "Side-by-side JSON diff with auto-formatting and character tracking.",
+    description: "Compare two JSON payloads with side-by-side highlighting. Features automatic formatting to ignore arbitrary whitespaces.",
+    category: "JSON",
+    route: "/json-compare",
+    iconName: "FileJson",
+    status: "active",
+    tags: [
+      "json compare",
+      "json diff",
+      "compare json",
+      "online json compare",
+      "json diff checker",
+    ],
+  },
+  {
     id: "code-compare",
     name: "Online Text Compare",
     shortDescription: "Free Online Text Compare tool with side-by-side text & code diff checker.",

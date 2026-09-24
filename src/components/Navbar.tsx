@@ -60,9 +60,8 @@ export const Navbar: React.FC = () => {
             <LayoutGrid className="w-4 h-4 text-indigo-600" />
             <span className="font-extrabold text-xs text-slate-900">Tools</span>
             <ChevronDown
-              className={`w-3.5 h-3.5 text-slate-500 transition-transform duration-200 ${
-                isToolsDropdownOpen ? "rotate-180 text-indigo-600" : ""
-              }`}
+              className={`w-3.5 h-3.5 text-slate-500 transition-transform duration-200 ${isToolsDropdownOpen ? "rotate-180 text-indigo-600" : ""
+                }`}
             />
           </button>
 
@@ -91,27 +90,25 @@ export const Navbar: React.FC = () => {
                       tool.id === "code-compare"
                         ? Code2
                         : tool.id === "jwt-decoder"
-                        ? KeyRound
-                        : tool.id === "online-translator"
-                        ? Languages
-                        : tool.id === "code-playground"
-                        ? Terminal
-                        : FileJson;
+                          ? KeyRound
+                          : tool.id === "online-translator"
+                            ? Languages
+                            : tool.id === "code-playground"
+                              ? Terminal
+                              : FileJson;
 
                     return (
                       <Link
                         key={tool.id}
                         href={tool.route}
                         onClick={() => setIsToolsDropdownOpen(false)}
-                        className={`p-3 rounded-xl flex items-start gap-3 transition-colors duration-150 group ${
-                          isToolActive
+                        className={`p-3 rounded-xl flex items-start gap-3 transition-colors duration-150 group ${isToolActive
                             ? "bg-indigo-50/80 border border-indigo-200/80 text-indigo-950"
                             : "hover:bg-slate-100/80 text-slate-800"
-                        }`}
+                          }`}
                       >
-                        <div className={`p-2 rounded-xl shrink-0 ${
-                          isToolActive ? "bg-indigo-600 text-white" : "bg-slate-100 text-slate-700 group-hover:bg-white group-hover:text-indigo-600"
-                        }`}>
+                        <div className={`p-2 rounded-xl shrink-0 ${isToolActive ? "bg-indigo-600 text-white" : "bg-slate-100 text-slate-700 group-hover:bg-white group-hover:text-indigo-600"
+                          }`}>
                           <IconComponent className="w-4 h-4" />
                         </div>
                         <div className="flex-1 min-w-0">

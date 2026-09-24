@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   authors: [{ name: "CodeLens Team", url: APP_URL }],
   creator: "CodeLens Product Team",
   publisher: "CodeLens",
-  applicationName: "CodeLens Developer Suite",
+  applicationName: "CodeLens Free Online Developer Tools",
   referrer: "origin-when-cross-origin",
 
   openGraph: {
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
         url: `${APP_URL}/logo-large.jpg`,
         width: 1200,
         height: 630,
-        alt: "CodeLens Developer Tools Suite",
+        alt: "CodeLens Free Online Developer Tools",
       },
     ],
   },

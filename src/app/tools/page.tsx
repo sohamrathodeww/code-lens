@@ -11,11 +11,29 @@ import { Footer } from "@/components/Footer";
 import { FluidCanvas } from "@/components/ui/FluidCanvas";
 import { SlideUp, FadeIn, Stagger } from "@/components/motion/MotionPrimitives";
 import { TOOLS_REGISTRY } from "@/lib/tools-registry";
+import { APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "All Developer Tools | CodeLens",
   description: "Browse the complete directory of free online developer tools provided by CodeLens. High-performance JSON viewers, Code Diff Checkers, Encoders, Currency Converters, and more.",
-  keywords: ["all developer tools", "free developer tools", "programming utilities", "online code editors"],
+  keywords: ["all developer tools", "free developer tools", "programming utilities", "online code editors", "developer tools directory", "codelens tools"],
+  alternates: {
+    canonical: `${APP_URL}/tools`,
+  },
+  openGraph: {
+    title: "All Developer Tools | CodeLens",
+    description: "Browse the complete directory of free online developer tools provided by CodeLens.",
+    url: `${APP_URL}/tools`,
+    siteName: "CodeLens",
+    images: [`${APP_URL}/logo-large.jpg`],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "All Developer Tools | CodeLens",
+    description: "Browse the complete directory of free online developer tools.",
+    images: [`${APP_URL}/logo-large.jpg`],
+  },
 };
 
 const ICON_MAP: Record<string, React.ElementType> = {

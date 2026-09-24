@@ -12,8 +12,29 @@ import { Button } from "@/components/ui/Button";
 export const metadata: Metadata = {
   title: "About Us | CodeLens Developer Tools",
   description: "Learn more about CodeLens, our mission, and why we are building the fastest, privacy-first online developer tools suite.",
+  keywords: [
+    "about codelens",
+    "codelens mission",
+    "privacy first developer tools",
+    "fastest developer tools",
+    "online developer utilities",
+  ],
   alternates: {
     canonical: `${APP_URL}/about`,
+  },
+  openGraph: {
+    title: "About Us | CodeLens Developer Tools",
+    description: "Learn more about CodeLens, our mission, and why we are building the fastest, privacy-first online developer tools suite.",
+    url: `${APP_URL}/about`,
+    siteName: "CodeLens",
+    images: [`${APP_URL}/logo-large.jpg`],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us | CodeLens",
+    description: "Learn more about CodeLens and our privacy-first tools.",
+    images: [`${APP_URL}/logo-large.jpg`],
   },
 };
 

@@ -31,6 +31,12 @@ export const metadata: Metadata = {
     images: [`${APP_URL}/logo-large.jpg`],
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Online JSON Compare & Diff Checker",
+    description: "Easily compare two JSON payloads side-by-side. Automatically format, swap, and find deep differences instantly.",
+    images: [`${APP_URL}/logo-large.jpg`],
+  },
 };
 
 const jsonLdSchema = {

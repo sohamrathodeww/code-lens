@@ -140,7 +140,7 @@ const jsonLdSchema = {
 
 export default function CodeComparePage() {
   return (
-    <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden font-sans bg-[#f8fafc] text-slate-900">
+    <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden font-sans bg-[#f8fafc] dark:bg-[#0f172a] text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <FluidCanvas />
 
       <script
@@ -153,91 +153,91 @@ export default function CodeComparePage() {
         <CodeCompareFeature />
 
         {/* High-Ranking SEO Information & Keywords Section */}
-        <section className="liquid-glass-surface p-8 sm:p-10 space-y-8 text-slate-700 text-sm leading-relaxed border border-white/80 rounded-3xl shadow-xl">
+        <section className="liquid-glass-surface p-8 sm:p-10 space-y-8 text-slate-700 dark:text-slate-300 text-sm leading-relaxed border border-white dark:border-slate-700/80 dark:border-slate-700/80 rounded-3xl shadow-xl">
           <div className="space-y-3">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 dark:text-white tracking-tight">
               Online Text Compare — Free Side-by-Side Text Diff & Code Difference Tool
             </h2>
-            <p className="text-slate-600 text-base leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 text-base leading-relaxed">
               CodeLens <strong>Online Text Compare</strong> is engineered for writers, developers, devops engineers, and content reviewers who need to <strong>compare text online</strong> and inspect <strong>code differences</strong> fast. Our <strong>online text diff tool</strong> delivers real-time, line-by-line and character-level diff comparison, side swapping, clean code formatting, and zero server storage.
             </p>
           </div>
 
           {/* Feature Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-            <div className="p-6 rounded-2xl bg-white/90 border border-slate-200/80 shadow-xs space-y-2.5">
-              <h3 className="font-extrabold text-slate-950 text-base">⚡ Real-Time Text & Code Diffing</h3>
-              <p className="text-xs text-slate-600 leading-normal">
+            <div className="p-6 rounded-2xl bg-white dark:bg-slate-900/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 shadow-xs space-y-2.5">
+              <h3 className="font-extrabold text-slate-950 dark:text-white text-base">⚡ Real-Time Text & Code Diffing</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-normal">
                 Highlight additions in soft green, deletions in soft red, and exact character modifications inline without messy full-line background blocks.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white/90 border border-slate-200/80 shadow-xs space-y-2.5">
-              <h3 className="font-extrabold text-slate-950 text-base">🔄 Instant Side Swapping & Reset</h3>
-              <p className="text-xs text-slate-600 leading-normal">
+            <div className="p-6 rounded-2xl bg-white dark:bg-slate-900/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 shadow-xs space-y-2.5">
+              <h3 className="font-extrabold text-slate-950 dark:text-white text-base">🔄 Instant Side Swapping & Reset</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-normal">
                 Flip left and right text panes instantly with a single click of <strong>Swap Sides</strong>, load pre-configured sample text, or click <strong>Clear</strong> to start fresh.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white/90 border border-slate-200/80 shadow-xs space-y-2.5">
-              <h3 className="font-extrabold text-slate-950 text-base">🔒 100% Client-Side Privacy</h3>
-              <p className="text-xs text-slate-600 leading-normal">
+            <div className="p-6 rounded-2xl bg-white dark:bg-slate-900/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 shadow-xs space-y-2.5">
+              <h3 className="font-extrabold text-slate-950 dark:text-white text-base">🔒 100% Client-Side Privacy</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-normal">
                 Your content stays 100% private. All text comparison, diff calculation, and word matching occur locally inside browser memory.
               </p>
             </div>
           </div>
 
           {/* Step-by-Step How-To Section */}
-          <div className="space-y-4 pt-4 border-t border-slate-200/80">
-            <h3 className="text-xl font-extrabold text-slate-950 tracking-tight">
+          <div className="space-y-4 pt-4 border-t border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80">
+            <h3 className="text-xl font-extrabold text-slate-950 dark:text-white tracking-tight">
               How to Compare Text Online in 3 Simple Steps
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="p-4 rounded-xl bg-slate-100/80 border border-slate-200/60 space-y-1">
-                <span className="text-xs font-mono font-bold text-indigo-600">STEP 1</span>
-                <h4 className="font-bold text-slate-900 text-sm">Paste Original Text</h4>
-                <p className="text-xs text-slate-600">Insert baseline text or original snippet into the Left pane.</p>
+              <div className="p-4 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200/60 dark:border-slate-700/60 space-y-1">
+                <span className="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-300">STEP 1</span>
+                <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">Paste Original Text</h4>
+                <p className="text-xs text-slate-600 dark:text-slate-400">Insert baseline text or original snippet into the Left pane.</p>
               </div>
-              <div className="p-4 rounded-xl bg-slate-100/80 border border-slate-200/60 space-y-1">
-                <span className="text-xs font-mono font-bold text-indigo-600">STEP 2</span>
-                <h4 className="font-bold text-slate-900 text-sm">Paste Modified Text</h4>
-                <p className="text-xs text-slate-600">Insert modified text or updated snippet into the Right pane.</p>
+              <div className="p-4 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200/60 dark:border-slate-700/60 space-y-1">
+                <span className="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-300">STEP 2</span>
+                <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">Paste Modified Text</h4>
+                <p className="text-xs text-slate-600 dark:text-slate-400">Insert modified text or updated snippet into the Right pane.</p>
               </div>
-              <div className="p-4 rounded-xl bg-slate-100/80 border border-slate-200/60 space-y-1">
-                <span className="text-xs font-mono font-bold text-indigo-600">STEP 3</span>
-                <h4 className="font-bold text-slate-900 text-sm">Inspect Differences</h4>
-                <p className="text-xs text-slate-600">Inspect diff counters (+Added, -Deleted, ~Modified), swap sides if needed, or copy content.</p>
+              <div className="p-4 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200/60 dark:border-slate-700/60 space-y-1">
+                <span className="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-300">STEP 3</span>
+                <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">Inspect Differences</h4>
+                <p className="text-xs text-slate-600 dark:text-slate-400">Inspect diff counters (+Added, -Deleted, ~Modified), swap sides if needed, or copy content.</p>
               </div>
             </div>
           </div>
 
           {/* Detailed FAQ Section for Search Engine Snippets */}
-          <div className="space-y-4 pt-4 border-t border-slate-200/80">
-            <h3 className="text-xl font-extrabold text-slate-950 tracking-tight">
+          <div className="space-y-4 pt-4 border-t border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80">
+            <h3 className="text-xl font-extrabold text-slate-950 dark:text-white tracking-tight">
               Frequently Asked Questions (FAQ) — Online Text Compare
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-1.5">
-                <h4 className="font-bold text-slate-900 text-sm">Why use CodeLens Online Text Compare?</h4>
-                <p className="text-xs text-slate-600">
+                <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">Why use CodeLens Online Text Compare?</h4>
+                <p className="text-xs text-slate-600 dark:text-slate-400">
                   CodeLens Online Text Compare provides clean, readable side-by-side diff highlighting for text and code without distracting background fills.
                 </p>
               </div>
               <div className="space-y-1.5">
-                <h4 className="font-bold text-slate-900 text-sm">Can I compare code snippets and JSON text?</h4>
-                <p className="text-xs text-slate-600">
+                <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">Can I compare code snippets and JSON text?</h4>
+                <p className="text-xs text-slate-600 dark:text-slate-400">
                   Yes, Online Text Compare easily compares source code, JSON objects, raw text documents, and configuration files.
                 </p>
               </div>
               <div className="space-y-1.5">
-                <h4 className="font-bold text-slate-900 text-sm">Is my text stored or uploaded anywhere?</h4>
-                <p className="text-xs text-slate-600">
+                <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">Is my text stored or uploaded anywhere?</h4>
+                <p className="text-xs text-slate-600 dark:text-slate-400">
                   No. 100% of text parsing and diffing occurs locally in your browser memory. No text payload is transmitted to any server.
                 </p>
               </div>
               <div className="space-y-1.5">
-                <h4 className="font-bold text-slate-900 text-sm">Can I format code before diffing?</h4>
-                <p className="text-xs text-slate-600">
+                <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">Can I format code before diffing?</h4>
+                <p className="text-xs text-slate-600 dark:text-slate-400">
                   Yes, use the 'Format Code' button to automatically format JSON or JS code in both editors for cleaner diff comparison.
                 </p>
               </div>
@@ -250,5 +250,8 @@ export default function CodeComparePage() {
     </div>
   );
 }
+
+
+
 
 

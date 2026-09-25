@@ -24,7 +24,7 @@ export const ToolHeader: React.FC<{
         {icon && <div className="p-2.5 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600 shadow-sm">{icon}</div>}
         <div>
           <div className="flex items-center gap-2.5">
-            <h2 className="font-extrabold text-base sm:text-lg text-slate-900 tracking-tight">{title}</h2>
+            <h2 className="font-extrabold text-base sm:text-lg text-slate-900 dark:text-slate-100 tracking-tight">{title}</h2>
             {badge && (
               <span className="px-2.5 py-0.5 text-xs font-mono font-semibold rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">
                 {badge}
@@ -59,3 +59,4 @@ export const ToolStatus: React.FC<{ children: React.ReactNode; variant?: "info" 
     </div>
   );
 };
+

@@ -208,10 +208,10 @@ const CustomCurrencySelect = ({
       {isOpen && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
-          <div className="absolute right-0 top-full mt-2 w-64 bg-white border border-slate-200 shadow-[0_12px_40px_rgba(15,23,42,0.15)] rounded-2xl z-50 overflow-hidden flex flex-col">
+          <div className="absolute right-0 top-full mt-2 w-64 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-[0_12px_40px_rgba(15,23,42,0.15)] rounded-2xl z-50 overflow-hidden flex flex-col">
             
-            <div className="p-2 border-b border-slate-100 bg-slate-50/50">
-              <div className="relative flex items-center bg-white rounded-lg border border-slate-200 focus-within:ring-2 focus-within:ring-indigo-500/20 focus-within:border-indigo-400 overflow-hidden">
+            <div className="p-2 border-b border-slate-100 dark:border-slate-700/50 bg-slate-50/50 dark:bg-slate-800/50">
+              <div className="relative flex items-center bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 focus-within:ring-2 focus-within:ring-indigo-500/20 focus-within:border-indigo-400 overflow-hidden">
                 <Search className="absolute left-2.5 w-4 h-4 text-slate-400 pointer-events-none" />
                 <input
                   type="text"
@@ -219,14 +219,14 @@ const CustomCurrencySelect = ({
                   placeholder="Search currency..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-transparent py-2 pl-8 pr-3 text-sm font-semibold text-slate-800 placeholder:text-slate-400 outline-none"
+                  className="w-full bg-transparent py-2 pl-8 pr-3 text-sm font-semibold text-slate-800 dark:text-slate-300 placeholder:text-slate-400 outline-none"
                 />
               </div>
             </div>
 
             <div className="max-h-60 overflow-y-auto p-1 custom-scrollbar">
               {filteredOptions.length === 0 ? (
-                <div className="px-4 py-6 text-center text-sm font-medium text-slate-500">
+                <div className="px-4 py-6 text-center text-sm font-medium text-slate-500 dark:text-slate-400">
                   No currencies found
                 </div>
               ) : (
@@ -240,8 +240,8 @@ const CustomCurrencySelect = ({
                     }}
                     className={`w-full text-left flex items-center justify-between px-3 py-2.5 text-sm font-bold rounded-xl transition-all mb-0.5 last:mb-0 ${
                       value === opt 
-                        ? "bg-indigo-50 text-indigo-700" 
-                        : "text-slate-700 hover:bg-slate-50"
+                        ? "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300" 
+                        : "text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:bg-slate-800/50"
                     }`}
                   >
                     <span>{opt} - {COMMON_CURRENCIES[opt]?.name || opt}</span>
@@ -333,14 +333,14 @@ export const CurrencyConverterFeature: React.FC = () => {
       <div className="liquid-glass-surface px-6 py-4.5 sm:px-8 sm:py-5 flex items-center justify-between gap-4 relative">
         <span className="lens-sheen" />
         <div className="flex items-center gap-3.5 relative z-10">
-          <div className="p-2.5 rounded-2xl bg-indigo-600/10 border border-indigo-200/80 text-indigo-600 shadow-[inset_0_1.5px_2px_#ffffff]">
-            <Banknote className="w-6 h-6 text-indigo-600" />
+          <div className="p-2.5 rounded-2xl bg-indigo-600/10 border border-indigo-200/80 dark:border-indigo-500/20 text-indigo-600 dark:text-white ">
+            <Banknote className="w-6 h-6 text-indigo-600 dark:text-white" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950">
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white">
               Currency Converter
             </h1>
-            <p className="text-xs text-slate-500 font-medium hidden sm:block">
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium hidden sm:block">
               Real-time exchange rates for global fiat currencies
             </p>
           </div>
@@ -352,7 +352,7 @@ export const CurrencyConverterFeature: React.FC = () => {
         {/* Main Converter Card */}
         <div className="liquid-glass-surface p-6 sm:p-10 flex flex-col relative overflow-hidden">
           <span className="lens-sheen" />
-          <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl -z-10 -translate-y-1/2 translate-x-1/2" />
+          <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-50 dark:bg-indigo-500/10 rounded-full blur-3xl -z-10 -translate-y-1/2 translate-x-1/2" />
           
           <div className="relative z-10 space-y-8">
             
@@ -361,14 +361,14 @@ export const CurrencyConverterFeature: React.FC = () => {
               {/* FROM Currency */}
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <label className="text-xs font-bold text-slate-500 uppercase tracking-widest">Amount</label>
+                  <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Amount</label>
                   <CustomCurrencySelect
                     value={fromCurrency}
                     onChange={setFromCurrency}
                     options={availableCurrencies}
                   />
                 </div>
-                <div className="relative flex items-center p-3 sm:p-4 rounded-2xl bg-white border border-slate-200 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500/20 focus-within:border-indigo-400 transition-all">
+                <div className="relative flex items-center p-3 sm:p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500/20 focus-within:border-indigo-400 transition-all">
                   <span className="pl-2 sm:pl-4 text-2xl sm:text-3xl font-bold text-slate-400">
                     {COMMON_CURRENCIES[fromCurrency]?.symbol || ""}
                   </span>
@@ -376,7 +376,7 @@ export const CurrencyConverterFeature: React.FC = () => {
                     type="number"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    className="w-full bg-transparent border-none text-3xl sm:text-4xl font-extrabold text-slate-900 focus:ring-0 px-3 py-2 outline-none placeholder:text-slate-200"
+                    className="w-full bg-transparent border-none text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 focus:ring-0 px-3 py-2 outline-none placeholder:text-slate-200"
                     placeholder="0.00"
                   />
                 </div>
@@ -386,7 +386,7 @@ export const CurrencyConverterFeature: React.FC = () => {
               <div className="flex justify-center pt-8 md:pt-10">
                 <button
                   onClick={handleSwap}
-                  className="p-4 rounded-full bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white border border-indigo-100 shadow-sm transition-all duration-300 hover:scale-110 hover:shadow-md group focus:outline-none"
+                  className="p-4 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-white hover:bg-indigo-600 hover:text-white border border-indigo-100 dark:border-indigo-500/20 shadow-sm transition-all duration-300 hover:scale-110 hover:shadow-md group focus:outline-none"
                 >
                   <ArrowRightLeft className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" />
                 </button>
@@ -395,18 +395,18 @@ export const CurrencyConverterFeature: React.FC = () => {
               {/* TO Currency */}
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <label className="text-xs font-bold text-slate-500 uppercase tracking-widest">Converted To</label>
+                  <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Converted To</label>
                   <CustomCurrencySelect
                     value={toCurrency}
                     onChange={setToCurrency}
                     options={availableCurrencies}
                   />
                 </div>
-                <div className="relative flex items-center p-3 sm:p-4 rounded-2xl bg-slate-50/50 border border-slate-200 shadow-inner overflow-hidden">
+                <div className="relative flex items-center p-3 sm:p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-inner overflow-hidden">
                   <span className="pl-2 sm:pl-4 text-2xl sm:text-3xl font-bold text-indigo-400">
                     {COMMON_CURRENCIES[toCurrency]?.symbol || ""}
                   </span>
-                  <div className="w-full truncate px-3 py-2 text-3xl sm:text-4xl font-extrabold text-indigo-600">
+                  <div className="w-full truncate px-3 py-2 text-3xl sm:text-4xl font-extrabold text-indigo-600 dark:text-white">
                     {loading ? <span className="animate-pulse opacity-50">...</span> : convertedAmount}
                   </div>
                 </div>
@@ -414,8 +414,8 @@ export const CurrencyConverterFeature: React.FC = () => {
             </div>
 
             {/* Status Footer */}
-            <div className="flex flex-col sm:flex-row items-center justify-between pt-6 border-t border-slate-200/60 gap-4">
-              <div className="flex items-center gap-2 text-sm font-medium text-slate-500">
+            <div className="flex flex-col sm:flex-row items-center justify-between pt-6 border-t border-slate-200/60 dark:border-slate-700/60 gap-4">
+              <div className="flex items-center gap-2 text-sm font-medium text-slate-500 dark:text-slate-400">
                 {loading ? (
                   <RefreshCw className="w-4 h-4 animate-spin text-indigo-500" />
                 ) : error ? (
@@ -425,10 +425,10 @@ export const CurrencyConverterFeature: React.FC = () => {
                 )}
                 
                 {error ? (
-                  <span className="text-rose-600 font-bold">{error}</span>
+                  <span className="text-rose-600 dark:text-rose-400 font-bold">{error}</span>
                 ) : exchangeRate ? (
                   <span>
-                    1 <span className="font-bold text-slate-700">{fromCurrency}</span> = <span className="font-bold text-indigo-600">{exchangeRate.toFixed(4)}</span> <span className="font-bold text-slate-700">{toCurrency}</span>
+                    1 <span className="font-bold text-slate-700 dark:text-slate-300">{fromCurrency}</span> = <span className="font-bold text-indigo-600 dark:text-white">{exchangeRate.toFixed(4)}</span> <span className="font-bold text-slate-700 dark:text-slate-300">{toCurrency}</span>
                   </span>
                 ) : (
                   "Fetching exchange rates..."
@@ -439,7 +439,7 @@ export const CurrencyConverterFeature: React.FC = () => {
                 <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
                   {lastUpdated ? `Last updated: ${lastUpdated}` : "Connecting to API..."}
                 </span>
-                <Button variant="secondary" size="sm" onClick={() => fetchRates(fromCurrency)} disabled={loading} className="text-[11px] h-7 px-3 bg-white hover:bg-slate-50 border-slate-200">
+                <Button variant="secondary" size="sm" onClick={() => fetchRates(fromCurrency)} disabled={loading} className="text-[11px] h-7 px-3 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700">
                   Refresh Rates
                 </Button>
               </div>
@@ -451,24 +451,24 @@ export const CurrencyConverterFeature: React.FC = () => {
         {/* Info Sidebar */}
         <div className="w-full lg:w-80 space-y-4 flex flex-col">
           <FadeIn delay={0.2} className="liquid-glass-surface p-6 flex-1 relative">
-             <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl -z-10 translate-x-1/2 -translate-y-1/2" />
+             <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-50 dark:bg-emerald-500/100/10 rounded-full blur-2xl -z-10 translate-x-1/2 -translate-y-1/2" />
              <div className="flex items-center gap-3 mb-4 relative z-10">
-               <div className="p-2 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-600">
+               <div className="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-100 text-emerald-600">
                  <Globe className="w-5 h-5" />
                </div>
-               <h3 className="font-bold text-slate-900">Live Global Rates</h3>
+               <h3 className="font-bold text-slate-900 dark:text-slate-100">Live Global Rates</h3>
              </div>
-             <p className="text-sm text-slate-600 leading-relaxed relative z-10">
+             <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed relative z-10">
                Exchange rates are pulled in real-time from our global financial API. We support over 150+ fiat currencies with an automatic fallback engine ensuring 99.9% uptime.
              </p>
              <div className="mt-6 space-y-3 relative z-10">
-                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
-                  <span className="text-xs font-bold text-slate-500">EUR / USD</span>
-                  <span className="text-sm font-extrabold text-slate-800">{rates ? (1 / rates["EUR"]).toFixed(4) : "..."}</span>
+                <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-700/50">
+                  <span className="text-xs font-bold text-slate-500 dark:text-slate-400">EUR / USD</span>
+                  <span className="text-sm font-extrabold text-slate-800 dark:text-slate-300">{rates ? (1 / rates["EUR"]).toFixed(4) : "..."}</span>
                 </div>
-                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
-                  <span className="text-xs font-bold text-slate-500">GBP / USD</span>
-                  <span className="text-sm font-extrabold text-slate-800">{rates ? (1 / rates["GBP"]).toFixed(4) : "..."}</span>
+                <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-700/50">
+                  <span className="text-xs font-bold text-slate-500 dark:text-slate-400">GBP / USD</span>
+                  <span className="text-sm font-extrabold text-slate-800 dark:text-slate-300">{rates ? (1 / rates["GBP"]).toFixed(4) : "..."}</span>
                 </div>
              </div>
           </FadeIn>
@@ -478,3 +478,12 @@ export const CurrencyConverterFeature: React.FC = () => {
     </SlideUp>
   );
 };
+
+
+
+
+
+
+
+
+

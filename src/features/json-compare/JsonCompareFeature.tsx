@@ -1,6 +1,8 @@
 "use client";
 
+
 import React, { useState, useRef, useEffect, useMemo, useCallback } from "react";
+import { useTheme } from "next-themes";
 import { Editor } from "@monaco-editor/react";
 import {
   FileJson,
@@ -201,7 +203,7 @@ export const JsonCompareFeature: React.FC = () => {
   const [modifiedCode, setModifiedCode] = useState<string>(SAMPLE_MODIFIED);
   const [originalFilename, setOriginalFilename] = useState<string>("Original JSON");
   const [modifiedFilename, setModifiedFilename] = useState<string>("Modified JSON");
-  const [editorTheme, setEditorTheme] = useState<"vs" | "vs-dark">("vs");
+  const { theme } = useTheme();
 
   const [copiedOriginal, setCopiedOriginal] = useState<boolean>(false);
   const [copiedModified, setCopiedModified] = useState<boolean>(false);
@@ -365,26 +367,26 @@ export const JsonCompareFeature: React.FC = () => {
         
         {/* Title & Diff Statistics */}
         <div className="flex items-center gap-4 relative z-10">
-          <div className="p-3.5 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-indigo-600/10 border border-indigo-200/80 text-indigo-600 shadow-[inset_0_1.5px_2px_#ffffff]">
+          <div className="p-3.5 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-indigo-600/10 border border-indigo-200/80 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 ">
             <FileJson className="w-7 h-7" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950 flex items-center gap-2">
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white flex items-center gap-2">
               Online JSON Compare
             </h1>
-            <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-slate-600 font-bold mt-1.5">
-              <span className="flex items-center gap-1 text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/60">
+            <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-slate-600 dark:text-slate-400 font-bold mt-1.5">
+              <span className="flex items-center gap-1 text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-200/60 dark:border-emerald-500/20">
                 <PlusCircle className="w-3.5 h-3.5" /> +{stats.addedCount} Added
               </span>
-              <span className="flex items-center gap-1 text-rose-700 bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200/60">
+              <span className="flex items-center gap-1 text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-500/10 px-2.5 py-0.5 rounded-full border border-rose-200/60 dark:border-rose-500/20">
                 <MinusCircle className="w-3.5 h-3.5" /> -{stats.deletedCount} Deleted
               </span>
               {stats.modifiedCount > 0 && (
-                <span className="flex items-center gap-1 text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200/60">
+                <span className="flex items-center gap-1 text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-200/60 dark:border-amber-500/20">
                   <Edit3 className="w-3.5 h-3.5" /> ~{stats.modifiedCount} Modified
                 </span>
               )}
-              <span className="bg-slate-100/90 text-slate-700 px-2.5 py-0.5 rounded-full border border-slate-200/80">
+              <span className="bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 px-2.5 py-0.5 rounded-full border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80">
                 Total: {stats.totalLines} lines
               </span>
             </div>
@@ -398,22 +400,14 @@ export const JsonCompareFeature: React.FC = () => {
             variant="secondary"
             size="sm"
             onClick={handleFormatBoth}
-            icon={<Wand2 className="w-4 h-4 text-indigo-600" />}
+            icon={<Wand2 className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />}
             title="Auto format JSON on both sides"
           >
             Auto Format JSON
           </Button>
 
           {/* Theme Toggle */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setEditorTheme(editorTheme === "vs" ? "vs-dark" : "vs")}
-            icon={editorTheme === "vs" ? <Moon className="w-4 h-4 text-slate-700" /> : <Sun className="w-4 h-4 text-amber-500" />}
-            title="Toggle Editor Dark/Light Theme"
-          >
-            {editorTheme === "vs" ? "Dark" : "Light"}
-          </Button>
+          
 
           {/* Sample Button */}
           <Button
@@ -431,7 +425,7 @@ export const JsonCompareFeature: React.FC = () => {
             variant="secondary"
             size="sm"
             onClick={handleSwapSides}
-            icon={<ArrowLeftRight className="w-4 h-4 text-indigo-600" />}
+            icon={<ArrowLeftRight className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />}
             title="Swap Left and Right Sides"
           >
             Swap
@@ -442,7 +436,7 @@ export const JsonCompareFeature: React.FC = () => {
             variant="ghost"
             size="sm"
             onClick={handleReset}
-            icon={<RotateCcw className="w-4 h-4 text-rose-600" />}
+            icon={<RotateCcw className="w-4 h-4 text-rose-600 dark:text-rose-400" />}
             title="Clean/Reset both JSON boxes"
           >
             Clear
@@ -457,23 +451,23 @@ export const JsonCompareFeature: React.FC = () => {
           <span className="lens-sheen" />
           <div className="flex items-center justify-between pb-3.5 border-b border-slate-900/10 relative z-10">
             <div className="flex items-center gap-2.5 overflow-hidden">
-              <span className="w-2.5 h-2.5 rounded-full bg-rose-500 shrink-0" />
-              <FileCode className="w-4.5 h-4.5 text-indigo-600 shrink-0" />
-              <span className="text-xs sm:text-sm font-mono font-extrabold text-slate-900 truncate">
+              <span className="w-2.5 h-2.5 rounded-full bg-rose-50 dark:bg-rose-500/100 shrink-0" />
+              <FileCode className="w-4.5 h-4.5 text-indigo-600 dark:text-indigo-400 shrink-0" />
+              <span className="text-xs sm:text-sm font-mono font-extrabold text-slate-900 dark:text-slate-100 truncate">
                 {originalFilename}
               </span>
             </div>
             <div className="flex items-center gap-2 shrink-0">
-              <span className="text-xs font-mono text-slate-500 font-bold">
+              <span className="text-xs font-mono text-slate-500 dark:text-slate-400 font-bold">
                 {stats.origLinesCount} Lines
               </span>
               {stats.deletedCount > 0 && (
-                <span className="text-xs font-mono font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200/70">
+                <span className="text-xs font-mono font-bold text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-500/10 px-2 py-0.5 rounded-md border border-rose-200/70">
                   -{stats.deletedCount} Removed
                 </span>
               )}
               {stats.modifiedCount > 0 && (
-                <span className="text-xs font-mono font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200/70">
+                <span className="text-xs font-mono font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 px-2 py-0.5 rounded-md border border-amber-200/70">
                   ~{stats.modifiedCount} Modified
                 </span>
               )}
@@ -481,7 +475,7 @@ export const JsonCompareFeature: React.FC = () => {
                 onClick={handleFormatOriginal}
                 disabled={!originalCode}
                 title="Format original JSON"
-                className="p-1.5 text-slate-600 hover:text-indigo-600 hover:bg-white rounded-xl transition-colors border border-slate-200/80 bg-white/80 shadow-2xs disabled:opacity-40"
+                className="p-1.5 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:text-indigo-400 hover:bg-white dark:bg-slate-900 rounded-xl transition-colors border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 shadow-2xs disabled:opacity-40"
               >
                 <Wand2 className="w-4 h-4" />
               </button>
@@ -489,7 +483,7 @@ export const JsonCompareFeature: React.FC = () => {
                 onClick={handleCopyOriginal}
                 disabled={!originalCode}
                 title="Copy original JSON"
-                className="p-1.5 text-slate-600 hover:text-indigo-600 hover:bg-white rounded-xl transition-colors border border-slate-200/80 bg-white/80 shadow-2xs disabled:opacity-40"
+                className="p-1.5 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:text-indigo-400 hover:bg-white dark:bg-slate-900 rounded-xl transition-colors border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 shadow-2xs disabled:opacity-40"
               >
                 {copiedOriginal ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
               </button>
@@ -497,20 +491,20 @@ export const JsonCompareFeature: React.FC = () => {
                 onClick={() => setOriginalCode("")}
                 disabled={!originalCode}
                 title="Clear original JSON"
-                className="p-1.5 text-slate-600 hover:text-rose-600 hover:bg-white rounded-xl transition-colors border border-slate-200/80 bg-white/80 shadow-2xs disabled:opacity-40"
+                className="p-1.5 text-slate-600 dark:text-slate-400 hover:text-rose-600 dark:text-rose-400 hover:bg-white dark:bg-slate-900 rounded-xl transition-colors border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 shadow-2xs disabled:opacity-40"
               >
                 <Trash2 className="w-4 h-4" />
               </button>
             </div>
           </div>
 
-          <div className="flex-1 mt-3.5 rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-white relative z-10">
+          <div className="flex-1 mt-3.5 rounded-2xl overflow-hidden border border-slate-200/90 dark:border-slate-700/90 shadow-inner bg-white dark:bg-slate-900 relative z-10">
             <Editor
               height="100%"
               language="json"
               value={originalCode}
               onChange={(v) => setOriginalCode(v || "")}
-              theme={editorTheme}
+              theme={theme === "dark" ? "vs-dark" : "vs"}
               onMount={handleOrigMount}
               loading={<ShimmerLoader variant="editor" />}
               options={{
@@ -535,23 +529,23 @@ export const JsonCompareFeature: React.FC = () => {
           <span className="lens-sheen" />
           <div className="flex items-center justify-between pb-3.5 border-b border-slate-900/10 relative z-10">
             <div className="flex items-center gap-2.5 overflow-hidden">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" />
-              <FileCode className="w-4.5 h-4.5 text-cyan-600 shrink-0" />
-              <span className="text-xs sm:text-sm font-mono font-extrabold text-slate-900 truncate">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-50 dark:bg-emerald-500/100 shrink-0" />
+              <FileCode className="w-4.5 h-4.5 text-cyan-600 dark:text-cyan-400 shrink-0" />
+              <span className="text-xs sm:text-sm font-mono font-extrabold text-slate-900 dark:text-slate-100 truncate">
                 {modifiedFilename}
               </span>
             </div>
             <div className="flex items-center gap-2 shrink-0">
-              <span className="text-xs font-mono text-slate-500 font-bold">
+              <span className="text-xs font-mono text-slate-500 dark:text-slate-400 font-bold">
                 {stats.modLinesCount} Lines
               </span>
               {stats.addedCount > 0 && (
-                <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/70">
+                <span className="text-xs font-mono font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-200/70">
                   +{stats.addedCount} Added
                 </span>
               )}
               {stats.modifiedCount > 0 && (
-                <span className="text-xs font-mono font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200/70">
+                <span className="text-xs font-mono font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 px-2 py-0.5 rounded-md border border-amber-200/70">
                   ~{stats.modifiedCount} Modified
                 </span>
               )}
@@ -559,7 +553,7 @@ export const JsonCompareFeature: React.FC = () => {
                 onClick={handleFormatModified}
                 disabled={!modifiedCode}
                 title="Format modified JSON"
-                className="p-1.5 text-slate-600 hover:text-indigo-600 hover:bg-white rounded-xl transition-colors border border-slate-200/80 bg-white/80 shadow-2xs disabled:opacity-40"
+                className="p-1.5 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:text-indigo-400 hover:bg-white dark:bg-slate-900 rounded-xl transition-colors border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 shadow-2xs disabled:opacity-40"
               >
                 <Wand2 className="w-4 h-4" />
               </button>
@@ -567,7 +561,7 @@ export const JsonCompareFeature: React.FC = () => {
                 onClick={handleCopyModified}
                 disabled={!modifiedCode}
                 title="Copy modified JSON"
-                className="p-1.5 text-slate-600 hover:text-indigo-600 hover:bg-white rounded-xl transition-colors border border-slate-200/80 bg-white/80 shadow-2xs disabled:opacity-40"
+                className="p-1.5 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:text-indigo-400 hover:bg-white dark:bg-slate-900 rounded-xl transition-colors border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 shadow-2xs disabled:opacity-40"
               >
                 {copiedModified ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
               </button>
@@ -575,20 +569,20 @@ export const JsonCompareFeature: React.FC = () => {
                 onClick={() => setModifiedCode("")}
                 disabled={!modifiedCode}
                 title="Clear modified JSON"
-                className="p-1.5 text-slate-600 hover:text-rose-600 hover:bg-white rounded-xl transition-colors border border-slate-200/80 bg-white/80 shadow-2xs disabled:opacity-40"
+                className="p-1.5 text-slate-600 dark:text-slate-400 hover:text-rose-600 dark:text-rose-400 hover:bg-white dark:bg-slate-900 rounded-xl transition-colors border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 shadow-2xs disabled:opacity-40"
               >
                 <Trash2 className="w-4 h-4" />
               </button>
             </div>
           </div>
 
-          <div className="flex-1 mt-3.5 rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-white relative z-10">
+          <div className="flex-1 mt-3.5 rounded-2xl overflow-hidden border border-slate-200/90 dark:border-slate-700/90 shadow-inner bg-white dark:bg-slate-900 relative z-10">
             <Editor
               height="100%"
               language="json"
               value={modifiedCode}
               onChange={(v) => setModifiedCode(v || "")}
-              theme={editorTheme}
+              theme={theme === "dark" ? "vs-dark" : "vs"}
               onMount={handleModMount}
               loading={<ShimmerLoader variant="editor" />}
               options={{
@@ -611,3 +605,12 @@ export const JsonCompareFeature: React.FC = () => {
     </SlideUp>
   );
 };
+
+
+
+
+
+
+
+
+

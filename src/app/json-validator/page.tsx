@@ -109,7 +109,7 @@ const jsonLdSchema = {
 
 export default function JsonViewerPage() {
   return (
-    <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden font-sans bg-[#f8fafc] text-slate-900">
+    <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden font-sans bg-[#f8fafc] dark:bg-[#0f172a] text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <FluidCanvas />
 
       <script
@@ -122,34 +122,34 @@ export default function JsonViewerPage() {
         <JsonViewerFeature />
 
         {/* High-Ranking SEO Information Section */}
-        <section className="liquid-glass-surface p-8 space-y-6 text-slate-700 text-sm leading-relaxed border border-white/80">
+        <section className="liquid-glass-surface p-8 space-y-6 text-slate-700 dark:text-slate-300 text-sm leading-relaxed border border-white dark:border-slate-700/80 dark:border-slate-700/80">
           <div className="space-y-2">
-            <h2 className="text-2xl font-bold text-slate-950 tracking-tight">
+            <h2 className="text-2xl font-bold text-slate-950 dark:text-white tracking-tight">
               Free Online JSON Viewer for API Payloads, Schema Review, and Data Inspection
             </h2>
-            <p className="text-slate-600">
+            <p className="text-slate-600 dark:text-slate-400">
               CodeLens JSON Viewer helps developers validate request and response payloads, inspect nested structures, and transform raw JSON into readable, developer-friendly output. It is designed for API teams, frontend engineers, and QA reviewers who need clean output and fast troubleshooting.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-            <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/80 space-y-2">
-              <h3 className="font-bold text-slate-950 text-base">🌳 Tree & Table Inspection</h3>
-              <p className="text-xs text-slate-600">
-                Inspect nested JSON objects with expandable tree nodes, copy precise JSON paths such as <span className="font-mono text-slate-700">$.users[0].name</span>, and switch to a structured tabular grid for readable data analysis.
+            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 space-y-2">
+              <h3 className="font-bold text-slate-950 dark:text-white text-base">🌳 Tree & Table Inspection</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400">
+                Inspect nested JSON objects with expandable tree nodes, copy precise JSON paths such as <span className="font-mono text-slate-700 dark:text-slate-300">$.users[0].name</span>, and switch to a structured tabular grid for readable data analysis.
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/80 space-y-2">
-              <h3 className="font-bold text-slate-950 text-base">🔀 Flow Chart Diagrams</h3>
-              <p className="text-xs text-slate-600">
+            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 space-y-2">
+              <h3 className="font-bold text-slate-950 dark:text-white text-base">🔀 Flow Chart Diagrams</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400">
                 Visualize JSON hierarchy as an interactive parent-to-child diagram tree connecting root objects, sub-branches, and array entities for content mapping and backend debugging.
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/80 space-y-2">
-              <h3 className="font-bold text-slate-950 text-base">⚡ Instant Minifier & Validator</h3>
-              <p className="text-xs text-slate-600">
+            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 space-y-2">
+              <h3 className="font-bold text-slate-950 dark:text-white text-base">⚡ Instant Minifier & Validator</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400">
                 Compress API responses into single-line minified JSON, validate syntax issues in real time, and keep data workflows moving without leaving the browser.
               </p>
             </div>
@@ -161,3 +161,6 @@ export default function JsonViewerPage() {
     </div>
   );
 }
+
+
+

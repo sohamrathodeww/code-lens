@@ -47,7 +47,7 @@ export default function LanguageSelector({ language, onSelect }: LanguageSelecto
   const selectedLang = ALL_LANGUAGES.find(l => l.name === language);
 
   return (
-    <div className="flex items-center space-x-2 bg-slate-100 p-2 rounded-xl border border-slate-200">
+    <div className="flex items-center space-x-2 bg-slate-100 dark:bg-slate-800 p-2 rounded-xl border border-slate-200 dark:border-slate-700">
       <div className="flex space-x-2 mr-2 sm:mr-4">
         {TOP_LANGUAGES.map((lang) => (
           <button
@@ -55,8 +55,8 @@ export default function LanguageSelector({ language, onSelect }: LanguageSelecto
             onClick={() => onSelect(lang.name)}
             className={`flex items-center gap-2 pr-4 pl-1.5 py-1.5 rounded-lg transition-all duration-200 ease-in-out text-sm font-semibold
               ${language === lang.name 
-                ? 'bg-white text-indigo-600 shadow-sm border border-slate-200' 
-                : 'text-slate-600 hover:text-indigo-600 hover:bg-white/50 border border-transparent'
+                ? 'bg-white dark:bg-slate-900 text-indigo-600 shadow-sm border border-slate-200 dark:border-slate-700' 
+                : 'text-slate-600 dark:text-slate-400 hover:text-indigo-600 hover:bg-white/50 dark:bg-slate-800/50 border border-transparent'
               }`}
           >
             <div className={`w-7 h-7 rounded flex items-center justify-center
@@ -74,7 +74,7 @@ export default function LanguageSelector({ language, onSelect }: LanguageSelecto
       <div className="relative" ref={dropdownRef}>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all duration-200 text-sm font-semibold bg-white text-indigo-600 border-slate-200 shadow-sm hover:bg-slate-50"
+          className="flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all duration-200 text-sm font-semibold bg-white dark:bg-slate-900 text-indigo-600 border-slate-200 dark:border-slate-700 shadow-sm hover:bg-slate-50 dark:bg-slate-800/50"
         >
           {selectedLang ? (
             <>
@@ -95,7 +95,7 @@ export default function LanguageSelector({ language, onSelect }: LanguageSelecto
         </button>
 
         {isOpen && (
-          <div className="absolute right-0 mt-2 w-56 bg-white border border-slate-200 rounded-xl shadow-xl z-50 overflow-hidden py-1">
+          <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl z-50 overflow-hidden py-1">
             <div className="max-h-64 overflow-y-auto">
               {ALL_LANGUAGES.map((lang) => {
                 const isSelected = language === lang.name;
@@ -109,12 +109,12 @@ export default function LanguageSelector({ language, onSelect }: LanguageSelecto
                     className={`w-full flex items-center justify-between px-3 py-2 text-sm font-medium transition-colors
                       ${isSelected 
                         ? 'bg-indigo-50 text-indigo-700' 
-                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                        : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:bg-slate-800/50 hover:text-slate-900 dark:text-slate-100'
                       }`}
                   >
                     <div className="flex items-center gap-3">
                       <div className={`w-6 h-6 rounded flex items-center justify-center
-                        ${isSelected ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 text-slate-500'}`}
+                        ${isSelected ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'}`}
                       >
                         {getIcon(lang.name)}
                       </div>
@@ -133,3 +133,4 @@ export default function LanguageSelector({ language, onSelect }: LanguageSelecto
     </div>
   );
 }
+

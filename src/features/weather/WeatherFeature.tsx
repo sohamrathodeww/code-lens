@@ -119,7 +119,7 @@ export const WeatherFeature = () => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search for a city, state, or country..."
-          className="block w-full pl-12 pr-32 py-4 liquid-glass-surface border border-slate-200/80 rounded-2xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all shadow-sm"
+          className="block w-full pl-12 pr-32 py-4 liquid-glass-surface border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 rounded-2xl text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all shadow-sm"
         />
         <button
           type="submit"
@@ -131,7 +131,7 @@ export const WeatherFeature = () => {
       </form>
 
       {error && (
-        <div className="p-4 bg-rose-50 text-rose-600 border border-rose-200 rounded-xl text-center font-medium">
+        <div className="p-4 bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-200 rounded-xl text-center font-medium">
           {error}
         </div>
       )}
@@ -139,27 +139,27 @@ export const WeatherFeature = () => {
       {weather && !loading && (
         <div className="space-y-6">
           {/* Main Weather Card */}
-          <div className="liquid-glass-surface p-8 rounded-3xl border border-white/80 shadow-sm relative overflow-hidden">
+          <div className="liquid-glass-surface p-8 rounded-3xl border border-white dark:border-slate-700/80 dark:border-slate-700/80 shadow-sm relative overflow-hidden">
             <div className="absolute -right-10 -top-10 opacity-5 pointer-events-none">
               {getWeatherIcon(weather.current.weather_code, "w-64 h-64")}
             </div>
             
             <div className="relative z-10">
-              <div className="flex items-center gap-2 text-indigo-600 mb-6">
+              <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 mb-6">
                 <MapPin className="w-5 h-5" />
                 <h2 className="text-lg font-bold">{locationName}</h2>
               </div>
               
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
                 <div className="flex items-center gap-6">
-                  <div className="bg-white/60 p-4 rounded-2xl border border-white">
+                  <div className="bg-white dark:bg-slate-900/60 dark:bg-slate-800/50 p-4 rounded-2xl border border-white dark:border-slate-700">
                     {getWeatherIcon(weather.current.weather_code, "w-16 h-16")}
                   </div>
                   <div>
-                    <div className="text-6xl font-extrabold text-slate-900 tracking-tighter">
+                    <div className="text-6xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tighter">
                       {Math.round(weather.current.temperature_2m)}°
                     </div>
-                    <div className="text-xl font-medium text-slate-500 mt-1">
+                    <div className="text-xl font-medium text-slate-500 dark:text-slate-400 mt-1">
                       {getWeatherDesc(weather.current.weather_code)}
                     </div>
                   </div>
@@ -168,7 +168,7 @@ export const WeatherFeature = () => {
                 <div className="flex gap-6">
                   <div className="flex flex-col gap-1">
                     <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Feels Like</span>
-                    <span className="text-lg font-bold text-slate-700 flex items-center gap-1">
+                    <span className="text-lg font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1">
                       <ThermometerSun className="w-4 h-4 text-orange-500" />
                       {Math.round(weather.current.apparent_temperature)}°
                     </span>
@@ -176,7 +176,7 @@ export const WeatherFeature = () => {
                   <div className="w-px bg-slate-200" />
                   <div className="flex flex-col gap-1">
                     <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Wind</span>
-                    <span className="text-lg font-bold text-slate-700 flex items-center gap-1">
+                    <span className="text-lg font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1">
                       <Wind className="w-4 h-4 text-teal-500" />
                       {weather.current.wind_speed_10m} km/h
                     </span>
@@ -184,7 +184,7 @@ export const WeatherFeature = () => {
                   <div className="w-px bg-slate-200" />
                   <div className="flex flex-col gap-1">
                     <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Humidity</span>
-                    <span className="text-lg font-bold text-slate-700 flex items-center gap-1">
+                    <span className="text-lg font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1">
                       <Droplets className="w-4 h-4 text-blue-500" />
                       {weather.current.relative_humidity_2m}%
                     </span>
@@ -201,11 +201,11 @@ export const WeatherFeature = () => {
               const dayName = i === 0 ? 'Tomorrow' : dateObj.toLocaleDateString('en-US', { weekday: 'short' });
               
               return (
-                <div key={date} className="bg-white/60 p-5 rounded-2xl border border-slate-200/60 flex flex-col items-center text-center gap-3 transition-transform hover:-translate-y-1">
-                  <span className="text-sm font-bold text-slate-500">{dayName}</span>
+                <div key={date} className="bg-white dark:bg-slate-900/60 dark:bg-slate-800/50 p-5 rounded-2xl border border-slate-200 dark:border-slate-700/60 dark:border-slate-700/60 flex flex-col items-center text-center gap-3 transition-transform hover:-translate-y-1">
+                  <span className="text-sm font-bold text-slate-500 dark:text-slate-400">{dayName}</span>
                   {getWeatherIcon(weather.daily.weather_code[i+1], "w-8 h-8")}
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-bold text-slate-900">{Math.round(weather.daily.temperature_2m_max[i+1])}°</span>
+                    <span className="text-sm font-bold text-slate-900 dark:text-slate-100">{Math.round(weather.daily.temperature_2m_max[i+1])}°</span>
                     <span className="text-sm font-medium text-slate-400">{Math.round(weather.daily.temperature_2m_min[i+1])}°</span>
                   </div>
                 </div>
@@ -217,3 +217,10 @@ export const WeatherFeature = () => {
     </div>
   );
 };
+
+
+
+
+
+
+

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import { useTheme } from "next-themes";
 import { Editor } from "@monaco-editor/react";
 import {
   KeyRound,
@@ -81,7 +82,7 @@ interface ParsedJwt {
 export const JwtDecoderFeature: React.FC = () => {
   const [jwtInput, setJwtInput] = useState<string>(SAMPLE_JWT_ACTIVE);
   const [secretKey, setSecretKey] = useState<string>("");
-  const [editorTheme, setEditorTheme] = useState<"vs" | "vs-dark">("vs");
+  const { theme } = useTheme();
 
   const [copiedToken, setCopiedToken] = useState<boolean>(false);
   const [copiedHeader, setCopiedHeader] = useState<boolean>(false);
@@ -241,20 +242,20 @@ export const JwtDecoderFeature: React.FC = () => {
 
         {/* Title & Status Badges */}
         <div className="flex items-center gap-4 relative z-10">
-          <div className="p-3.5 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-600/10 border border-indigo-200/80 text-indigo-600 shadow-[inset_0_1.5px_2px_#ffffff]">
+          <div className="p-3.5 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-600/10 border border-indigo-200/80 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 ">
             <KeyRound className="w-7 h-7" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950 flex items-center gap-2">
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white flex items-center gap-2">
               Online JWT Decoder
             </h1>
-            <div className="flex flex-wrap items-center gap-3 text-xs font-mono font-bold text-slate-600 mt-1.5">
+            <div className="flex flex-wrap items-center gap-3 text-xs font-mono font-bold text-slate-600 dark:text-slate-400 mt-1.5">
               {parsedJwt.isValid ? (
-                <span className="flex items-center gap-1 text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/60">
+                <span className="flex items-center gap-1 text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-200/60 dark:border-emerald-500/20">
                   <ShieldCheck className="w-3.5 h-3.5" /> Valid Token Format
                 </span>
               ) : (
-                <span className="flex items-center gap-1 text-rose-700 bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200/60">
+                <span className="flex items-center gap-1 text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-500/10 px-2.5 py-0.5 rounded-full border border-rose-200/60 dark:border-rose-500/20">
                   <ShieldAlert className="w-3.5 h-3.5" /> Invalid JWT Structure
                 </span>
               )}
@@ -263,8 +264,8 @@ export const JwtDecoderFeature: React.FC = () => {
                 <span
                   className={`flex items-center gap-1 px-2.5 py-0.5 rounded-full border font-bold ${
                     parsedJwt.timestamps.exp.status === "active"
-                      ? "text-emerald-700 bg-emerald-50 border-emerald-200/60"
-                      : "text-rose-700 bg-rose-50 border-rose-200/60"
+                      ? "text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 border-emerald-200/60 dark:border-emerald-500/20"
+                      : "text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-500/10 border-rose-200/60 dark:border-rose-500/20"
                   }`}
                 >
                   <Clock className="w-3.5 h-3.5" /> {parsedJwt.timestamps.exp.diffStr}
@@ -277,24 +278,16 @@ export const JwtDecoderFeature: React.FC = () => {
         {/* Action Toolbar */}
         <div className="flex flex-wrap items-center gap-2.5 relative z-10">
           {/* Theme Toggle */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setEditorTheme(editorTheme === "vs" ? "vs-dark" : "vs")}
-            icon={editorTheme === "vs" ? <Moon className="w-4 h-4 text-slate-700" /> : <Sun className="w-4 h-4 text-amber-500" />}
-            title="Toggle Dark/Light Theme"
-          >
-            {editorTheme === "vs" ? "Dark" : "Light"}
-          </Button>
+          
 
           {/* Sample Preset Selector */}
-          <div className="flex items-center gap-1 bg-white/90 border border-slate-200/80 rounded-full p-1 shadow-[inset_0_1.5px_2px_#ffffff]">
+          <div className="flex items-center gap-1 bg-white dark:bg-slate-900/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 rounded-full p-1 ">
             <button
               onClick={() => setJwtInput(SAMPLE_JWT_ACTIVE)}
               className={`px-3 py-1 rounded-full text-xs font-sans font-bold transition-all ${
                 jwtInput === SAMPLE_JWT_ACTIVE
                   ? "bg-indigo-600 text-white shadow-xs"
-                  : "text-slate-600 hover:text-slate-950 hover:bg-slate-50"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:text-white hover:bg-slate-50 dark:bg-slate-800/50"
               }`}
             >
               Active Sample
@@ -304,7 +297,7 @@ export const JwtDecoderFeature: React.FC = () => {
               className={`px-3 py-1 rounded-full text-xs font-sans font-bold transition-all ${
                 jwtInput === SAMPLE_JWT_EXPIRED
                   ? "bg-indigo-600 text-white shadow-xs"
-                  : "text-slate-600 hover:text-slate-950 hover:bg-slate-50"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:text-white hover:bg-slate-50 dark:bg-slate-800/50"
               }`}
             >
               Expired Sample
@@ -314,7 +307,7 @@ export const JwtDecoderFeature: React.FC = () => {
               className={`px-3 py-1 rounded-full text-xs font-sans font-bold transition-all ${
                 jwtInput === SAMPLE_JWT_OAUTH
                   ? "bg-indigo-600 text-white shadow-xs"
-                  : "text-slate-600 hover:text-slate-950 hover:bg-slate-50"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:text-white hover:bg-slate-50 dark:bg-slate-800/50"
               }`}
             >
               OAuth2 Sample
@@ -326,7 +319,7 @@ export const JwtDecoderFeature: React.FC = () => {
             variant="ghost"
             size="sm"
             onClick={handleReset}
-            icon={<RotateCcw className="w-4 h-4 text-rose-600" />}
+            icon={<RotateCcw className="w-4 h-4 text-rose-600 dark:text-rose-400" />}
             title="Reset Token Input"
           >
             Reset
@@ -341,8 +334,8 @@ export const JwtDecoderFeature: React.FC = () => {
           <span className="lens-sheen" />
           <div className="flex items-center justify-between pb-3.5 border-b border-slate-900/10 relative z-10">
             <div className="flex items-center gap-2 overflow-hidden">
-              <KeyRound className="w-4.5 h-4.5 text-indigo-600 shrink-0" />
-              <span className="text-xs sm:text-sm font-mono font-extrabold text-slate-900 truncate">
+              <KeyRound className="w-4.5 h-4.5 text-indigo-600 dark:text-indigo-400 shrink-0" />
+              <span className="text-xs sm:text-sm font-mono font-extrabold text-slate-900 dark:text-slate-100 truncate">
                 Encoded JWT Token Input
               </span>
             </div>
@@ -350,37 +343,37 @@ export const JwtDecoderFeature: React.FC = () => {
               onClick={handleCopyToken}
               disabled={!jwtInput}
               title="Copy Raw Token"
-              className="p-1.5 text-slate-600 hover:text-indigo-600 hover:bg-white rounded-xl transition-colors border border-slate-200/80 bg-white/80 shadow-2xs disabled:opacity-40"
+              className="p-1.5 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:text-indigo-400 hover:bg-white dark:bg-slate-900 rounded-xl transition-colors border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 shadow-2xs disabled:opacity-40"
             >
               {copiedToken ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
             </button>
           </div>
 
           {/* Color-Coded Token Display Header breakdown */}
-          <div className="mt-3.5 p-3 rounded-2xl bg-slate-100/90 border border-slate-200/80 relative z-10 flex items-center justify-around text-xs font-mono font-bold">
-            <div className="flex items-center gap-1.5 text-indigo-700">
+          <div className="mt-3.5 p-3 rounded-2xl bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 relative z-10 flex items-center justify-around text-xs font-mono font-bold">
+            <div className="flex items-center gap-1.5 text-indigo-700 dark:text-indigo-300">
               <span className="w-2.5 h-2.5 rounded-full bg-indigo-600" />
               <span>Header</span>
             </div>
             <span className="text-slate-300">•</span>
-            <div className="flex items-center gap-1.5 text-emerald-700">
+            <div className="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-600" />
               <span>Payload</span>
             </div>
             <span className="text-slate-300">•</span>
-            <div className="flex items-center gap-1.5 text-rose-700">
+            <div className="flex items-center gap-1.5 text-rose-700 dark:text-rose-400">
               <span className="w-2.5 h-2.5 rounded-full bg-rose-600" />
               <span>Signature</span>
             </div>
           </div>
 
           {/* Raw Input Editor Area */}
-          <div className="flex-1 mt-3.5 rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-white relative z-10 flex flex-col">
+          <div className="flex-1 mt-3.5 rounded-2xl overflow-hidden border border-slate-200/90 dark:border-slate-700/90 shadow-inner bg-white dark:bg-slate-900 relative z-10 flex flex-col">
             <textarea
               value={jwtInput}
               onChange={(e) => setJwtInput(e.target.value)}
               placeholder="Paste your JSON Web Token (JWT) here..."
-              className="w-full h-full p-4 font-mono text-xs sm:text-sm text-slate-900 bg-transparent resize-none focus:outline-none leading-relaxed tracking-tight"
+              className="w-full h-full p-4 font-mono text-xs sm:text-sm text-slate-900 dark:text-slate-100 bg-transparent resize-none focus:outline-none leading-relaxed tracking-tight"
             />
           </div>
         </div>
@@ -393,8 +386,8 @@ export const JwtDecoderFeature: React.FC = () => {
               {Object.keys(parsedJwt.timestamps).length > 0 && (
                 <FadeIn className="liquid-glass-surface p-5 sm:p-6 relative">
                   <span className="lens-sheen" />
-                  <h3 className="text-xs font-mono font-extrabold uppercase tracking-wider text-slate-500 mb-3 flex items-center gap-1.5 relative z-10">
-                    <Calendar className="w-4 h-4 text-indigo-600" /> Claim Timestamps & Expiration
+                  <h3 className="text-xs font-mono font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3 flex items-center gap-1.5 relative z-10">
+                    <Calendar className="w-4 h-4 text-indigo-600 dark:text-indigo-400" /> Claim Timestamps & Expiration
                   </h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 relative z-10">
@@ -402,8 +395,8 @@ export const JwtDecoderFeature: React.FC = () => {
                       <div
                         className={`p-3.5 rounded-2xl border flex items-start justify-between gap-3 ${
                           parsedJwt.timestamps.exp.status === "active"
-                            ? "bg-emerald-50/80 border-emerald-200/80 text-emerald-950"
-                            : "bg-rose-50/80 border-rose-200/80 text-rose-950"
+                            ? "bg-emerald-50/80 dark:bg-emerald-900/10 border-emerald-200/80 dark:border-emerald-500/20 text-emerald-950 dark:text-emerald-100"
+                            : "bg-rose-50/80 dark:bg-rose-900/10 border-rose-200/80 dark:border-rose-500/20 text-rose-950 dark:text-rose-100"
                         }`}
                       >
                         <div>
@@ -417,8 +410,8 @@ export const JwtDecoderFeature: React.FC = () => {
                         <span
                           className={`text-[10px] font-mono font-extrabold px-2 py-0.5 rounded-full shrink-0 border ${
                             parsedJwt.timestamps.exp.status === "active"
-                              ? "bg-emerald-100 border-emerald-300 text-emerald-800"
-                              : "bg-rose-100 border-rose-300 text-rose-800"
+                              ? "bg-emerald-100 dark:bg-emerald-900/30 border-emerald-300 text-emerald-800 dark:text-emerald-300"
+                              : "bg-rose-100 dark:bg-rose-900/30 border-rose-300 text-rose-800 dark:text-rose-300"
                           }`}
                         >
                           {parsedJwt.timestamps.exp.diffStr}
@@ -427,7 +420,7 @@ export const JwtDecoderFeature: React.FC = () => {
                     )}
 
                     {parsedJwt.timestamps.iat && (
-                      <div className="p-3.5 rounded-2xl bg-indigo-50/80 border border-indigo-200/80 text-indigo-950 flex items-start justify-between gap-3">
+                      <div className="p-3.5 rounded-2xl bg-indigo-50/80 dark:bg-indigo-900/10 border border-indigo-200/80 dark:border-indigo-500/20 text-indigo-950 dark:text-indigo-100 flex items-start justify-between gap-3">
                         <div>
                           <div className="text-[11px] font-mono font-extrabold uppercase opacity-70">
                             Issued At (iat)
@@ -436,7 +429,7 @@ export const JwtDecoderFeature: React.FC = () => {
                             {parsedJwt.timestamps.iat.dateStr}
                           </div>
                         </div>
-                        <span className="text-[10px] font-mono font-bold text-indigo-700 bg-indigo-100 px-2 py-0.5 rounded-full border border-indigo-200">
+                        <span className="text-[10px] font-mono font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-100 dark:bg-indigo-900/30 px-2 py-0.5 rounded-full border border-indigo-200 dark:border-indigo-500/30">
                           Unix: {parsedJwt.timestamps.iat.val}
                         </span>
                       </div>
@@ -453,25 +446,25 @@ export const JwtDecoderFeature: React.FC = () => {
                   <div className="flex items-center justify-between pb-3 border-b border-slate-900/10 relative z-10">
                     <div className="flex items-center gap-2 overflow-hidden">
                       <span className="w-2.5 h-2.5 rounded-full bg-indigo-600 shrink-0" />
-                      <span className="text-xs font-mono font-extrabold text-slate-900 truncate">
+                      <span className="text-xs font-mono font-extrabold text-slate-900 dark:text-slate-100 truncate">
                         Header (Algorithm & Type)
                       </span>
                     </div>
                     <button
                       onClick={handleCopyHeader}
                       title="Copy Header JSON"
-                      className="p-1 text-slate-600 hover:text-indigo-600 hover:bg-white rounded-lg transition-colors border border-slate-200/80 bg-white/80"
+                      className="p-1 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:text-indigo-400 hover:bg-white dark:bg-slate-900 rounded-lg transition-colors border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/80 dark:bg-slate-800/80"
                     >
                       {copiedHeader ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
                     </button>
                   </div>
 
-                  <div className="flex-1 mt-3 rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-white relative z-10">
+                  <div className="flex-1 mt-3 rounded-2xl overflow-hidden border border-slate-200/90 dark:border-slate-700/90 shadow-inner bg-white dark:bg-slate-900 relative z-10">
                     <Editor
                       height="100%"
                       language="json"
                       value={parsedJwt.headerFormatted}
-                      theme={editorTheme}
+                      theme={theme === "dark" ? "vs-dark" : "vs"}
                       loading={<ShimmerLoader variant="editor" />}
                       options={{
                         readOnly: true,
@@ -492,25 +485,25 @@ export const JwtDecoderFeature: React.FC = () => {
                   <div className="flex items-center justify-between pb-3 border-b border-slate-900/10 relative z-10">
                     <div className="flex items-center gap-2 overflow-hidden">
                       <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 shrink-0" />
-                      <span className="text-xs font-mono font-extrabold text-slate-900 truncate">
+                      <span className="text-xs font-mono font-extrabold text-slate-900 dark:text-slate-100 truncate">
                         Payload (Claims & Data)
                       </span>
                     </div>
                     <button
                       onClick={handleCopyPayload}
                       title="Copy Payload JSON"
-                      className="p-1 text-slate-600 hover:text-indigo-600 hover:bg-white rounded-lg transition-colors border border-slate-200/80 bg-white/80"
+                      className="p-1 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:text-indigo-400 hover:bg-white dark:bg-slate-900 rounded-lg transition-colors border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/80 dark:bg-slate-800/80"
                     >
                       {copiedPayload ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
                     </button>
                   </div>
 
-                  <div className="flex-1 mt-3 rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-white relative z-10">
+                  <div className="flex-1 mt-3 rounded-2xl overflow-hidden border border-slate-200/90 dark:border-slate-700/90 shadow-inner bg-white dark:bg-slate-900 relative z-10">
                     <Editor
                       height="100%"
                       language="json"
                       value={parsedJwt.payloadFormatted}
-                      theme={editorTheme}
+                      theme={theme === "dark" ? "vs-dark" : "vs"}
                       loading={<ShimmerLoader variant="editor" />}
                       options={{
                         readOnly: true,
@@ -529,13 +522,13 @@ export const JwtDecoderFeature: React.FC = () => {
           ) : (
             <div className="liquid-glass-surface p-8 sm:p-12 flex flex-col items-center justify-center text-center h-[780px] relative space-y-4">
               <span className="lens-sheen" />
-              <div className="p-4 rounded-3xl bg-rose-50 text-rose-600 border border-rose-200/80 shadow-inner">
+              <div className="p-4 rounded-3xl bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-200/80 shadow-inner">
                 <AlertCircle className="w-10 h-10" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 font-sans">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 font-sans">
                 Unable to Decode Token
               </h3>
-              <p className="text-xs font-mono text-slate-500 max-w-sm">
+              <p className="text-xs font-mono text-slate-500 dark:text-slate-400 max-w-sm">
                 {parsedJwt.error}
               </p>
             </div>
@@ -545,3 +538,13 @@ export const JwtDecoderFeature: React.FC = () => {
     </SlideUp>
   );
 };
+
+
+
+
+
+
+
+
+
+

@@ -122,13 +122,13 @@ export default function PlaygroundPage() {
   const isSuccess = Boolean(output) && !isError;
 
   return (
-    <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden font-sans bg-[#f8fafc] text-slate-900">
+    <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden font-sans bg-[#f8fafc] dark:bg-[#0f172a] text-slate-900 dark:text-slate-100 transition-colors duration-300">
       
       {/* Global Toast Notification */}
       {showToast && (isSuccess || isError) && (
         <div className="fixed top-6 right-6 z-[100] flex items-center shadow-xl animate-in slide-in-from-top-5 fade-in duration-300">
           <div className={`flex items-center px-4 py-3 rounded-lg border text-sm font-bold shadow-lg ${
-            isError ? 'bg-red-50 border-red-200 text-red-700' : 'bg-emerald-50 border-emerald-200 text-emerald-700'
+            isError ? 'bg-red-50 dark:bg-red-900/10 border-red-200 text-red-700 dark:text-red-200' : 'bg-emerald-50 border-emerald-200 text-emerald-700'
           }`}>
             {isError ? (
               <AlertCircle className="w-5 h-5 mr-3 shrink-0" />
@@ -137,11 +137,11 @@ export default function PlaygroundPage() {
             )}
             <div className="flex flex-col mr-6">
               <span className="leading-tight">{isError ? 'Execution Error' : 'Success'}</span>
-              <span className={`text-xs font-medium opacity-80 mt-0.5 ${isError ? 'text-red-600' : 'text-emerald-600'}`}>
+              <span className={`text-xs font-medium opacity-80 mt-0.5 ${isError ? 'text-red-600 dark:text-red-300' : 'text-emerald-600'}`}>
                 {isError ? 'Code failed to run.' : 'Code executed successfully!'}
               </span>
             </div>
-            <button onClick={() => setShowToast(false)} className={`p-1 hover:bg-black/5 rounded-md transition-colors ${isError ? 'text-red-700' : 'text-emerald-700'}`}>
+            <button onClick={() => setShowToast(false)} className={`p-1 hover:bg-black/5 rounded-md transition-colors ${isError ? 'text-red-700 dark:text-red-200' : 'text-emerald-700'}`}>
               <X className="w-4 h-4" />
             </button>
           </div>
@@ -154,20 +154,20 @@ export default function PlaygroundPage() {
       <main className="relative z-10 max-w-[1750px] w-full mx-auto px-4 sm:px-8 pt-6 pb-12 flex-1 space-y-6">
         <div id="split-container" className="flex flex-col lg:flex-row h-[75vh] relative">
           {/* Left Panel: Editor */}
-          <div style={{ width: `${leftWidth}%` }} className="hidden lg:flex flex-col h-full bg-white rounded-2xl border border-slate-200/80 shadow-[0_8px_32px_rgba(15,23,42,0.04)] overflow-hidden">
-            <div className="px-4 py-3 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+          <div style={{ width: `${leftWidth}%` }} className="hidden lg:flex flex-col h-full bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 shadow-[0_8px_32px_rgba(15,23,42,0.04)] overflow-hidden">
+            <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-700/50 flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/50">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center">
-                  <span className="text-indigo-600 font-extrabold text-xs">&lt;/&gt;</span>
+                  <span className="text-indigo-600 dark:text-indigo-300 font-extrabold text-xs">&lt;/&gt;</span>
                 </div>
                 <div>
-                  <h2 className="text-sm font-extrabold text-slate-900">Online Editor</h2>
-                  <p className="text-[10px] text-slate-500 font-medium">Write & Compile Code</p>
+                  <h2 className="text-sm font-extrabold text-slate-900 dark:text-slate-100">Online Editor</h2>
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Write & Compile Code</p>
                 </div>
               </div>
               <LanguageSelector language={language} onSelect={handleLanguageChange} />
             </div>
-            <div className="flex-1 w-full bg-white relative">
+            <div className="flex-1 w-full bg-white dark:bg-slate-900 relative">
               <CodeEditor
                 language={language}
                 value={code}
@@ -177,20 +177,20 @@ export default function PlaygroundPage() {
           </div>
           
           {/* Mobile Fallback Left Panel */}
-          <div className="lg:hidden w-full flex-1 flex flex-col h-full bg-white rounded-2xl border border-slate-200/80 shadow-[0_8px_32px_rgba(15,23,42,0.04)] overflow-hidden mb-6">
-            <div className="px-4 py-3 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+          <div className="lg:hidden w-full flex-1 flex flex-col h-full bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 shadow-[0_8px_32px_rgba(15,23,42,0.04)] overflow-hidden mb-6">
+            <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-700/50 flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/50">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center">
-                  <span className="text-indigo-600 font-extrabold text-xs">&lt;/&gt;</span>
+                  <span className="text-indigo-600 dark:text-indigo-300 font-extrabold text-xs">&lt;/&gt;</span>
                 </div>
                 <div>
-                  <h2 className="text-sm font-extrabold text-slate-900">Online Editor</h2>
-                  <p className="text-[10px] text-slate-500 font-medium">Write & Compile Code</p>
+                  <h2 className="text-sm font-extrabold text-slate-900 dark:text-slate-100">Online Editor</h2>
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Write & Compile Code</p>
                 </div>
               </div>
               <LanguageSelector language={language} onSelect={handleLanguageChange} />
             </div>
-            <div className="flex-1 w-full bg-white relative min-h-[300px]">
+            <div className="flex-1 w-full bg-white dark:bg-slate-900 relative min-h-[300px]">
               <CodeEditor
                 language={language}
                 value={code}
@@ -208,7 +208,7 @@ export default function PlaygroundPage() {
           </div>
 
           {/* Right Panel: Output */}
-          <div style={{ width: `calc(${100 - leftWidth}% - 1.5rem)` }} className="hidden lg:flex flex-col h-full bg-white rounded-2xl border border-slate-200/80 shadow-[0_8px_32px_rgba(15,23,42,0.04)] overflow-hidden">
+          <div style={{ width: `calc(${100 - leftWidth}% - 1.5rem)` }} className="hidden lg:flex flex-col h-full bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 shadow-[0_8px_32px_rgba(15,23,42,0.04)] overflow-hidden">
             <OutputPanel
               output={output}
               error={error}
@@ -219,7 +219,7 @@ export default function PlaygroundPage() {
           </div>
           
           {/* Mobile Fallback Right Panel */}
-          <div className="lg:hidden w-full h-[40vh] flex flex-col bg-white rounded-2xl border border-slate-200/80 shadow-[0_8px_32px_rgba(15,23,42,0.04)] overflow-hidden">
+          <div className="lg:hidden w-full h-[40vh] flex flex-col bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 shadow-[0_8px_32px_rgba(15,23,42,0.04)] overflow-hidden">
             <OutputPanel
               output={output}
               error={error}
@@ -231,8 +231,8 @@ export default function PlaygroundPage() {
         </div>
 
         {/* SEO Information Section */}
-        <div className="mt-12 bg-white p-8 rounded-2xl border border-slate-200/80 shadow-[0_8px_32px_rgba(15,23,42,0.04)] text-slate-600 text-sm leading-relaxed">
-          <h3 className="font-extrabold text-slate-900 mb-3 text-lg">CodeLens Free Online Compiler & IDE</h3>
+        <div className="mt-12 bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 shadow-[0_8px_32px_rgba(15,23,42,0.04)] text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+          <h3 className="font-extrabold text-slate-900 dark:text-slate-100 mb-3 text-lg">CodeLens Free Online Compiler & IDE</h3>
           <p className="mb-4">
             Welcome to the ultimate <strong>Online Code Editor</strong> and <strong>Online Compiler</strong>. Designed for developers, students, and educators, this powerful <strong>online IDE</strong> allows you to write, compile, and run code instantly directly from your browser. No downloads or complex local setups are required.
           </p>
@@ -240,15 +240,15 @@ export default function PlaygroundPage() {
             Whether you are testing an algorithm in Python, writing competitive programming logic in C++, or building scripts in JavaScript, our <strong>online code playground</strong> provides an intuitive, high-performance environment. The editor is powered by the same underlying technology as VS Code, providing intelligent syntax highlighting, auto-completion, and a clean interface.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
-              <h4 className="font-bold text-slate-800 mb-2">Supported Languages</h4>
-              <p className="text-xs text-slate-500">
+            <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-100 dark:border-slate-700/50">
+              <h4 className="font-bold text-slate-800 dark:text-slate-100 mb-2">Supported Languages</h4>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 Instantly switch between JavaScript, Python, Java, C++, C, and many more. Our <strong>multi-language compiler</strong> handles real-time execution flawlessly.
               </p>
             </div>
-            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
-              <h4 className="font-bold text-slate-800 mb-2">Run Code Instantly</h4>
-              <p className="text-xs text-slate-500">
+            <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-100 dark:border-slate-700/50">
+              <h4 className="font-bold text-slate-800 dark:text-slate-100 mb-2">Run Code Instantly</h4>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 Click <strong>Run Code</strong> to execute your logic securely in the cloud. Review your output, catch compilation errors, and iterate quickly with our seamless output console.
               </p>
             </div>
@@ -260,3 +260,6 @@ export default function PlaygroundPage() {
     </div>
   );
 }
+
+
+

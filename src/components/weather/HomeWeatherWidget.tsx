@@ -71,7 +71,7 @@ export const HomeWeatherWidget = () => {
   if (error || !weather && !loading) return null;
 
   return (
-    <Link href="/weather" className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/70 backdrop-blur-md border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all cursor-pointer group">
+    <Link href="/weather" className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/70 backdrop-blur-md border border-slate-200/80 dark:border-slate-700/80 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all cursor-pointer group">
       {loading ? (
         <div className="flex items-center gap-2 text-slate-500 text-xs font-bold uppercase tracking-wider">
           <Loader2 className="w-4 h-4 animate-spin" />
@@ -79,12 +79,12 @@ export const HomeWeatherWidget = () => {
         </div>
       ) : weather ? (
         <>
-          <div className="flex items-center gap-1.5 text-slate-700">
+          <div className="flex items-center gap-1.5 text-slate-700 dark:text-slate-300">
             <MapPin className="w-4 h-4 text-rose-500" />
             <span className="text-xs font-bold">{locationName}</span>
           </div>
           <div className="w-px h-4 bg-slate-200" />
-          <div className="flex items-center gap-1.5 text-slate-700">
+          <div className="flex items-center gap-1.5 text-slate-700 dark:text-slate-300">
             {getWeatherIcon(weather.code, weather.isDay)}
             <span className="text-xs font-bold">{weather.temp}°C • {weather.desc}</span>
           </div>
@@ -94,3 +94,4 @@ export const HomeWeatherWidget = () => {
     </Link>
   );
 };
+

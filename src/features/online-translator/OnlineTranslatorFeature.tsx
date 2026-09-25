@@ -220,17 +220,17 @@ export const OnlineTranslatorFeature: React.FC = () => {
         <span className="lens-sheen" />
         <div className="space-y-2 max-w-2xl relative z-10">
           <div className="flex items-center gap-2.5">
-            <span className="p-2.5 rounded-2xl bg-indigo-600/10 border border-indigo-200 text-indigo-600 shadow-[inset_0_1px_1.5px_#ffffff]">
+            <span className="p-2.5 rounded-2xl bg-indigo-600/10 border border-indigo-200 text-indigo-600 dark:text-indigo-400 ">
               <Languages className="w-6 h-6" />
             </span>
-            <span className="px-3 py-1 text-xs font-mono font-bold rounded-full bg-emerald-500/15 text-emerald-800 border border-emerald-300">
+            <span className="px-3 py-1 text-xs font-mono font-bold rounded-full bg-emerald-50 dark:bg-emerald-500/100/15 text-emerald-800 dark:text-emerald-300 border border-emerald-300">
               Online Translation
             </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight font-sans">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-950 dark:text-white tracking-tight font-sans">
             Online Translator
           </h1>
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-sans">
             Translate text effortlessly across 100+ languages with automatic language detection and a 5,000 character limit for maximum accuracy.
           </p>
         </div>
@@ -244,7 +244,7 @@ export const OnlineTranslatorFeature: React.FC = () => {
             <button
               key={idx}
               onClick={() => setInputText(sample.text)}
-              className="px-3 py-1.5 text-xs font-medium rounded-xl bg-white/80 border border-slate-200/90 text-slate-700 hover:bg-white hover:border-indigo-300 hover:text-indigo-600 transition-all cursor-pointer shadow-2xs"
+              className="px-3 py-1.5 text-xs font-medium rounded-xl bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 border border-slate-200/90 dark:border-slate-700/90 text-slate-700 dark:text-slate-300 hover:bg-white dark:bg-slate-900 hover:border-indigo-300 hover:text-indigo-600 dark:text-indigo-400 transition-all cursor-pointer shadow-2xs"
             >
               {sample.label}
             </button>
@@ -254,16 +254,16 @@ export const OnlineTranslatorFeature: React.FC = () => {
 
       {/* Backup engine notification banner */}
       {usedBackupEngine && (
-        <div className="p-3.5 rounded-2xl bg-indigo-50/80 border border-indigo-200/80 text-indigo-950 text-xs font-sans flex items-center justify-between gap-3 shadow-2xs">
+        <div className="p-3.5 rounded-2xl bg-indigo-50/80 border border-indigo-200/80 dark:border-indigo-500/20 text-indigo-950 text-xs font-sans flex items-center justify-between gap-3 shadow-2xs">
           <div className="flex items-center gap-2.5">
-            <Sparkles className="w-4 h-4 text-indigo-600 shrink-0" />
+            <Sparkles className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0" />
             <span>
               <strong>Translation Ready:</strong> Translation processed using secondary high-precision translation engine.
             </span>
           </div>
           <button
             onClick={() => setUsedBackupEngine(false)}
-            className="text-indigo-700 font-bold hover:underline shrink-0"
+            className="text-indigo-700 dark:text-indigo-300 font-bold hover:underline shrink-0"
           >
             Dismiss
           </button>
@@ -273,7 +273,7 @@ export const OnlineTranslatorFeature: React.FC = () => {
       {/* Main Workspace Card */}
       <div className="liquid-glass-surface p-4 sm:p-6 space-y-4">
         {/* Language Selection Toolbar */}
-        <div className="relative z-30 flex flex-col sm:flex-row items-center justify-between gap-3 bg-white/70 backdrop-blur-md p-2.5 rounded-2xl border border-slate-200/80 shadow-2xs">
+        <div className="relative z-30 flex flex-col sm:flex-row items-center justify-between gap-3 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md p-2.5 rounded-2xl border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 shadow-2xs">
           {/* Source Language Dropdown */}
           <div className="relative z-40 w-full sm:w-72" ref={sourceDropdownRef}>
             <button
@@ -281,11 +281,11 @@ export const OnlineTranslatorFeature: React.FC = () => {
                 setIsSourceDropdownOpen(!isSourceDropdownOpen);
                 setIsTargetDropdownOpen(false);
               }}
-              className="w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200/90 text-slate-900 flex items-center justify-between hover:border-indigo-300 transition-all cursor-pointer font-sans font-bold text-sm shadow-2xs"
+              className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-slate-100 flex items-center justify-between hover:border-indigo-300 transition-all cursor-pointer font-sans font-bold text-sm shadow-2xs"
             >
               <div className="flex items-center gap-2 truncate">
                 <span className="text-xs text-slate-400 uppercase font-mono font-semibold">From:</span>
-                <span className="text-slate-950 truncate font-semibold">{sourceLangDisplayText}</span>
+                <span className="text-slate-950 dark:text-white truncate font-semibold">{sourceLangDisplayText}</span>
               </div>
               <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${isSourceDropdownOpen ? "rotate-180" : ""}`} />
             </button>
@@ -296,7 +296,7 @@ export const OnlineTranslatorFeature: React.FC = () => {
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 4 }}
-                  className="absolute left-0 top-full mt-2 w-full sm:w-80 p-3 rounded-2xl bg-white/95 backdrop-blur-3xl border border-slate-200 shadow-xl z-50 space-y-2 max-h-80 overflow-hidden flex flex-col"
+                  className="absolute left-0 top-full mt-2 w-full sm:w-80 p-3 rounded-2xl bg-white dark:bg-slate-900/95 backdrop-blur-3xl border border-slate-200 dark:border-slate-700 shadow-xl z-50 space-y-2 max-h-80 overflow-hidden flex flex-col"
                 >
                   <div className="relative">
                     <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
@@ -305,13 +305,13 @@ export const OnlineTranslatorFeature: React.FC = () => {
                       placeholder="Search source language..."
                       value={sourceSearch}
                       onChange={(e) => setSourceSearch(e.target.value)}
-                      className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 bg-slate-50 text-slate-900 focus:outline-none focus:border-indigo-500"
+                      className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-indigo-500"
                     />
                   </div>
 
                   {/* Popular shortcuts */}
                   {!sourceSearch && (
-                    <div className="flex flex-wrap gap-1.5 pb-2 border-b border-slate-100">
+                    <div className="flex flex-wrap gap-1.5 pb-2 border-b border-slate-100 dark:border-slate-700/50">
                       {["auto", ...POPULAR_LANGUAGES.slice(0, 5)].map((code) => (
                         <button
                           key={code}
@@ -322,7 +322,7 @@ export const OnlineTranslatorFeature: React.FC = () => {
                           className={`px-2.5 py-1 text-[11px] rounded-lg font-medium transition-all ${
                             sourceLang === code
                               ? "bg-indigo-600 text-white font-bold"
-                              : "bg-slate-100 text-slate-700 hover:bg-indigo-50 hover:text-indigo-600"
+                              : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:bg-indigo-500/10 hover:text-indigo-600 dark:text-indigo-400"
                           }`}
                         >
                           {getLangName(code)}
@@ -341,8 +341,8 @@ export const OnlineTranslatorFeature: React.FC = () => {
                         }}
                         className={`w-full px-3 py-1.5 text-left text-xs rounded-xl flex items-center justify-between font-sans transition-colors ${
                           sourceLang === lang.code
-                            ? "bg-indigo-50 text-indigo-900 font-extrabold"
-                            : "hover:bg-slate-100 text-slate-800"
+                            ? "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-900 dark:text-indigo-50 font-extrabold"
+                            : "hover:bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-300"
                         }`}
                       >
                         <span>{lang.name}</span>
@@ -359,7 +359,7 @@ export const OnlineTranslatorFeature: React.FC = () => {
           <button
             onClick={swapLanguages}
             title="Swap Source and Target Languages"
-            className="p-2.5 rounded-xl bg-white border border-slate-200/90 text-slate-700 hover:text-indigo-600 hover:bg-indigo-50/50 hover:border-indigo-200 transition-all cursor-pointer shadow-2xs"
+            className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-700/90 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50/50 hover:border-indigo-200 transition-all cursor-pointer shadow-2xs"
           >
             <ArrowLeftRight className="w-4 h-4" />
           </button>
@@ -371,11 +371,11 @@ export const OnlineTranslatorFeature: React.FC = () => {
                 setIsTargetDropdownOpen(!isTargetDropdownOpen);
                 setIsSourceDropdownOpen(false);
               }}
-              className="w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200/90 text-slate-900 flex items-center justify-between hover:border-indigo-300 transition-all cursor-pointer font-sans font-bold text-sm shadow-2xs"
+              className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-slate-100 flex items-center justify-between hover:border-indigo-300 transition-all cursor-pointer font-sans font-bold text-sm shadow-2xs"
             >
               <div className="flex items-center gap-2 truncate">
                 <span className="text-xs text-slate-400 uppercase font-mono font-semibold">To:</span>
-                <span className="text-slate-950 truncate font-semibold">{getLangName(targetLang)}</span>
+                <span className="text-slate-950 dark:text-white truncate font-semibold">{getLangName(targetLang)}</span>
               </div>
               <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${isTargetDropdownOpen ? "rotate-180" : ""}`} />
             </button>
@@ -386,7 +386,7 @@ export const OnlineTranslatorFeature: React.FC = () => {
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 4 }}
-                  className="absolute right-0 top-full mt-2 w-full sm:w-80 p-3 rounded-2xl bg-white/95 backdrop-blur-3xl border border-slate-200 shadow-xl z-50 space-y-2 max-h-80 overflow-hidden flex flex-col"
+                  className="absolute right-0 top-full mt-2 w-full sm:w-80 p-3 rounded-2xl bg-white dark:bg-slate-900/95 backdrop-blur-3xl border border-slate-200 dark:border-slate-700 shadow-xl z-50 space-y-2 max-h-80 overflow-hidden flex flex-col"
                 >
                   <div className="relative">
                     <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
@@ -395,13 +395,13 @@ export const OnlineTranslatorFeature: React.FC = () => {
                       placeholder="Search target language..."
                       value={targetSearch}
                       onChange={(e) => setTargetSearch(e.target.value)}
-                      className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 bg-slate-50 text-slate-900 focus:outline-none focus:border-indigo-500"
+                      className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-indigo-500"
                     />
                   </div>
 
                   {/* Popular shortcuts */}
                   {!targetSearch && (
-                    <div className="flex flex-wrap gap-1.5 pb-2 border-b border-slate-100">
+                    <div className="flex flex-wrap gap-1.5 pb-2 border-b border-slate-100 dark:border-slate-700/50">
                       {POPULAR_LANGUAGES.slice(0, 6).map((code) => (
                         <button
                           key={code}
@@ -412,7 +412,7 @@ export const OnlineTranslatorFeature: React.FC = () => {
                           className={`px-2.5 py-1 text-[11px] rounded-lg font-medium transition-all ${
                             targetLang === code
                               ? "bg-indigo-600 text-white font-bold"
-                              : "bg-slate-100 text-slate-700 hover:bg-indigo-50 hover:text-indigo-600"
+                              : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:bg-indigo-500/10 hover:text-indigo-600 dark:text-indigo-400"
                           }`}
                         >
                           {getLangName(code)}
@@ -431,8 +431,8 @@ export const OnlineTranslatorFeature: React.FC = () => {
                         }}
                         className={`w-full px-3 py-1.5 text-left text-xs rounded-xl flex items-center justify-between font-sans transition-colors ${
                           targetLang === lang.code
-                            ? "bg-indigo-50 text-indigo-900 font-extrabold"
-                            : "hover:bg-slate-100 text-slate-800"
+                            ? "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-900 dark:text-indigo-50 font-extrabold"
+                            : "hover:bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-300"
                         }`}
                       >
                         <span>{lang.name}</span>
@@ -449,11 +449,11 @@ export const OnlineTranslatorFeature: React.FC = () => {
         {/* Dual Text Editor Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
           {/* Left Input Pane */}
-          <div className="flex flex-col h-[340px] sm:h-[400px] rounded-2xl border border-slate-200/90 bg-white/90 overflow-hidden shadow-2xs focus-within:border-indigo-400 focus-within:ring-2 focus-within:ring-indigo-500/10 transition-all">
-            <div className="p-3 bg-slate-50/80 border-b border-slate-200/70 flex items-center justify-between text-xs text-slate-500 font-sans">
-              <span className="font-extrabold text-slate-800">Source Text</span>
+          <div className="flex flex-col h-[340px] sm:h-[400px] rounded-2xl border border-slate-200/90 dark:border-slate-700/90 bg-white dark:bg-slate-900/90 dark:bg-slate-900/90 overflow-hidden shadow-2xs focus-within:border-indigo-400 focus-within:ring-2 focus-within:ring-indigo-500/10 transition-all">
+            <div className="p-3 bg-slate-50/80 dark:bg-slate-800/80 border-b border-slate-200/70 dark:border-slate-700/70 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-sans">
+              <span className="font-extrabold text-slate-800 dark:text-slate-300">Source Text</span>
               <div className="flex items-center gap-2 font-mono">
-                <span className={`font-semibold ${isMaxReached ? "text-rose-600 font-extrabold" : "text-slate-600"}`}>
+                <span className={`font-semibold ${isMaxReached ? "text-rose-600 dark:text-rose-400 font-extrabold" : "text-slate-600 dark:text-slate-400"}`}>
                   {charCount.toLocaleString()} / {MAX_CHAR_LIMIT.toLocaleString()} chars
                 </span>
                 <span>•</span>
@@ -466,23 +466,23 @@ export const OnlineTranslatorFeature: React.FC = () => {
               onChange={handleInputChange}
               maxLength={MAX_CHAR_LIMIT}
               placeholder="Type or paste text here (up to 5,000 characters). Translation automatically triggers after typing pause..."
-              className="flex-1 p-4 bg-transparent text-slate-900 text-sm sm:text-base font-sans leading-relaxed resize-none focus:outline-none placeholder:text-slate-400 custom-scrollbar"
+              className="flex-1 p-4 bg-transparent text-slate-900 dark:text-slate-100 text-sm sm:text-base font-sans leading-relaxed resize-none focus:outline-none placeholder:text-slate-400 custom-scrollbar"
             />
 
-            <div className="p-3 bg-slate-50/50 border-t border-slate-200/70 flex items-center justify-between">
+            <div className="p-3 bg-slate-50/50 dark:bg-slate-800/50 border-t border-slate-200/70 dark:border-slate-700/70 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setInputText("")}
                   disabled={!inputText}
-                  className="px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-rose-600 hover:bg-rose-50 disabled:opacity-40 transition-colors flex items-center gap-1.5 cursor-pointer"
+                  className="px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:bg-rose-500/10 disabled:opacity-40 transition-colors flex items-center gap-1.5 cursor-pointer"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                   Clear
                 </button>
 
                 {isMaxReached && (
-                  <span className="text-[11px] font-mono text-amber-700 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200 flex items-center gap-1">
-                    <AlertTriangle className="w-3 h-3 text-amber-600" />
+                  <span className="text-[11px] font-mono text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 px-2.5 py-1 rounded-lg border border-amber-200 flex items-center gap-1">
+                    <AlertTriangle className="w-3 h-3 text-amber-600 dark:text-amber-400" />
                     Max 5k limit reached
                   </span>
                 )}
@@ -490,7 +490,7 @@ export const OnlineTranslatorFeature: React.FC = () => {
 
               <div className="flex items-center gap-2">
                 {isLoading ? (
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-indigo-50 text-indigo-700 text-xs font-semibold font-mono animate-pulse">
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-xs font-semibold font-mono animate-pulse">
                     <Loader2 className="w-3.5 h-3.5 animate-spin" />
                     Translating...
                   </div>
@@ -509,11 +509,11 @@ export const OnlineTranslatorFeature: React.FC = () => {
           </div>
 
           {/* Right Output Pane */}
-          <div className="flex flex-col h-[340px] sm:h-[400px] rounded-2xl border border-slate-200/90 bg-slate-900 text-slate-100 overflow-hidden shadow-2xs relative">
+          <div className="flex flex-col h-[340px] sm:h-[400px] rounded-2xl border border-slate-200/90 dark:border-slate-700/90 bg-slate-900 text-slate-100 overflow-hidden shadow-2xs relative">
             <div className="p-3 bg-slate-950/80 border-b border-slate-800 flex items-center justify-between text-xs font-sans">
               <div className="flex items-center gap-2">
                 <span className="font-extrabold text-white">Translated Text</span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-bold">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-500/100/20 text-indigo-300 border border-indigo-500/30 font-bold">
                   {getLangName(targetLang)}
                 </span>
               </div>
@@ -534,7 +534,7 @@ export const OnlineTranslatorFeature: React.FC = () => {
 
                   <button
                     onClick={handleCopy}
-                    className="px-2.5 py-1 rounded-lg bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-500 transition-colors flex items-center gap-1.5"
+                    className="px-2.5 py-1 rounded-lg bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-50 dark:bg-indigo-500/100 transition-colors flex items-center gap-1.5"
                   >
                     {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                     {copied ? "Copied" : "Copy"}
@@ -555,7 +555,7 @@ export const OnlineTranslatorFeature: React.FC = () => {
               ) : translatedText ? (
                 <p className="whitespace-pre-wrap">{translatedText}</p>
               ) : (
-                <div className="h-full flex flex-col items-center justify-center text-slate-500 space-y-2 text-center p-6 select-none">
+                <div className="h-full flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 space-y-2 text-center p-6 select-none">
                   <Languages className="w-8 h-8 opacity-40" />
                   <p className="text-xs">Translation output will appear here automatically</p>
                 </div>
@@ -572,4 +572,11 @@ export const OnlineTranslatorFeature: React.FC = () => {
     </div>
   );
 };
+
+
+
+
+
+
+
 

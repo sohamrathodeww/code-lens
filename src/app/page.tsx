@@ -45,7 +45,7 @@ export default function Home() {
   const activeTools = TOOLS_REGISTRY.filter((t) => t.status === "active");
 
   return (
-    <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden font-sans bg-[#fbfcfd] text-slate-900 selection:bg-indigo-500/30">
+    <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden font-sans bg-[#fbfcfd] dark:bg-[#0f172a] text-slate-900 dark:text-slate-100 selection:bg-indigo-500/30 transition-colors duration-300">
       {/* Dynamic Background */}
       <FluidCanvas />
       
@@ -61,24 +61,17 @@ export default function Home() {
         {/* Powerful Hero Section */}
         <section className="max-w-6xl mx-auto pt-20 pb-32 flex flex-col items-center text-center space-y-8 relative">
           
-          <div className="flex flex-col items-center gap-4">
 
-            <ScaleIn delay={0.1}>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200/60 shadow-sm transition-transform hover:scale-105 cursor-default mt-4">
-                <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-[11px] font-bold uppercase tracking-widest text-slate-600 font-mono">
-                  CodeLens v2.0 is Live
-                </span>
-              </div>
-            </ScaleIn>
-          </div>
 
           <div className="space-y-6 max-w-4xl relative">
             <SlideUp delay={0.2} className="relative">
-              <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tighter text-slate-950 leading-[1.05]">
-                Free Online JSON Viewer, <br className="hidden sm:inline" />
+              <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tighter text-slate-950 dark:text-white leading-[1.05]">
+                <span className="dark:bg-gradient-to-b dark:from-white dark:via-white/70 dark:to-white/20 dark:bg-clip-text dark:text-transparent">
+                  Free Online JSON Viewer,
+                </span>
+                <br className="hidden sm:inline" />
                 <span className="relative whitespace-nowrap">
-                  <span className="relative z-10 bg-gradient-to-br from-indigo-600 via-violet-600 to-indigo-500 bg-clip-text text-transparent">
+                  <span className="relative z-10 bg-gradient-to-br dark:bg-gradient-to-b from-indigo-600 via-violet-600 to-indigo-500 dark:from-white dark:via-white/70 dark:to-white/20 bg-clip-text text-transparent drop-shadow-sm dark:drop-shadow-none">
                     Code Compare & Developer Tools.
                   </span>
                 </span>
@@ -86,7 +79,7 @@ export default function Home() {
             </SlideUp>
 
             <SlideUp delay={0.3}>
-              <p className="text-lg sm:text-xl text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto text-balance">
+              <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 font-medium leading-relaxed max-w-2xl mx-auto text-balance">
                 Format JSON, diff code, inspect payloads, and decode tokens in milliseconds. Built with Monaco and WebAssembly for native-level performance inside your browser.
               </p>
             </SlideUp>
@@ -97,15 +90,15 @@ export default function Home() {
               {/* Subtle ambient glow behind the container */}
               <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10 blur-xl opacity-50 rounded-3xl" />
               
-              <div className="relative grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 p-3 sm:p-4 rounded-3xl bg-white/50 backdrop-blur-2xl border border-white/80 shadow-[0_8px_32px_rgba(15,23,42,0.04)] ring-1 ring-slate-900/5">
+              <div className="relative grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 p-3 sm:p-4 rounded-3xl bg-white dark:bg-slate-900/50 dark:bg-slate-800/50/50 backdrop-blur-2xl border border-white dark:border-slate-700/80 dark:border-slate-700/80 dark:border-slate-800/80 shadow-[0_8px_32px_rgba(15,23,42,0.04)] dark:shadow-none ring-1 ring-slate-900/5 dark:ring-slate-100/5">
                 {FEATURES.map((feature, idx) => (
-                  <div key={idx} className="group relative flex flex-col items-center text-center gap-3 p-5 rounded-2xl hover:bg-white/80 transition-all duration-300">
-                    <div className="p-3 rounded-2xl bg-gradient-to-br from-white to-slate-50 border border-slate-200/80 shadow-sm text-slate-700 group-hover:text-indigo-600 group-hover:shadow-md group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300">
+                  <div key={idx} className="group relative flex flex-col items-center text-center gap-3 p-5 rounded-2xl hover:bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 dark:hover:bg-slate-800/50 transition-all duration-300">
+                    <div className="p-3 rounded-2xl bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 shadow-sm text-slate-700 dark:text-slate-300 group-hover:text-indigo-600 dark:text-indigo-300 dark:group-hover:text-indigo-400 group-hover:shadow-md group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300">
                       <feature.icon className="w-5 h-5" />
                     </div>
                     <div className="space-y-1.5 z-10">
-                      <h4 className="font-bold text-slate-900 tracking-tight">{feature.title}</h4>
-                      <p className="text-xs text-slate-500 font-medium leading-relaxed max-w-[200px] mx-auto">
+                      <h4 className="font-bold text-slate-900 dark:text-slate-100 tracking-tight">{feature.title}</h4>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 font-medium leading-relaxed max-w-[200px] mx-auto">
                         {feature.description}
                       </p>
                     </div>
@@ -120,17 +113,17 @@ export default function Home() {
         <section id="tools" className="max-w-7xl mx-auto py-24 scroll-mt-24">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
             <SlideUp>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight mb-2">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 dark:text-white tracking-tight mb-2">
                 Powerful Utilities
               </h2>
-              <p className="text-slate-500 font-medium text-lg">
+              <p className="text-slate-500 dark:text-slate-400 font-medium text-lg">
                 Everything you need, right in your browser.
               </p>
             </SlideUp>
             <SlideUp delay={0.1}>
               <div className="flex items-center gap-2 bg-indigo-50 px-4 py-2 rounded-full border border-indigo-100">
-                <Cpu className="w-4 h-4 text-indigo-600" />
-                <span className="text-sm font-bold text-indigo-700">{activeTools.length} Platform Tools</span>
+                <Cpu className="w-4 h-4 text-indigo-600 dark:text-indigo-300" />
+                <span className="text-sm font-bold text-indigo-700 dark:text-indigo-200">{activeTools.length} Platform Tools</span>
               </div>
             </SlideUp>
           </div>
@@ -147,9 +140,9 @@ export default function Home() {
               return (
                 <SlideUp key={tool.id} delay={delay} className="h-full">
                   <div
-                    className={`group relative p-6 flex flex-col justify-between h-full rounded-3xl bg-white border border-slate-200/60 transition-all duration-400 overflow-hidden ${
+                    className={`group relative p-6 flex flex-col justify-between h-full rounded-3xl bg-white dark:bg-[#13182b] border border-slate-200 dark:border-slate-700/60 dark:border-slate-800 transition-all duration-400 overflow-hidden ${
                       isActive 
-                        ? "hover:border-indigo-300 hover:shadow-[0_20px_60px_-15px_rgba(79,70,229,0.15)] hover:-translate-y-1.5" 
+                        ? "hover:border-indigo-300 dark:hover:border-slate-700 hover:shadow-[0_20px_60px_-15px_rgba(79,70,229,0.15)] dark:hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] hover:-translate-y-1.5" 
                         : "opacity-75 grayscale-[0.5]"
                     }`}
                   >
@@ -162,8 +155,8 @@ export default function Home() {
                         <div
                           className={`p-3.5 rounded-2xl border transition-all duration-300 ${
                             isActive
-                              ? "bg-indigo-50/50 border-indigo-100 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white group-hover:scale-110 shadow-sm"
-                              : "bg-slate-50 border-slate-200 text-slate-400"
+                              ? "bg-indigo-50/50 dark:bg-slate-800/50 border-indigo-100 dark:border-slate-700 text-indigo-600 dark:text-slate-300 group-hover:bg-indigo-600 dark:group-hover:bg-slate-700 group-hover:text-white dark:group-hover:text-white group-hover:scale-110 shadow-sm"
+                              : "bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 text-slate-400"
                           }`}
                         >
                           <Icon className="w-6 h-6" />
@@ -172,8 +165,8 @@ export default function Home() {
                         <span
                           className={`px-3 py-1.5 text-[10px] uppercase tracking-widest font-bold rounded-full border ${
                             isActive
-                              ? "bg-slate-50 text-slate-600 border-slate-200 group-hover:bg-indigo-50 group-hover:text-indigo-700 group-hover:border-indigo-200 transition-colors duration-300"
-                              : "bg-slate-100 text-slate-500 border-slate-200"
+                              ? "bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 group-hover:bg-indigo-50 dark:group-hover:bg-slate-800 group-hover:text-indigo-700 dark:text-indigo-200 dark:group-hover:text-slate-300 group-hover:border-indigo-200 dark:group-hover:border-slate-600 transition-colors duration-300"
+                              : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-700"
                           }`}
                         >
                           {isActive ? tool.category : "Planned"}
@@ -181,10 +174,10 @@ export default function Home() {
                       </div>
 
                       <div className="pt-2">
-                        <h3 className="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors duration-300 tracking-tight">
+                        <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:text-indigo-300 dark:group-hover:text-white transition-colors duration-300 tracking-tight">
                           {tool.name}
                         </h3>
-                        <p className="text-sm text-slate-500 mt-2 font-medium leading-relaxed">
+                        <p className="text-sm text-slate-500 dark:text-slate-400 mt-2 font-medium leading-relaxed">
                           {tool.description}
                         </p>
                       </div>
@@ -193,13 +186,13 @@ export default function Home() {
                     <div className="pt-8 relative z-10 mt-auto">
                       {isActive ? (
                         <Link href={tool.route} className="w-full block cursor-pointer">
-                          <button className="w-full py-3 px-4 rounded-xl font-bold text-sm flex items-center justify-between bg-slate-50 text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 border border-slate-200/80 hover:border-indigo-200 transition-all duration-300 cursor-pointer">
+                          <button className="w-full py-3 px-4 rounded-xl font-bold text-sm flex items-center justify-between bg-slate-50 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 hover:text-indigo-700 dark:text-indigo-200 dark:hover:text-white border border-slate-200 dark:border-slate-700/80 dark:border-slate-700 hover:border-indigo-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer">
                             Launch Tool
-                            <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-1.5 transition-all duration-300" />
+                            <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-indigo-600 dark:text-indigo-300 dark:group-hover:text-white group-hover:translate-x-1.5 transition-all duration-300" />
                           </button>
                         </Link>
                       ) : (
-                        <button disabled className="w-full py-3 px-4 rounded-xl font-bold text-sm bg-slate-100 text-slate-400 cursor-not-allowed">
+                        <button disabled className="w-full py-3 px-4 rounded-xl font-bold text-sm bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 dark:text-slate-400 cursor-not-allowed">
                           Coming Soon
                         </button>
                       )}
@@ -217,14 +210,14 @@ export default function Home() {
                 <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 rounded-2xl blur-lg opacity-30 group-hover:opacity-70 transition duration-500 group-hover:duration-200"></div>
                 
                 {/* Main Button Body */}
-                <button className="relative flex items-center gap-3 px-8 py-4 bg-white/95 backdrop-blur-xl border border-indigo-100 rounded-2xl text-indigo-700 font-extrabold text-lg shadow-sm group-hover:shadow-[0_12px_24px_rgba(79,70,229,0.25)] group-hover:-translate-y-1 transition-all duration-300">
-                  <span className="bg-gradient-to-br from-indigo-700 to-purple-600 bg-clip-text text-transparent">
+                <button className="relative flex items-center gap-3 px-8 py-4 bg-white dark:bg-slate-900/95 dark:bg-[#13182b]/95 backdrop-blur-xl border border-indigo-100 dark:border-indigo-900 rounded-2xl text-indigo-700 dark:text-indigo-400 font-extrabold text-lg shadow-sm group-hover:shadow-[0_12px_24px_rgba(79,70,229,0.25)] group-hover:-translate-y-1 transition-all duration-300">
+                  <span className="bg-gradient-to-br from-indigo-700 to-purple-600 dark:from-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">
                     Explore All Platform Tools
                   </span>
                   
                   {/* Arrow Icon Wrapper */}
                   <div className="p-1.5 rounded-full bg-indigo-50 group-hover:bg-indigo-600 transition-colors duration-300">
-                    <ArrowRight className="w-5 h-5 text-indigo-600 group-hover:text-white group-hover:translate-x-0.5 transition-all duration-300" />
+                    <ArrowRight className="w-5 h-5 text-indigo-600 dark:text-indigo-300 group-hover:text-white group-hover:translate-x-0.5 transition-all duration-300" />
                   </div>
                 </button>
               </Link>
@@ -240,7 +233,7 @@ export default function Home() {
             
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
               <div className="space-y-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/10 backdrop-blur-md">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 dark:bg-slate-900/10 border border-white/10 dark:border-slate-700/10 backdrop-blur-md">
                   <ShieldCheck className="w-4 h-4 text-emerald-400" />
                   <span className="text-[11px] font-bold uppercase tracking-widest text-emerald-100 font-mono">
                     Security First
@@ -254,7 +247,7 @@ export default function Home() {
                 </p>
                 <div className="pt-4">
                   <Link href="/json-viewer">
-                    <Button variant="primary" size="lg" className="bg-white text-slate-900 hover:bg-slate-100 border-transparent shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                    <Button variant="primary" size="lg" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:bg-slate-800 border-transparent shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                       Start Formatting
                     </Button>
                   </Link>
@@ -268,7 +261,7 @@ export default function Home() {
                   { title: "Payload Decoders", desc: "JWT verification & base64 transforms." },
                   { title: "Compiler", desc: "Multi-language online playground." },
                 ].map((item, i) => (
-                  <div key={i} className="p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-colors">
+                  <div key={i} className="p-5 rounded-2xl bg-white dark:bg-slate-900/5 border border-white/10 dark:border-slate-700/10 backdrop-blur-md hover:bg-white/10 dark:bg-slate-900/10 transition-colors">
                     <h4 className="font-bold text-white mb-2">{item.title}</h4>
                     <p className="text-sm text-slate-400">{item.desc}</p>
                   </div>
@@ -279,28 +272,28 @@ export default function Home() {
         </SlideUp>
 
         {/* SEO Comprehensive Content & Internal Links */}
-        <section className="max-w-7xl mx-auto px-8 sm:px-12 py-16 mb-12 bg-white rounded-3xl border border-slate-200/60 shadow-sm">
-          <article className="prose prose-slate max-w-none text-sm text-slate-600">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">Why CodeLens is the Best Free Online Developer Toolkit</h2>
+        <section className="max-w-7xl mx-auto px-8 sm:px-12 py-16 mb-12 bg-white dark:bg-slate-900 dark:bg-[#1e293b] rounded-3xl border border-slate-200/60 dark:border-slate-700/60/60 shadow-sm">
+          <article className="prose prose-slate dark:prose-invert max-w-none text-sm text-slate-600 dark:text-slate-400">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-4">Why CodeLens is the Best Free Online Developer Toolkit</h2>
             <p className="mb-4">
-              Modern web development requires fast, reliable, and secure tools. Whether you are debugging a complex REST API, evaluating a Git pull request, or simply trying to read a massive configuration file, <strong>CodeLens</strong> offers a premium suite of <Link href="/" className="text-indigo-600 hover:underline">Free Online Developer Tools</Link> designed to run entirely within your browser. By utilizing WebAssembly and the Monaco Editor (the same engine behind VS Code), CodeLens guarantees lightning-fast execution with zero server latency.
+              Modern web development requires fast, reliable, and secure tools. Whether you are debugging a complex REST API, evaluating a Git pull request, or simply trying to read a massive configuration file, <strong>CodeLens</strong> offers a premium suite of <Link href="/" className="text-indigo-600 dark:text-indigo-300 hover:underline">Free Online Developer Tools</Link> designed to run entirely within your browser. By utilizing WebAssembly and the Monaco Editor (the same engine behind VS Code), CodeLens guarantees lightning-fast execution with zero server latency.
             </p>
             <p className="mb-4">
-              One of our most popular utilities is the <Link href="/json-viewer" className="text-indigo-600 hover:underline">Online JSON Viewer and Formatter</Link>. Unlike basic text validators, this tool allows you to instantly beautify, minify, and inspect JSON payloads. You can switch to a tree view to collapse nested objects, or copy specific JSON paths (e.g., <code>$.users[0].email</code>) directly to your clipboard. QA testers and frontend engineers use it daily to validate API responses without ever sending their proprietary data to a backend server. 
+              One of our most popular utilities is the <Link href="/json-viewer" className="text-indigo-600 dark:text-indigo-300 hover:underline">Online JSON Viewer and Formatter</Link>. Unlike basic text validators, this tool allows you to instantly beautify, minify, and inspect JSON payloads. You can switch to a tree view to collapse nested objects, or copy specific JSON paths (e.g., <code>$.users[0].email</code>) directly to your clipboard. QA testers and frontend engineers use it daily to validate API responses without ever sending their proprietary data to a backend server. 
             </p>
             <p className="mb-4">
-              If you need to review code changes, our <Link href="/code-compare" className="text-indigo-600 hover:underline">Online Code Compare</Link> and <Link href="/text-diff" className="text-indigo-600 hover:underline">Text Diff Checker</Link> provide an unparalleled side-by-side comparison experience. It highlights word-level and line-level differences with semantic syntax highlighting for JavaScript, Python, C++, and dozens of other languages.
+              If you need to review code changes, our <Link href="/code-compare" className="text-indigo-600 dark:text-indigo-300 hover:underline">Online Code Compare</Link> and <Link href="/text-diff" className="text-indigo-600 dark:text-indigo-300 hover:underline">Text Diff Checker</Link> provide an unparalleled side-by-side comparison experience. It highlights word-level and line-level differences with semantic syntax highlighting for JavaScript, Python, C++, and dozens of other languages.
             </p>
             <p className="mb-6">
-              Additionally, security engineers and backend developers rely on our <Link href="/jwt-decoder" className="text-indigo-600 hover:underline">JWT Decoder</Link> to safely inspect JSON Web Tokens. You can verify token headers, payloads, and expiration timestamps securely without the risk of exposing authorization tokens over the network. 
+              Additionally, security engineers and backend developers rely on our <Link href="/jwt-decoder" className="text-indigo-600 dark:text-indigo-300 hover:underline">JWT Decoder</Link> to safely inspect JSON Web Tokens. You can verify token headers, payloads, and expiration timestamps securely without the risk of exposing authorization tokens over the network. 
             </p>
             
-            <div className="flex flex-col sm:flex-row items-center justify-between pt-6 border-t border-slate-100">
-              <div className="text-xs text-slate-500 mb-4 sm:mb-0">
-                <strong>Internal Directory:</strong> <Link href="/json-viewer" className="hover:text-indigo-600">JSON Viewer</Link> | <Link href="/json-formatter" className="hover:text-indigo-600">JSON Formatter</Link> | <Link href="/code-compare" className="hover:text-indigo-600">Code Diff</Link> | <Link href="/jwt-decoder" className="hover:text-indigo-600">JWT Decoder</Link> | <Link href="/online-code-editor" className="hover:text-indigo-600">Online IDE</Link>
+            <div className="flex flex-col sm:flex-row items-center justify-between pt-6 border-t border-slate-100 dark:border-slate-700/50">
+              <div className="text-xs text-slate-500 dark:text-slate-400 mb-4 sm:mb-0">
+                <strong>Internal Directory:</strong> <Link href="/json-viewer" className="hover:text-indigo-600 dark:text-indigo-300">JSON Viewer</Link> | <Link href="/json-formatter" className="hover:text-indigo-600 dark:text-indigo-300">JSON Formatter</Link> | <Link href="/code-compare" className="hover:text-indigo-600 dark:text-indigo-300">Code Diff</Link> | <Link href="/jwt-decoder" className="hover:text-indigo-600 dark:text-indigo-300">JWT Decoder</Link> | <Link href="/online-code-editor" className="hover:text-indigo-600 dark:text-indigo-300">Online IDE</Link>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-xs font-bold text-slate-900">Share CodeLens:</span>
+                <span className="text-xs font-bold text-slate-900 dark:text-slate-100">Share CodeLens:</span>
                 
                 {/* Twitter / X */}
                 <a href={`https://twitter.com/intent/tweet?text=Check out CodeLens - Free Online Developer Tools&url=${APP_URL}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 bg-[#1DA1F2]/10 text-[#1DA1F2] hover:bg-[#1DA1F2]/20 rounded-lg text-xs font-bold transition-colors">
@@ -329,3 +322,5 @@ export default function Home() {
     </div>
   );
 }
+
+

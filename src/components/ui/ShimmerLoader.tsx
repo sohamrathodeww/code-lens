@@ -15,7 +15,7 @@ export const ShimmerLoader: React.FC<ShimmerLoaderProps> = ({
   if (variant === "editor") {
     return (
       <div className={clsx("w-full h-full rounded-2xl p-6 product-card flex flex-col gap-4 overflow-hidden", className)}>
-        <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4">
           <div className="flex items-center gap-3">
             <div className="h-8 w-24 rounded-lg animate-shimmer" />
             <div className="h-8 w-24 rounded-lg animate-shimmer" />
@@ -41,13 +41,13 @@ export const ShimmerLoader: React.FC<ShimmerLoaderProps> = ({
   if (variant === "diff") {
     return (
       <div className={clsx("w-full h-[500px] rounded-2xl product-card p-4 flex gap-4 overflow-hidden", className)}>
-        <div className="flex-1 space-y-3 p-4 rounded-xl bg-slate-100/70">
+        <div className="flex-1 space-y-3 p-4 rounded-xl bg-slate-100 dark:bg-slate-800/70">
           <div className="h-6 w-32 rounded animate-shimmer mb-4" />
           <div className="h-4 w-full rounded animate-shimmer" />
           <div className="h-4 w-3/4 rounded animate-shimmer" />
           <div className="h-4 w-5/6 rounded animate-shimmer" />
         </div>
-        <div className="flex-1 space-y-3 p-4 rounded-xl bg-slate-100/70">
+        <div className="flex-1 space-y-3 p-4 rounded-xl bg-slate-100 dark:bg-slate-800/70">
           <div className="h-6 w-32 rounded animate-shimmer mb-4" />
           <div className="h-4 w-full rounded animate-shimmer" />
           <div className="h-4 w-2/3 rounded animate-shimmer" />
@@ -67,3 +67,4 @@ export const ShimmerLoader: React.FC<ShimmerLoaderProps> = ({
 
   return <div className={clsx("rounded-2xl animate-shimmer min-h-[120px]", className)} />;
 };
+

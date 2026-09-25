@@ -63,44 +63,44 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden font-sans bg-[#f8fafc] text-slate-900">
+    <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden font-sans bg-[#f8fafc] dark:bg-[#0f172a] text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <Navbar />
 
       <main className="relative z-10 w-full mx-auto px-4 sm:px-8 py-16 lg:py-24 flex-1">
         <div className="max-w-7xl mx-auto">
           
           <div className="text-center space-y-6 max-w-3xl mx-auto mb-16">
-            <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tighter text-slate-950 leading-[1.1]">
+            <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tighter text-slate-950 dark:text-white leading-[1.1]">
               Contact Us.
             </h1>
-            <p className="text-xl text-slate-500 font-medium leading-relaxed text-balance">
+            <p className="text-xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed text-balance">
               We'd love to hear from you. Drop us a message below and our team will get back to you within 24 hours.
             </p>
           </div>
 
-          <section className="bg-white p-8 sm:p-12 border border-slate-200 rounded-[2.5rem] shadow-sm relative overflow-hidden">
+          <section className="bg-white dark:bg-slate-900 p-8 sm:p-12 border border-slate-200 dark:border-slate-700 rounded-[2.5rem] shadow-sm relative overflow-hidden">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-12 lg:gap-20 items-center relative z-10">
               
               {/* Information Panel (Left Side) */}
               <div className="space-y-12">
                 <article className="prose prose-slate prose-lg max-w-none">
-                  <p className="text-lg text-slate-600 leading-relaxed font-medium">
+                  <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
                     Whether you have a question about one of our developer tools, want to request a new feature, or found a bug, our team is here to help.
                   </p>
                 </article>
 
                 <div className="space-y-8">
                   <div className="space-y-3">
-                    <h3 className="text-slate-900 font-extrabold text-xl">Open Source & Community</h3>
-                    <p className="text-slate-600">
-                      CodeLens is actively growing! If you're a developer and want to contribute or track our public roadmap, feel free to visit our <a href="https://github.com/codelens" target="_blank" rel="noopener noreferrer" className="text-indigo-600 font-bold hover:text-indigo-700 hover:underline transition-all">GitHub organization</a>.
+                    <h3 className="text-slate-900 dark:text-slate-100 font-extrabold text-xl">Open Source & Community</h3>
+                    <p className="text-slate-600 dark:text-slate-400">
+                      CodeLens is actively growing! If you're a developer and want to contribute or track our public roadmap, feel free to visit our <a href="https://github.com/codelens" target="_blank" rel="noopener noreferrer" className="text-indigo-600 dark:text-indigo-300 font-bold hover:text-indigo-700 dark:text-indigo-200 hover:underline transition-all">GitHub organization</a>.
                     </p>
                   </div>
                 </div>
               </div>
 
               {/* Contact Form (Right Side) */}
-              <div className="space-y-6 bg-slate-50 p-8 sm:p-10 rounded-[2rem] border border-slate-200 shadow-sm relative">
+              <div className="space-y-6 bg-slate-50 dark:bg-slate-800/50 p-8 sm:p-10 rounded-[2rem] border border-slate-200 dark:border-slate-700 shadow-sm relative">
                 {status === "success" ? (
                   <div className="p-8 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex flex-col items-center text-center space-y-4 h-full justify-center min-h-[400px]">
                     <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-2">
@@ -115,37 +115,37 @@ export default function ContactPage() {
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-2">
-                      <label htmlFor="name" className="text-xs font-extrabold text-slate-500 uppercase tracking-widest block ml-1">Name</label>
+                      <label htmlFor="name" className="text-xs font-extrabold text-slate-500 dark:text-slate-400 uppercase tracking-widest block ml-1">Name</label>
                       <input 
                         type="text" 
                         id="name" 
                         name="name" 
                         required 
-                        className="w-full px-5 py-4 rounded-2xl border border-slate-200/80 bg-white/80 focus:bg-white focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-400 transition-all text-base font-medium shadow-sm"
+                        className="w-full px-5 py-4 rounded-2xl border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 focus:bg-white dark:bg-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-400 transition-all text-base font-medium shadow-sm"
                         placeholder="e.g. John Doe"
                       />
                     </div>
                     
                     <div className="space-y-2">
-                      <label htmlFor="email" className="text-xs font-extrabold text-slate-500 uppercase tracking-widest block ml-1">Email Address</label>
+                      <label htmlFor="email" className="text-xs font-extrabold text-slate-500 dark:text-slate-400 uppercase tracking-widest block ml-1">Email Address</label>
                       <input 
                         type="email" 
                         id="email" 
                         name="email" 
                         required 
-                        className="w-full px-5 py-4 rounded-2xl border border-slate-200/80 bg-white/80 focus:bg-white focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-400 transition-all text-base font-medium shadow-sm"
+                        className="w-full px-5 py-4 rounded-2xl border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 focus:bg-white dark:bg-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-400 transition-all text-base font-medium shadow-sm"
                         placeholder="e.g. john@company.com"
                       />
                     </div>
                     
                     <div className="space-y-2">
-                      <label htmlFor="message" className="text-xs font-extrabold text-slate-500 uppercase tracking-widest block ml-1">Message</label>
+                      <label htmlFor="message" className="text-xs font-extrabold text-slate-500 dark:text-slate-400 uppercase tracking-widest block ml-1">Message</label>
                       <textarea 
                         id="message" 
                         name="message" 
                         required 
                         rows={5}
-                        className="w-full px-5 py-4 rounded-2xl border border-slate-200/80 bg-white/80 focus:bg-white focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-400 transition-all text-base font-medium resize-none shadow-sm"
+                        className="w-full px-5 py-4 rounded-2xl border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 focus:bg-white dark:bg-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-400 transition-all text-base font-medium resize-none shadow-sm"
                         placeholder="How can we help you today?"
                       ></textarea>
                     </div>
@@ -189,3 +189,6 @@ export default function ContactPage() {
     </div>
   );
 }
+
+
+

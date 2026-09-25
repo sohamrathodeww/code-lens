@@ -98,7 +98,7 @@ export default function OnlineTranslatorPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
       />
-      <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-900 font-sans selection:bg-indigo-500/20 selection:text-indigo-900 relative">
+      <div className="min-h-screen flex flex-col bg-[#f8fafc] dark:bg-[#0f172a] text-slate-900 dark:text-slate-100 transition-colors duration-300 font-sans selection:bg-indigo-500/20 selection:text-indigo-900 dark:text-indigo-50 relative">
         <FluidCanvas />
         <Navbar />
 
@@ -109,47 +109,47 @@ export default function OnlineTranslatorPage() {
           <section className="liquid-glass-surface p-6 sm:p-10 space-y-8">
             <span className="lens-sheen" />
             <div className="max-w-3xl space-y-3">
-              <h2 className="text-xl sm:text-2xl font-extrabold text-slate-950 font-sans">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-slate-950 dark:text-white font-sans">
                 Why Use CodeLens Free Online Translator?
               </h2>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-sans">
                 Engineering teams and developers often need to translate technical documentation, API error messages, commit messages, and internationalized (i18n) content into different languages without hitting strict paywalls or manual service disruptions.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/90 shadow-2xs space-y-2">
-                <span className="text-xs font-mono font-extrabold text-indigo-600 uppercase">
+              <div className="p-5 rounded-2xl bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 border border-slate-200/90 dark:border-slate-700/90 shadow-2xs space-y-2">
+                <span className="text-xs font-mono font-extrabold text-indigo-600 dark:text-indigo-300 uppercase">
                   1. Automatic Failover
                 </span>
-                <h3 className="text-sm font-bold text-slate-950 font-sans">
+                <h3 className="text-sm font-bold text-slate-950 dark:text-white font-sans">
                   Multi-Provider Backup
                 </h3>
-                <p className="text-xs text-slate-500 leading-relaxed font-sans">
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-sans">
                   If one free engine experiences rate limits or high load, CodeLens prompts you to confirm and seamlessly continues translation using backup engines.
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/90 shadow-2xs space-y-2">
+              <div className="p-5 rounded-2xl bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 border border-slate-200/90 dark:border-slate-700/90 shadow-2xs space-y-2">
                 <span className="text-xs font-mono font-extrabold text-emerald-600 uppercase">
                   2. 100+ Languages
                 </span>
-                <h3 className="text-sm font-bold text-slate-950 font-sans">
+                <h3 className="text-sm font-bold text-slate-950 dark:text-white font-sans">
                   Global Coverage
                 </h3>
-                <p className="text-xs text-slate-500 leading-relaxed font-sans">
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-sans">
                   Supports English, Spanish, French, German, Chinese, Japanese, Hindi, Arabic, Russian, Portuguese, and dozens of regional languages.
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/90 shadow-2xs space-y-2">
+              <div className="p-5 rounded-2xl bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 border border-slate-200/90 dark:border-slate-700/90 shadow-2xs space-y-2">
                 <span className="text-xs font-mono font-extrabold text-rose-600 uppercase">
                   3. Privacy First
                 </span>
-                <h3 className="text-sm font-bold text-slate-950 font-sans">
+                <h3 className="text-sm font-bold text-slate-950 dark:text-white font-sans">
                   No Database Persistence
                 </h3>
-                <p className="text-xs text-slate-500 leading-relaxed font-sans">
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-sans">
                   Your code snippets, strings, and developer text remain ephemeral and are never stored in databases or user profiling tools.
                 </p>
               </div>
@@ -162,3 +162,6 @@ export default function OnlineTranslatorPage() {
     </>
   );
 }
+
+
+

@@ -4,7 +4,7 @@ export default function Loading() {
   return (
     <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden font-sans bg-[#f8fafc]">
       {/* Shimmer Navbar */}
-      <header className="sticky top-0 z-40 w-full px-4 sm:px-8 py-3.5 backdrop-blur-3xl bg-white/70 border-b border-slate-200/80">
+      <header className="sticky top-0 z-40 w-full px-4 sm:px-8 py-3.5 backdrop-blur-3xl bg-white/70 dark:bg-slate-900/70 border-b border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80">
         <div className="max-w-[1750px] mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-2xl bg-slate-200 animate-pulse" />
@@ -30,10 +30,10 @@ export default function Loading() {
           </div>
 
           {/* Main Workspace Skeleton */}
-          <div className="w-full h-[65vh] min-h-[500px] bg-slate-50/50 rounded-2xl border border-slate-200/80 overflow-hidden flex flex-col relative">
+          <div className="w-full h-[65vh] min-h-[500px] bg-slate-50/50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 overflow-hidden flex flex-col relative">
             <div className="absolute inset-0 animate-shimmer opacity-20 pointer-events-none" />
             
-            <div className="h-12 border-b border-slate-200/80 flex items-center px-4 gap-4 bg-slate-100/50 relative z-10">
+            <div className="h-12 border-b border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 flex items-center px-4 gap-4 bg-slate-100 dark:bg-slate-800/50 relative z-10">
               <div className="w-24 h-4 bg-slate-200 rounded animate-pulse" />
               <div className="w-24 h-4 bg-slate-200 rounded animate-pulse" />
             </div>
@@ -51,21 +51,21 @@ export default function Loading() {
 
         {/* Information Grid Skeleton */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-          <div className="p-5 rounded-2xl border border-slate-200/80 space-y-4 bg-white/50">
+          <div className="p-5 rounded-2xl border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 space-y-4 bg-white dark:bg-slate-900/50 dark:bg-slate-800/50">
             <div className="w-32 h-5 bg-slate-200 rounded animate-pulse" />
             <div className="space-y-2">
               <div className="w-full h-3 bg-slate-200 rounded animate-pulse" />
               <div className="w-4/5 h-3 bg-slate-200 rounded animate-pulse" />
             </div>
           </div>
-          <div className="p-5 rounded-2xl border border-slate-200/80 space-y-4 bg-white/50">
+          <div className="p-5 rounded-2xl border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 space-y-4 bg-white dark:bg-slate-900/50 dark:bg-slate-800/50">
             <div className="w-32 h-5 bg-slate-200 rounded animate-pulse" />
             <div className="space-y-2">
               <div className="w-full h-3 bg-slate-200 rounded animate-pulse" />
               <div className="w-4/5 h-3 bg-slate-200 rounded animate-pulse" />
             </div>
           </div>
-          <div className="p-5 rounded-2xl border border-slate-200/80 space-y-4 bg-white/50">
+          <div className="p-5 rounded-2xl border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 space-y-4 bg-white dark:bg-slate-900/50 dark:bg-slate-800/50">
             <div className="w-32 h-5 bg-slate-200 rounded animate-pulse" />
             <div className="space-y-2">
               <div className="w-full h-3 bg-slate-200 rounded animate-pulse" />
@@ -76,7 +76,7 @@ export default function Loading() {
       </main>
 
       {/* Shimmer Footer */}
-      <footer className="border-t border-slate-200/80 py-8 bg-white/50">
+      <footer className="border-t border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 py-8 bg-white dark:bg-slate-900/50 dark:bg-slate-800/50">
         <div className="max-w-[1750px] mx-auto px-4 sm:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="w-48 h-4 bg-slate-200 rounded animate-pulse" />
           <div className="flex gap-4">
@@ -88,3 +88,5 @@ export default function Loading() {
     </div>
   );
 }
+
+

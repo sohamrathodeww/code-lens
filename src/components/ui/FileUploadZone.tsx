@@ -114,7 +114,7 @@ export const FileUploadZone: React.FC<FileUploadZoneProps> = ({
           "relative group border-2 border-dashed rounded-3xl p-7 transition-all duration-300 cursor-pointer text-center flex flex-col items-center justify-center gap-3 overflow-hidden backdrop-blur-2xl bg-white/70 border-indigo-300/60 shadow-[inset_0_1.5px_2px_#ffffff,0_10px_25px_rgba(15,23,42,0.05)]",
           isDragging
             ? "border-indigo-600 bg-indigo-50 shadow-[0_12px_32px_rgba(99,102,241,0.25)] scale-[1.01]"
-            : "hover:border-indigo-500 hover:bg-white hover:shadow-[0_16px_36px_rgba(99,102,241,0.15)]"
+            : "hover:border-indigo-500 hover:bg-white dark:bg-slate-900 hover:shadow-[0_16px_36px_rgba(99,102,241,0.15)]"
         )}
       >
         <input
@@ -125,16 +125,16 @@ export const FileUploadZone: React.FC<FileUploadZoneProps> = ({
           accept={allowedExtensions ? allowedExtensions.join(",") : undefined}
         />
 
-        <div className="p-3.5 rounded-2xl bg-indigo-600/10 border border-indigo-200/80 text-indigo-600 group-hover:scale-110 transition-transform duration-300 shadow-[inset_0_1.5px_2px_#ffffff]">
+        <div className="p-3.5 rounded-2xl bg-indigo-600/10 border border-indigo-200/80 text-indigo-600 group-hover:scale-110 transition-transform duration-300 ">
           <UploadCloud className="w-7 h-7" />
         </div>
 
         <div>
-          <h4 className="text-sm font-extrabold text-slate-950 tracking-tight">{title}</h4>
-          <p className="text-xs text-slate-600 font-medium mt-0.5">{subtitle}</p>
+          <h4 className="text-sm font-extrabold text-slate-950 dark:text-white tracking-tight">{title}</h4>
+          <p className="text-xs text-slate-600 dark:text-slate-400 font-medium mt-0.5">{subtitle}</p>
         </div>
 
-        <span className="px-3.5 py-1 text-[11px] font-mono font-bold rounded-full bg-white text-indigo-700 border border-indigo-200/80 shadow-sm">
+        <span className="px-3.5 py-1 text-[11px] font-mono font-bold rounded-full bg-white dark:bg-slate-900 text-indigo-700 border border-indigo-200/80 shadow-sm">
           {acceptLabel}
         </span>
       </motion.div>
@@ -168,13 +168,13 @@ export const FileUploadZone: React.FC<FileUploadZoneProps> = ({
           <div className="flex items-center gap-2.5 truncate">
             <FileCode className="w-4 h-4 text-emerald-700 shrink-0" />
             <span className="font-mono font-bold truncate">{currentFile.name}</span>
-            <span className="text-[10px] px-2 py-0.5 rounded-md bg-white text-emerald-800 font-mono font-bold border border-emerald-200">
+            <span className="text-[10px] px-2 py-0.5 rounded-md bg-white dark:bg-slate-900 text-emerald-800 font-mono font-bold border border-emerald-200">
               {formatBytes(currentFile.size)}
             </span>
           </div>
           <button
             onClick={clearFile}
-            className="text-slate-500 hover:text-slate-900 transition-colors p-1 rounded-lg hover:bg-slate-200/50"
+            className="text-slate-500 hover:text-slate-900 dark:text-slate-100 transition-colors p-1 rounded-lg hover:bg-slate-200/50"
           >
             <X className="w-3.5 h-3.5" />
           </button>
@@ -183,4 +183,6 @@ export const FileUploadZone: React.FC<FileUploadZoneProps> = ({
     </div>
   );
 };
+
+
 

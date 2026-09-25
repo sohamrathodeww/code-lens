@@ -60,7 +60,7 @@ export const LiquidPreloader: React.FC<LiquidPreloaderProps> = ({
       <motion.div
         initial={{ opacity: 1 }}
         exit={{ opacity: 0, transition: { duration: 0.5, ease: "easeInOut" } }}
-        className="fixed inset-0 z-50 flex flex-col items-center justify-between p-6 bg-[#f8fafc] text-slate-900 font-sans overflow-hidden"
+        className="fixed inset-0 z-50 flex flex-col items-center justify-between p-6 bg-[#f8fafc] text-slate-900 dark:text-slate-100 font-sans overflow-hidden"
       >
         {/* Ambient Gradient Backdrop Fluid Orbs */}
         <div className="absolute inset-0 pointer-events-none z-0">
@@ -72,7 +72,7 @@ export const LiquidPreloader: React.FC<LiquidPreloaderProps> = ({
         {/* Top Header Spec Badge */}
         <div className="relative z-10 w-full max-w-7xl mx-auto flex items-center justify-between pt-2">
           <div className="flex items-center gap-2">
-            <span className="font-extrabold text-sm tracking-tight text-slate-950 font-sans">
+            <span className="font-extrabold text-sm tracking-tight text-slate-950 dark:text-white font-sans">
               CodeLens
             </span>
             <span className="text-slate-300">•</span>
@@ -99,9 +99,9 @@ export const LiquidPreloader: React.FC<LiquidPreloaderProps> = ({
             />
 
             {/* Inner Pulsing Glass Orb with Official CodeLens Logo */}
-            <div className="liquid-glass-surface p-5 rounded-3xl bg-white/90 border border-white shadow-[0_20px_50px_rgba(79,70,229,0.22),inset_0_2px_3px_#ffffff] relative z-10 flex items-center justify-center group">
+            <div className="liquid-glass-surface p-5 rounded-3xl bg-white/90 dark:bg-slate-900/90 border border-white dark:border-slate-700 shadow-[0_20px_50px_rgba(79,70,229,0.22),inset_0_2px_3px_#ffffff] relative z-10 flex items-center justify-center group">
               <span className="lens-sheen" />
-              <div className="w-14 h-14 rounded-2xl overflow-hidden border border-slate-200/80 shadow-md bg-white p-0.5 relative z-10 transition-transform duration-300 group-hover:scale-105">
+              <div className="w-14 h-14 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-700/80 shadow-md bg-white dark:bg-slate-900 p-0.5 relative z-10 transition-transform duration-300 group-hover:scale-105">
                 <img src="/logo-dark-medium.jpg" alt="CodeLens Logo" className="w-full h-full object-cover rounded-xl" />
               </div>
             </div>
@@ -109,7 +109,7 @@ export const LiquidPreloader: React.FC<LiquidPreloaderProps> = ({
 
           {/* Brand Titles */}
           <div className="space-y-1">
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950 font-sans">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white font-sans">
               CodeLens
             </h2>
             <p className="text-xs font-mono font-bold text-slate-500">
@@ -120,7 +120,7 @@ export const LiquidPreloader: React.FC<LiquidPreloaderProps> = ({
           {/* Liquid Glass Progress Bar & Anatomy Step Tracker */}
           <div className="w-full space-y-4">
             {/* Track */}
-            <div className="w-full h-3 rounded-full bg-white/80 border border-white p-0.5 shadow-[inset_0_1.5px_2px_rgba(0,0,0,0.06)] relative overflow-hidden">
+            <div className="w-full h-3 rounded-full bg-white/80 dark:bg-slate-800/80 border border-white dark:border-slate-700 p-0.5 shadow-[inset_0_1.5px_2px_rgba(0,0,0,0.06)] relative overflow-hidden">
               <motion.div
                 className="h-full rounded-full bg-gradient-to-r from-indigo-600 via-indigo-500 to-violet-600 shadow-[inset_0_1px_1.5px_rgba(255,255,255,0.6),0_4px_12px_rgba(79,70,229,0.4)]"
                 style={{ width: `${progress}%` }}
@@ -134,24 +134,24 @@ export const LiquidPreloader: React.FC<LiquidPreloaderProps> = ({
                 <StepIcon className="w-3.5 h-3.5 shrink-0 text-indigo-600 animate-spin" />
                 <span className="truncate">{currentStep?.text}</span>
               </div>
-              <span className="text-slate-950 font-extrabold text-sm">{progress}%</span>
+              <span className="text-slate-950 dark:text-white font-extrabold text-sm">{progress}%</span>
             </div>
           </div>
         </div>
 
         {/* Bottom Anatomy Architecture Badges */}
         <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-3 pb-2">
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/70 border border-white text-[11px] font-mono font-bold text-slate-600 shadow-sm">
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/70 border border-white dark:border-slate-700 text-[11px] font-mono font-bold text-slate-600 dark:text-slate-400 shadow-sm">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
             <span>Monaco Engine v0.52</span>
           </div>
 
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/70 border border-white text-[11px] font-mono font-bold text-slate-600 shadow-sm">
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/70 border border-white dark:border-slate-700 text-[11px] font-mono font-bold text-slate-600 dark:text-slate-400 shadow-sm">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
             <span>5MB Inline Validator</span>
           </div>
 
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/70 border border-white text-[11px] font-mono font-bold text-slate-600 shadow-sm">
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/70 border border-white dark:border-slate-700 text-[11px] font-mono font-bold text-slate-600 dark:text-slate-400 shadow-sm">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
             <span>Liquid Glass UI System</span>
           </div>
@@ -160,3 +160,4 @@ export const LiquidPreloader: React.FC<LiquidPreloaderProps> = ({
     </AnimatePresence>
   );
 };
+

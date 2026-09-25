@@ -44,7 +44,7 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   const baseStyles =
-    "relative overflow-hidden inline-flex items-center justify-center font-semibold tracking-tight font-sans text-slate-950 transition-all duration-300 rounded-full cursor-pointer select-none backdrop-blur-2xl border focus:outline-none focus:ring-4 focus:ring-indigo-500/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none";
+    "relative overflow-hidden inline-flex items-center justify-center font-semibold tracking-tight font-sans text-slate-950 dark:text-white transition-all duration-300 rounded-full cursor-pointer select-none backdrop-blur-2xl border focus:outline-none focus:ring-4 focus:ring-indigo-500/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none";
 
   const sizeStyles = {
     sm: "px-4.5 py-2.5 text-xs sm:text-sm gap-2 shadow-sm",
@@ -54,21 +54,21 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantStyles = {
     primary:
-      "bg-white/90 hover:bg-white text-slate-950 font-extrabold border-white shadow-[inset_0_1.5px_2px_#ffffff,0_8px_20px_rgba(15,23,42,0.08)] hover:shadow-[inset_0_2px_3px_#ffffff,0_12px_28px_rgba(99,102,241,0.18)]",
+      "bg-white/90 dark:bg-slate-900/90 hover:bg-white dark:hover:bg-slate-800 text-slate-950 dark:text-white font-extrabold border-white dark:border-slate-700 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_8px_20px_rgba(0,0,0,0.5)] hover:shadow-[inset_0_2px_3px_#ffffff,0_12px_28px_rgba(99,102,241,0.18)] dark:hover:shadow-[inset_0_1px_2px_rgba(255,255,255,0.15),0_12px_28px_rgba(99,102,241,0.3)]",
     solid:
       "bg-slate-950 hover:bg-slate-900 text-white font-extrabold border-slate-950 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15),0_8px_20px_rgba(15,23,42,0.15)] hover:shadow-[0_12px_28px_rgba(15,23,42,0.25)]",
     secondary:
-      "bg-white/90 hover:bg-white text-slate-950 font-extrabold border-white shadow-[inset_0_1.5px_2px_#ffffff,0_8px_20px_rgba(15,23,42,0.08)] hover:shadow-[inset_0_2px_3px_#ffffff,0_12px_28px_rgba(99,102,241,0.18)]",
+      "bg-white/90 dark:bg-slate-900/90 hover:bg-white dark:hover:bg-slate-800 text-slate-950 dark:text-white font-extrabold border-white dark:border-slate-700 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_8px_20px_rgba(0,0,0,0.5)] hover:shadow-[inset_0_2px_3px_#ffffff,0_12px_28px_rgba(99,102,241,0.18)] dark:hover:shadow-[inset_0_1px_2px_rgba(255,255,255,0.15),0_12px_28px_rgba(99,102,241,0.3)]",
     ghost:
-      "bg-white/50 hover:bg-white/90 text-slate-800 hover:text-slate-950 border-white/70 hover:border-white shadow-none",
+      "bg-white/50 dark:bg-slate-800/50 hover:bg-white/90 dark:hover:bg-slate-700/80 text-slate-800 hover:text-slate-950 dark:text-white border-white/70 hover:border-white dark:border-slate-700 shadow-none",
     destructive:
-      "bg-rose-50/95 hover:bg-rose-100 text-rose-700 font-extrabold border-rose-200 hover:border-rose-300 shadow-[inset_0_1.5px_2px_#ffffff,0_8px_20px_rgba(225,29,72,0.12)]",
+      "bg-rose-50/95 hover:bg-rose-100 text-rose-700 font-extrabold border-rose-200 hover:border-rose-300 ",
     icon:
-      "p-2.5 bg-white/85 hover:bg-white text-slate-950 border-white rounded-full shadow-[inset_0_1.5px_2px_#ffffff,0_6px_16px_rgba(15,23,42,0.06)]",
+      "p-2.5 bg-white/85 hover:bg-white dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-950 dark:text-white border-white dark:border-slate-700 rounded-full shadow-[inset_0_1.5px_2px_#ffffff,0_6px_16px_rgba(15,23,42,0.06)]",
     toolAction:
-      "bg-white/90 hover:bg-white text-slate-900 border-white font-mono text-xs rounded-xl shadow-[inset_0_1px_1.5px_#ffffff]",
+      "bg-white/90 dark:bg-slate-900/90 hover:bg-white dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100 border-white dark:border-slate-700 font-mono text-xs rounded-xl ",
     floatingAction:
-      "bg-white/95 backdrop-blur-3xl text-slate-950 font-extrabold border-white shadow-[inset_0_2px_3px_#ffffff,0_16px_36px_rgba(15,23,42,0.1)]",
+      "bg-white/95 backdrop-blur-3xl text-slate-950 dark:text-white font-extrabold border-white dark:border-slate-700 shadow-[inset_0_2px_3px_#ffffff,0_16px_36px_rgba(15,23,42,0.1)]",
   };
 
   return (
@@ -82,7 +82,7 @@ export const Button: React.FC<ButtonProps> = ({
     >
       {/* Specular Diagonal Lens Flare Curve - ONLY for light glossy variants */}
       {(variant === "primary" || variant === "secondary") && (
-        <span className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/70 via-white/20 to-transparent pointer-events-none rounded-t-full" />
+        <span className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/70 via-white/20 to-transparent dark:from-white/5 dark:via-white/[0.02] pointer-events-none rounded-t-full" />
       )}
 
       {/* Water Ripple Physics */}
@@ -113,4 +113,6 @@ export const Button: React.FC<ButtonProps> = ({
     </motion.button>
   );
 };
+
+
 

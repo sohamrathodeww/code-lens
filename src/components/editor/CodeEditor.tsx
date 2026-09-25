@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTheme } from 'next-themes';
 import Editor from '@monaco-editor/react';
 
 interface CodeEditorProps {
@@ -8,13 +9,14 @@ interface CodeEditorProps {
 }
 
 export default function CodeEditor({ language, value, onChange }: CodeEditorProps) {
+  const { theme } = useTheme();
   return (
-    <div className="w-full h-full rounded-xl overflow-hidden border border-slate-200 bg-white">
+    <div className="w-full h-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
       <Editor
         height="100%"
         language={language === 'c' || language === 'cpp' ? 'cpp' : language}
         value={value}
-        theme="light"
+        theme={theme === "dark" ? "vs-dark" : "light"}
         onChange={onChange}
         options={{
           minimap: { enabled: false },
@@ -40,3 +42,5 @@ export default function CodeEditor({ language, value, onChange }: CodeEditorProp
     </div>
   );
 }
+
+

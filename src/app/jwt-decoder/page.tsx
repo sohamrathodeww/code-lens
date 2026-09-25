@@ -104,7 +104,7 @@ export default function JwtDecoderPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
       />
-      <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-900 font-sans selection:bg-indigo-500/20 selection:text-indigo-900 relative">
+      <div className="min-h-screen flex flex-col bg-[#f8fafc] dark:bg-[#0f172a] text-slate-900 dark:text-slate-100 transition-colors duration-300 font-sans selection:bg-indigo-500/20 selection:text-indigo-900 dark:text-indigo-50 relative">
         <FluidCanvas />
         <Navbar />
 
@@ -115,47 +115,47 @@ export default function JwtDecoderPage() {
           <section className="liquid-glass-surface p-6 sm:p-10 space-y-8">
             <span className="lens-sheen" />
             <div className="max-w-3xl space-y-3">
-              <h2 className="text-xl sm:text-2xl font-extrabold text-slate-950 font-sans">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-slate-950 dark:text-white font-sans">
                 What is a JSON Web Token (JWT)?
               </h2>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-sans">
                 A JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/90 shadow-2xs space-y-2">
-                <span className="text-xs font-mono font-extrabold text-indigo-600 uppercase">
+              <div className="p-5 rounded-2xl bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 border border-slate-200/90 dark:border-slate-700/90 shadow-2xs space-y-2">
+                <span className="text-xs font-mono font-extrabold text-indigo-600 dark:text-indigo-300 uppercase">
                   1. Header
                 </span>
-                <h3 className="text-sm font-bold text-slate-950 font-sans">
+                <h3 className="text-sm font-bold text-slate-950 dark:text-white font-sans">
                   Algorithm & Token Type
                 </h3>
-                <p className="text-xs text-slate-500 leading-relaxed font-sans">
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-sans">
                   Contains metadata about the token, such as the signing algorithm (e.g., HS256, RS256) and token type (`JWT`).
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/90 shadow-2xs space-y-2">
+              <div className="p-5 rounded-2xl bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 border border-slate-200/90 dark:border-slate-700/90 shadow-2xs space-y-2">
                 <span className="text-xs font-mono font-extrabold text-emerald-600 uppercase">
                   2. Payload
                 </span>
-                <h3 className="text-sm font-bold text-slate-950 font-sans">
+                <h3 className="text-sm font-bold text-slate-950 dark:text-white font-sans">
                   Claims & Identity Data
                 </h3>
-                <p className="text-xs text-slate-500 leading-relaxed font-sans">
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-sans">
                   Contains statements about an entity (typically user identity, roles, permissions) and metadata claims like `exp` and `iat`.
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/90 shadow-2xs space-y-2">
+              <div className="p-5 rounded-2xl bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 border border-slate-200/90 dark:border-slate-700/90 shadow-2xs space-y-2">
                 <span className="text-xs font-mono font-extrabold text-rose-600 uppercase">
                   3. Signature
                 </span>
-                <h3 className="text-sm font-bold text-slate-950 font-sans">
+                <h3 className="text-sm font-bold text-slate-950 dark:text-white font-sans">
                   Integrity Verification
                 </h3>
-                <p className="text-xs text-slate-500 leading-relaxed font-sans">
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-sans">
                   Used to verify the sender of the JWT and to ensure that the message wasn&apos;t changed along the way.
                 </p>
               </div>
@@ -168,3 +168,6 @@ export default function JwtDecoderPage() {
     </>
   );
 }
+
+
+

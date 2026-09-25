@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import { useTheme } from "next-themes";
 import Editor from "@monaco-editor/react";
 import {
   FileJson,
@@ -63,6 +64,7 @@ const DEFAULT_SAMPLE_JSON = {
 type ViewMode = "tree" | "table" | "hierarchy" | "graph";
 
 export const JsonViewerFeature: React.FC = () => {
+  const { theme } = useTheme();
   const [jsonText, setJsonText] = useState<string>(
     JSON.stringify(DEFAULT_SAMPLE_JSON, null, 2)
   );
@@ -167,14 +169,14 @@ export const JsonViewerFeature: React.FC = () => {
       <div className="liquid-glass-surface px-6 py-4.5 sm:px-8 sm:py-5 flex items-center justify-between gap-4 relative">
         <span className="lens-sheen" />
         <div className="flex items-center gap-3.5 relative z-10">
-          <div className="p-2.5 rounded-2xl bg-indigo-600/10 border border-indigo-200/80 text-indigo-600 shadow-[inset_0_1.5px_2px_#ffffff]">
-            <FileJson className="w-6 h-6 text-indigo-600" />
+          <div className="p-2.5 rounded-2xl bg-indigo-600/10 border border-indigo-200/80 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 ">
+            <FileJson className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950">
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white">
               Online JSON Viewer
             </h1>
-            <p className="text-xs text-slate-500 font-medium hidden sm:block">
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium hidden sm:block">
               Multi-View JSON Suite: Tree, Table, Hierarchy, & Analytics
             </p>
           </div>
@@ -200,20 +202,20 @@ export const JsonViewerFeature: React.FC = () => {
         <div className="liquid-glass-surface p-6 sm:p-7 flex flex-col h-[800px] relative">
           <span className="lens-sheen" />
           <div className="flex items-center justify-between pb-3.5 border-b border-slate-900/10 relative z-10">
-            <span className="text-xs sm:text-sm font-mono font-extrabold text-slate-900 flex items-center gap-2">
-              <FileText className="w-4.5 h-4.5 text-indigo-600" />
+            <span className="text-xs sm:text-sm font-mono font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <FileText className="w-4.5 h-4.5 text-indigo-600 dark:text-indigo-400" />
               Source Code (Input)
             </span>
-            <span className="text-xs font-mono text-slate-500 font-bold">
+            <span className="text-xs font-mono text-slate-500 dark:text-slate-400 font-bold">
               {jsonText.split("\n").length} Lines
             </span>
           </div>
 
-          <div className="flex-1 mt-3.5 rounded-2xl overflow-hidden border border-white/80 shadow-inner bg-white/90 relative z-10">
+          <div className="flex-1 mt-3.5 rounded-2xl overflow-hidden border border-white dark:border-slate-700/80 dark:border-slate-700/80 shadow-inner bg-white dark:bg-slate-900/90 dark:bg-slate-900/90 relative z-10">
             <Editor
               height="100%"
               defaultLanguage="json"
-              theme="vs"
+              theme={theme === "dark" ? "vs-dark" : "vs"}
               value={jsonText}
               onChange={handleEditorChange}
               loading={<ShimmerLoader variant="editor" />}
@@ -232,8 +234,8 @@ export const JsonViewerFeature: React.FC = () => {
           </div>
 
           {jsonError && (
-            <div className="mt-3 p-3.5 rounded-2xl bg-rose-500/15 border border-rose-300 text-rose-800 text-xs flex items-center gap-2 font-mono font-bold relative z-10">
-              <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
+            <div className="mt-3 p-3.5 rounded-2xl bg-rose-50 dark:bg-rose-500/100/15 border border-rose-300 text-rose-800 dark:text-rose-300 text-xs flex items-center gap-2 font-mono font-bold relative z-10">
+              <AlertCircle className="w-4 h-4 shrink-0 text-rose-600 dark:text-rose-400" />
               <span className="truncate">{jsonError}</span>
             </div>
           )}
@@ -246,8 +248,8 @@ export const JsonViewerFeature: React.FC = () => {
             variant="secondary"
             size="sm"
             onClick={loadSample}
-            icon={<RefreshCw className="w-4 h-4 text-amber-600 shrink-0" />}
-            className="w-full justify-center min-w-[115px] font-sans text-xs sm:text-sm font-extrabold text-slate-950"
+            icon={<RefreshCw className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />}
+            className="w-full justify-center min-w-[115px] font-sans text-xs sm:text-sm font-extrabold text-slate-950 dark:text-white"
             title="Load Sample JSON"
           >
             Sample
@@ -258,8 +260,8 @@ export const JsonViewerFeature: React.FC = () => {
             variant="primary"
             size="sm"
             onClick={formatJson}
-            icon={<Wand2 className="w-4 h-4 text-indigo-600 shrink-0" />}
-            className="w-full justify-center min-w-[115px] font-sans text-xs sm:text-sm font-extrabold text-slate-950"
+            icon={<Wand2 className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0" />}
+            className="w-full justify-center min-w-[115px] font-sans text-xs sm:text-sm font-extrabold text-slate-950 dark:text-white"
             title="Format & Beautify JSON"
           >
             Format
@@ -270,8 +272,8 @@ export const JsonViewerFeature: React.FC = () => {
             variant="secondary"
             size="sm"
             onClick={clearJson}
-            icon={<Trash2 className="w-4 h-4 text-rose-600 shrink-0" />}
-            className="w-full justify-center min-w-[115px] font-sans text-xs sm:text-sm font-extrabold text-rose-700 hover:bg-rose-50/80"
+            icon={<Trash2 className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />}
+            className="w-full justify-center min-w-[115px] font-sans text-xs sm:text-sm font-extrabold text-rose-700 dark:text-rose-400 hover:bg-rose-50/80"
             title="Clear All Code"
           >
             Clear
@@ -282,8 +284,8 @@ export const JsonViewerFeature: React.FC = () => {
             variant="secondary"
             size="sm"
             onClick={minifyJson}
-            icon={<Minimize2 className="w-4 h-4 text-cyan-600 shrink-0" />}
-            className="w-full justify-center min-w-[115px] font-sans text-xs sm:text-sm font-extrabold text-slate-950"
+            icon={<Minimize2 className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" />}
+            className="w-full justify-center min-w-[115px] font-sans text-xs sm:text-sm font-extrabold text-slate-950 dark:text-white"
             title="Minify JSON payload"
           >
             Minify
@@ -294,8 +296,8 @@ export const JsonViewerFeature: React.FC = () => {
             variant="secondary"
             size="sm"
             onClick={copyToClipboard}
-            icon={copied ? <Check className="w-4 h-4 text-emerald-600 shrink-0" /> : <Copy className="w-4 h-4 text-blue-600 shrink-0" />}
-            className="w-full justify-center min-w-[115px] font-sans text-xs sm:text-sm font-extrabold text-slate-950"
+            icon={copied ? <Check className="w-4 h-4 text-emerald-600 shrink-0" /> : <Copy className="w-4 h-4 text-blue-600 dark:text-blue-300 shrink-0" />}
+            className="w-full justify-center min-w-[115px] font-sans text-xs sm:text-sm font-extrabold text-slate-950 dark:text-white"
             title="Copy JSON to Clipboard"
           >
             {copied ? "Copied!" : "Copy"}
@@ -306,8 +308,8 @@ export const JsonViewerFeature: React.FC = () => {
             variant="secondary"
             size="sm"
             onClick={downloadJson}
-            icon={<Download className="w-4 h-4 text-violet-600 shrink-0" />}
-            className="w-full justify-center min-w-[115px] font-sans text-xs sm:text-sm font-extrabold text-slate-950"
+            icon={<Download className="w-4 h-4 text-violet-600 dark:text-violet-400 shrink-0" />}
+            className="w-full justify-center min-w-[115px] font-sans text-xs sm:text-sm font-extrabold text-slate-950 dark:text-white"
             title="Download JSON File"
           >
             Download
@@ -318,8 +320,8 @@ export const JsonViewerFeature: React.FC = () => {
             variant="secondary"
             size="sm"
             onClick={() => setShowInlineUpload(!showInlineUpload)}
-            icon={<Upload className="w-4 h-4 text-indigo-600 shrink-0" />}
-            className="w-full justify-center min-w-[115px] font-sans text-xs sm:text-sm font-extrabold text-slate-950"
+            icon={<Upload className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0" />}
+            className="w-full justify-center min-w-[115px] font-sans text-xs sm:text-sm font-extrabold text-slate-950 dark:text-white"
             title="Upload File (Max 5MB)"
           >
             Upload
@@ -332,13 +334,13 @@ export const JsonViewerFeature: React.FC = () => {
           
           {/* Output Mode Navigation Tabs */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3.5 border-b border-slate-900/10 relative z-10">
-            <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-white/80 border border-white shadow-[inset_0_1px_2px_#ffffff]">
+            <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 border border-white dark:border-slate-700 ">
               <button
                 onClick={() => setViewMode("tree")}
                 className={`px-3 py-1.5 rounded-xl text-xs font-sans font-extrabold transition-all flex items-center gap-1.5 ${
                   viewMode === "tree"
                     ? "bg-indigo-600 text-white shadow-sm"
-                    : "text-slate-600 hover:text-slate-950 hover:bg-slate-50"
+                    : "text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:text-white hover:bg-slate-50 dark:bg-slate-800/50"
                 }`}
               >
                 <Layers className="w-3.5 h-3.5" />
@@ -350,7 +352,7 @@ export const JsonViewerFeature: React.FC = () => {
                 className={`px-3 py-1.5 rounded-xl text-xs font-sans font-extrabold transition-all flex items-center gap-1.5 ${
                   viewMode === "table"
                     ? "bg-indigo-600 text-white shadow-sm"
-                    : "text-slate-600 hover:text-slate-950 hover:bg-slate-50"
+                    : "text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:text-white hover:bg-slate-50 dark:bg-slate-800/50"
                 }`}
               >
                 <Table className="w-3.5 h-3.5" />
@@ -362,7 +364,7 @@ export const JsonViewerFeature: React.FC = () => {
                 className={`px-3 py-1.5 rounded-xl text-xs font-sans font-extrabold transition-all flex items-center gap-1.5 ${
                   viewMode === "hierarchy"
                     ? "bg-indigo-600 text-white shadow-sm"
-                    : "text-slate-600 hover:text-slate-950 hover:bg-slate-50"
+                    : "text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:text-white hover:bg-slate-50 dark:bg-slate-800/50"
                 }`}
               >
                 <FolderTree className="w-3.5 h-3.5" />
@@ -374,7 +376,7 @@ export const JsonViewerFeature: React.FC = () => {
                 className={`px-3 py-1.5 rounded-xl text-xs font-sans font-extrabold transition-all flex items-center gap-1.5 ${
                   viewMode === "graph"
                     ? "bg-indigo-600 text-white shadow-sm"
-                    : "text-slate-600 hover:text-slate-950 hover:bg-slate-50"
+                    : "text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:text-white hover:bg-slate-50 dark:bg-slate-800/50"
                 }`}
               >
                 <BarChart3 className="w-3.5 h-3.5" />
@@ -392,21 +394,21 @@ export const JsonViewerFeature: React.FC = () => {
                 placeholder="Search keys, values, or JSON paths..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 text-xs font-mono rounded-full bg-white/90 border border-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 shadow-[inset_0_1.5px_2px_#ffffff] font-medium"
+                className="w-full pl-10 pr-4 py-2 text-xs font-mono rounded-full bg-white dark:bg-slate-900/90 dark:bg-slate-900/90 border border-white dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 font-medium"
               />
             </div>
           )}
 
           {/* Path Copy Toast Banner */}
           {copiedPath && (
-            <div className="mb-2 p-2 rounded-xl bg-indigo-500/15 border border-indigo-300 text-indigo-900 text-xs font-mono flex items-center justify-between relative z-10">
+            <div className="mb-2 p-2 rounded-xl bg-indigo-50 dark:bg-indigo-500/100/15 border border-indigo-300 text-indigo-900 dark:text-indigo-50 text-xs font-mono flex items-center justify-between relative z-10">
               <span className="truncate">Copied path: <strong>{copiedPath}</strong></span>
-              <CheckCircle2 className="w-4 h-4 shrink-0 text-indigo-600" />
+              <CheckCircle2 className="w-4 h-4 shrink-0 text-indigo-600 dark:text-indigo-400" />
             </div>
           )}
 
           {/* Main Viewport Content Area */}
-          <div className="flex-1 overflow-auto p-4 rounded-2xl bg-white/90 border border-white/80 font-mono text-xs text-slate-900 shadow-inner relative z-10">
+          <div className="flex-1 overflow-auto p-4 rounded-2xl bg-white dark:bg-slate-900/90 dark:bg-slate-900/90 border border-white dark:border-slate-700/80 dark:border-slate-700/80 font-mono text-xs text-slate-900 dark:text-slate-100 shadow-inner relative z-10">
             {viewMode === "tree" && (
               <div className="space-y-1.5">
                 {parsedData && typeof parsedData === "object" ? (
@@ -487,24 +489,24 @@ const JsonTreeNode: React.FC<JsonTreeNodeProps> = ({
   }
 
   if (!isObject) {
-    let valueColor = "text-emerald-700 font-semibold";
-    if (typeof value === "number") valueColor = "text-amber-700 font-bold";
-    if (typeof value === "boolean") valueColor = "text-purple-700 font-bold";
-    if (value === null) valueColor = "text-rose-600 font-bold";
+    let valueColor = "text-emerald-700 dark:text-emerald-400 font-semibold";
+    if (typeof value === "number") valueColor = "text-amber-700 dark:text-amber-400 font-bold";
+    if (typeof value === "boolean") valueColor = "text-purple-700 dark:text-purple-400 font-bold";
+    if (value === null) valueColor = "text-rose-600 dark:text-rose-400 font-bold";
 
     return (
       <div
-        className="group flex items-center justify-between py-1 px-2 rounded-lg hover:bg-slate-100/80 transition-colors"
+        className="group flex items-center justify-between py-1 px-2 rounded-lg hover:bg-slate-100 dark:bg-slate-800/80 transition-colors"
         style={{ paddingLeft: `${depth * 16 + 6}px` }}
       >
         <div className="flex items-center gap-2 truncate">
-          <span className="text-indigo-700 font-bold">{keyName}:</span>
+          <span className="text-indigo-700 dark:text-indigo-300 font-bold">{keyName}:</span>
           <span className={valueColor}>{JSON.stringify(value)}</span>
         </div>
 
         <button
           onClick={() => onCopyPath(path)}
-          className="opacity-0 group-hover:opacity-100 text-[10px] text-slate-500 hover:text-slate-900 px-2 py-0.5 rounded-full bg-white border border-slate-200 transition-opacity shadow-sm"
+          className="opacity-0 group-hover:opacity-100 text-[10px] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-slate-100 px-2 py-0.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 transition-opacity shadow-sm"
           title={`Copy path: ${path}`}
         >
           Copy Path
@@ -520,7 +522,7 @@ const JsonTreeNode: React.FC<JsonTreeNodeProps> = ({
     <div className="select-none">
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between py-1 px-2 rounded-lg hover:bg-slate-100/80 cursor-pointer text-slate-900 transition-colors"
+        className="flex items-center justify-between py-1 px-2 rounded-lg hover:bg-slate-100 dark:bg-slate-800/80 cursor-pointer text-slate-900 dark:text-slate-100 transition-colors"
         style={{ paddingLeft: `${depth * 16 + 6}px` }}
       >
         <div className="flex items-center gap-1.5">
@@ -529,8 +531,8 @@ const JsonTreeNode: React.FC<JsonTreeNodeProps> = ({
           ) : (
             <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
           )}
-          <span className="text-indigo-700 font-extrabold">{keyName}:</span>
-          <span className="text-slate-500 font-mono text-[11px]">
+          <span className="text-indigo-700 dark:text-indigo-300 font-extrabold">{keyName}:</span>
+          <span className="text-slate-500 dark:text-slate-400 font-mono text-[11px]">
             {isArray ? `Array[${itemCount}]` : `Object{${itemCount}}`}
           </span>
         </div>
@@ -540,7 +542,7 @@ const JsonTreeNode: React.FC<JsonTreeNodeProps> = ({
             e.stopPropagation();
             onCopyPath(path);
           }}
-          className="text-[10px] text-slate-500 hover:text-slate-900 px-2 py-0.5 rounded-full bg-white border border-slate-200 shadow-sm"
+          className="text-[10px] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-slate-100 px-2 py-0.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm"
           title={`Copy path: ${path}`}
         >
           Path
@@ -628,18 +630,18 @@ const JsonTableView: React.FC<{ data: any; searchQuery: string }> = ({ data, sea
   return (
     <div className="space-y-3 font-sans">
       {tableData.title && (
-        <div className="text-xs font-mono font-bold text-indigo-700 bg-indigo-50/80 px-3 py-1.5 rounded-lg inline-block">
+        <div className="text-xs font-mono font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50/80 px-3 py-1.5 rounded-lg inline-block">
           {tableData.title} ({filteredRows.length} Rows)
         </div>
       )}
 
-      <div className="overflow-x-auto border border-slate-200 rounded-xl bg-white shadow-sm">
+      <div className="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 shadow-sm">
         <table className="w-full text-left text-xs">
-          <thead className="bg-slate-100 border-b border-slate-200 font-mono text-slate-700">
+          <thead className="bg-slate-100 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 font-mono text-slate-700 dark:text-slate-300">
             <tr>
-              <th className="p-2.5 font-bold w-12 text-center border-r border-slate-200">#</th>
+              <th className="p-2.5 font-bold w-12 text-center border-r border-slate-200 dark:border-slate-700">#</th>
               {tableData.headers.map((h: string) => (
-                <th key={h} className="p-2.5 font-bold border-r border-slate-200 last:border-r-0">
+                <th key={h} className="p-2.5 font-bold border-r border-slate-200 dark:border-slate-700 last:border-r-0">
                   {h}
                 </th>
               ))}
@@ -648,7 +650,7 @@ const JsonTableView: React.FC<{ data: any; searchQuery: string }> = ({ data, sea
           <tbody className="divide-y divide-slate-100 font-mono">
             {filteredRows.map((row: any, idx: number) => (
               <tr key={idx} className="hover:bg-indigo-50/40 transition-colors">
-                <td className="p-2.5 text-slate-400 text-center border-r border-slate-200 font-bold">
+                <td className="p-2.5 text-slate-400 text-center border-r border-slate-200 dark:border-slate-700 font-bold">
                   {idx + 1}
                 </td>
                 {tableData.headers.map((h: string) => {
@@ -658,15 +660,15 @@ const JsonTableView: React.FC<{ data: any; searchQuery: string }> = ({ data, sea
                   const isNum = typeof val === "number";
 
                   return (
-                    <td key={h} className="p-2.5 border-r border-slate-200 last:border-r-0 max-w-[200px] truncate">
+                    <td key={h} className="p-2.5 border-r border-slate-200 dark:border-slate-700 last:border-r-0 max-w-[200px] truncate">
                       {isBool ? (
-                        <span className={`px-2 py-0.5 rounded-md font-bold text-[10px] ${val ? "bg-emerald-100 text-emerald-800" : "bg-rose-100 text-rose-800"}`}>
+                        <span className={`px-2 py-0.5 rounded-md font-bold text-[10px] ${val ? "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300" : "bg-rose-100 dark:bg-rose-900/30 text-rose-800 dark:text-rose-300"}`}>
                           {String(val)}
                         </span>
                       ) : isNum ? (
-                        <span className="text-amber-700 font-bold">{displayVal}</span>
+                        <span className="text-amber-700 dark:text-amber-400 font-bold">{displayVal}</span>
                       ) : (
-                        <span className="text-slate-800">{displayVal}</span>
+                        <span className="text-slate-800 dark:text-slate-300">{displayVal}</span>
                       )}
                     </td>
                   );
@@ -735,30 +737,30 @@ const JsonHierarchyView: React.FC<{ data: any; searchQuery: string; onCopyPath: 
 
   return (
     <div className="space-y-2 font-mono text-xs">
-      <div className="text-xs font-mono font-bold text-slate-500 pb-2 border-b border-slate-200">
+      <div className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400 pb-2 border-b border-slate-200 dark:border-slate-700">
         Root Node Breakdown ({filteredNodes.length} Hierarchy Nodes)
       </div>
 
       {filteredNodes.map((n) => (
         <div
           key={n.id}
-          className="p-2.5 rounded-xl border border-slate-200 bg-white hover:border-indigo-300 hover:shadow-sm transition-all flex items-center justify-between gap-3"
+          className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:border-indigo-300 hover:shadow-sm transition-all flex items-center justify-between gap-3"
           style={{ marginLeft: `${n.depth * 18}px` }}
         >
           <div className="flex items-center gap-2 truncate">
             <span className="text-slate-400 font-bold">
               {n.depth === 0 ? "ROOT ❯" : `DEPTH ${n.depth} └─`}
             </span>
-            <span className="font-extrabold text-indigo-700">{n.key}</span>
-            <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[10px] font-bold">
+            <span className="font-extrabold text-indigo-700 dark:text-indigo-300">{n.key}</span>
+            <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold">
               {n.type}
             </span>
-            <span className="text-slate-500 truncate max-w-[220px]">{n.valuePreview}</span>
+            <span className="text-slate-500 dark:text-slate-400 truncate max-w-[220px]">{n.valuePreview}</span>
           </div>
 
           <button
             onClick={() => onCopyPath(n.path)}
-            className="text-[10px] text-slate-500 hover:text-slate-900 px-2 py-0.5 rounded-full bg-slate-50 border border-slate-200 shrink-0"
+            className="text-[10px] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-slate-100 px-2 py-0.5 rounded-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 shrink-0"
           >
             Copy Path
           </button>
@@ -782,12 +784,12 @@ const JsonDiagramView: React.FC<{ data: any; searchQuery: string; onCopyPath: (p
   return (
     <div className="w-full h-full">
       <div className="flex flex-col min-w-max w-max p-4 space-y-6 font-sans">
-        <div className="text-xs font-mono font-bold text-slate-500 pb-3 border-b border-slate-200 flex items-center justify-between sticky left-0 min-w-full">
+        <div className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400 pb-3 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between sticky left-0 min-w-full">
           <span className="flex items-center gap-2">
-            <Workflow className="w-4 h-4 text-indigo-600" />
+            <Workflow className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
             Interactive Flow Chart Diagram (Org Chart Node Tree)
           </span>
-          <span className="px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 text-[11px] font-extrabold ml-8">
+          <span className="px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-[11px] font-extrabold ml-8">
             Parent ➔ Child Architecture
           </span>
         </div>
@@ -843,7 +845,7 @@ const DiagramNodeCard: React.FC<{
   return (
     <div className="flex flex-col items-center shrink-0 min-w-max">
       {/* Node Box */}
-      <div className="w-[320px] shrink-0 rounded-2xl border-2 border-indigo-200 bg-white shadow-md hover:shadow-lg hover:border-indigo-400 transition-all overflow-hidden flex flex-col">
+      <div className="w-[320px] shrink-0 rounded-2xl border-2 border-indigo-200 bg-white dark:bg-slate-900 shadow-md hover:shadow-lg hover:border-indigo-400 transition-all overflow-hidden flex flex-col">
         {/* Header */}
         <div className="bg-gradient-to-r from-indigo-700 via-indigo-600 to-cyan-700 px-4 py-2.5 text-white flex items-center justify-between">
           <div className="flex items-center gap-2 truncate">
@@ -852,15 +854,15 @@ const DiagramNodeCard: React.FC<{
           </div>
           <button
             onClick={() => onCopyPath(path)}
-            className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/20 hover:bg-white/30 text-white border border-white/30 shrink-0 transition-colors"
+            className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/20 dark:bg-slate-900/20 hover:bg-white/30 dark:bg-slate-900/30 text-white border border-white/30 dark:border-slate-700/30 shrink-0 transition-colors"
           >
             Copy
           </button>
         </div>
 
         {/* Content Properties Table inside Card */}
-        <div className="p-3.5 space-y-1.5 font-mono text-[11px] bg-slate-50/50 flex-1">
-          <div className="text-[10px] font-bold text-slate-400 font-mono pb-1 border-b border-slate-200 flex items-center justify-between">
+        <div className="p-3.5 space-y-1.5 font-mono text-[11px] bg-slate-50/50 dark:bg-slate-800/50 flex-1">
+          <div className="text-[10px] font-bold text-slate-400 font-mono pb-1 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
             <span>TYPE: {isArray ? `Array [${value.length}]` : `Object {${Object.keys(value).length}}`}</span>
             <span>PATH: {path}</span>
           </div>
@@ -868,9 +870,9 @@ const DiagramNodeCard: React.FC<{
           {scalarFields.length > 0 ? (
             <div className="space-y-1 pt-1 max-h-[160px] overflow-y-auto pr-1">
               {scalarFields.map(({ key, val }) => (
-                <div key={key} className="flex items-center justify-between py-1 px-2 rounded bg-white border border-slate-100">
-                  <span className="font-bold text-indigo-700 truncate mr-2">{key}:</span>
-                  <span className={`truncate font-semibold ${typeof val === "number" ? "text-amber-700" : typeof val === "boolean" ? "text-purple-700" : "text-slate-800"}`}>
+                <div key={key} className="flex items-center justify-between py-1 px-2 rounded bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-700/50">
+                  <span className="font-bold text-indigo-700 dark:text-indigo-300 truncate mr-2">{key}:</span>
+                  <span className={`truncate font-semibold ${typeof val === "number" ? "text-amber-700 dark:text-amber-400" : typeof val === "boolean" ? "text-purple-700 dark:text-purple-400" : "text-slate-800 dark:text-slate-300"}`}>
                     {JSON.stringify(val)}
                   </span>
                 </div>
@@ -986,39 +988,39 @@ const JsonGraphView: React.FC<{ data: any; jsonText: string }> = ({ data, jsonTe
     <div className="space-y-6 font-sans">
       {/* Metrics Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="p-4 rounded-2xl bg-indigo-50/70 border border-indigo-200/80 space-y-1">
-          <span className="text-[11px] font-mono font-bold text-indigo-700 flex items-center gap-1.5">
+        <div className="p-4 rounded-2xl bg-indigo-50/70 dark:bg-indigo-50 dark:bg-indigo-500/100/10 border border-indigo-200/80 dark:border-indigo-500/20 space-y-1">
+          <span className="text-[11px] font-mono font-bold text-indigo-700 dark:text-indigo-300 flex items-center gap-1.5">
             <Hash className="w-3.5 h-3.5" /> Total Keys
           </span>
-          <p className="text-2xl font-extrabold text-slate-950">{stats.totalKeys}</p>
+          <p className="text-2xl font-extrabold text-slate-950 dark:text-white">{stats.totalKeys}</p>
         </div>
 
-        <div className="p-4 rounded-2xl bg-cyan-50/70 border border-cyan-200/80 space-y-1">
-          <span className="text-[11px] font-mono font-bold text-cyan-700 flex items-center gap-1.5">
+        <div className="p-4 rounded-2xl bg-cyan-50 dark:bg-cyan-900/10/70 dark:bg-cyan-50 dark:bg-cyan-50 dark:bg-cyan-900/100/100/10 border border-cyan-200/80 dark:border-cyan-500/20 space-y-1">
+          <span className="text-[11px] font-mono font-bold text-cyan-700 dark:text-cyan-400 flex items-center gap-1.5">
             <Network className="w-3.5 h-3.5" /> Max Depth
           </span>
-          <p className="text-2xl font-extrabold text-slate-950">{stats.maxDepth} Levels</p>
+          <p className="text-2xl font-extrabold text-slate-950 dark:text-white">{stats.maxDepth} Levels</p>
         </div>
 
-        <div className="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200/80 space-y-1">
-          <span className="text-[11px] font-mono font-bold text-emerald-700 flex items-center gap-1.5">
+        <div className="p-4 rounded-2xl bg-emerald-50/70 dark:bg-emerald-50 dark:bg-emerald-500/100/10 border border-emerald-200/80 dark:border-emerald-500/20 space-y-1">
+          <span className="text-[11px] font-mono font-bold text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
             <FileText className="w-3.5 h-3.5" /> Payload Size
           </span>
-          <p className="text-2xl font-extrabold text-slate-950">{kbSize} KB</p>
+          <p className="text-2xl font-extrabold text-slate-950 dark:text-white">{kbSize} KB</p>
         </div>
 
-        <div className="p-4 rounded-2xl bg-violet-50/70 border border-violet-200/80 space-y-1">
-          <span className="text-[11px] font-mono font-bold text-violet-700 flex items-center gap-1.5">
+        <div className="p-4 rounded-2xl bg-violet-50/70 dark:bg-violet-50 dark:bg-violet-500/100/10 border border-violet-200/80 dark:border-violet-500/20 space-y-1">
+          <span className="text-[11px] font-mono font-bold text-violet-700 dark:text-violet-400 flex items-center gap-1.5">
             <Activity className="w-3.5 h-3.5" /> Total Values
           </span>
-          <p className="text-2xl font-extrabold text-slate-950">{stats.totalValues}</p>
+          <p className="text-2xl font-extrabold text-slate-950 dark:text-white">{stats.totalValues}</p>
         </div>
       </div>
 
       {/* Data Type Breakdown Charts */}
-      <div className="p-5 rounded-2xl border border-slate-200 bg-white space-y-4">
-        <h3 className="text-xs font-mono font-bold text-slate-900 flex items-center gap-2">
-          <PieChart className="w-4 h-4 text-indigo-600" />
+      <div className="p-5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 space-y-4">
+        <h3 className="text-xs font-mono font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+          <PieChart className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
           Data Type Composition Breakdown
         </h3>
 
@@ -1028,19 +1030,19 @@ const JsonGraphView: React.FC<{ data: any; jsonText: string }> = ({ data, jsonTe
             const pct = stats.totalValues > 0 ? ((count / stats.totalValues) * 100).toFixed(1) : "0";
 
             let barColor = "bg-indigo-600";
-            if (type === "Number") barColor = "bg-amber-500";
+            if (type === "Number") barColor = "bg-amber-50 dark:bg-amber-500/100";
             if (type === "Boolean") barColor = "bg-purple-600";
             if (type === "String") barColor = "bg-emerald-600";
             if (type === "Array") barColor = "bg-cyan-600";
-            if (type === "Null") barColor = "bg-rose-500";
+            if (type === "Null") barColor = "bg-rose-50 dark:bg-rose-500/100";
 
             return (
               <div key={type} className="space-y-1.5">
                 <div className="flex items-center justify-between text-xs font-mono">
-                  <span className="font-bold text-slate-700">{type} ({count})</span>
-                  <span className="font-extrabold text-slate-950">{pct}%</span>
+                  <span className="font-bold text-slate-700 dark:text-slate-300">{type} ({count})</span>
+                  <span className="font-extrabold text-slate-950 dark:text-white">{pct}%</span>
                 </div>
-                <div className="w-full h-2.5 rounded-full bg-slate-100 overflow-hidden">
+                <div className="w-full h-2.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
                   <div className={`h-full ${barColor} transition-all duration-500`} style={{ width: `${pct}%` }} />
                 </div>
               </div>
@@ -1051,16 +1053,16 @@ const JsonGraphView: React.FC<{ data: any; jsonText: string }> = ({ data, jsonTe
 
       {/* Array Metrics Bars */}
       {stats.arrayMetrics.length > 0 && (
-        <div className="p-5 rounded-2xl border border-slate-200 bg-white space-y-4">
-          <h3 className="text-xs font-mono font-bold text-slate-900 flex items-center gap-2">
-            <Grid className="w-4 h-4 text-cyan-600" />
+        <div className="p-5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 space-y-4">
+          <h3 className="text-xs font-mono font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+            <Grid className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
             Top Array Properties Length Indicator
           </h3>
 
           <div className="space-y-2.5">
             {stats.arrayMetrics.slice(0, 5).map((arr, idx) => (
-              <div key={idx} className="flex items-center justify-between gap-4 p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
-                <span className="font-mono text-xs font-bold text-indigo-700">{arr.name}</span>
+              <div key={idx} className="flex items-center justify-between gap-4 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80">
+                <span className="font-mono text-xs font-bold text-indigo-700 dark:text-indigo-300">{arr.name}</span>
                 <span className="px-3 py-1 rounded-full bg-indigo-600 text-white font-mono text-xs font-extrabold">
                   {arr.length} Items
                 </span>
@@ -1072,3 +1074,11 @@ const JsonGraphView: React.FC<{ data: any; jsonText: string }> = ({ data, jsonTe
     </div>
   );
 };
+
+
+
+
+
+
+
+

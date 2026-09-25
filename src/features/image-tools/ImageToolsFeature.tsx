@@ -108,9 +108,9 @@ export const ImageToolsFeature = () => {
       
       {/* Tools Sidebar */}
       <div className="lg:col-span-1 space-y-4">
-        <div className="liquid-glass-surface rounded-2xl shadow-sm border border-slate-200/80 p-5">
-          <h3 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
-            <Settings className="w-5 h-5 text-indigo-600" />
+        <div className="liquid-glass-surface rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 p-5">
+          <h3 className="font-bold text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-2">
+            <Settings className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
             Select Image Tool
           </h3>
           <div className="space-y-3">
@@ -124,8 +124,8 @@ export const ImageToolsFeature = () => {
                 onClick={() => setActiveTool(tool.id as ToolType)}
                 className={`w-full text-left p-4 rounded-xl transition-all duration-300 border ${
                   activeTool === tool.id 
-                    ? 'border-indigo-300 bg-indigo-50 shadow-sm text-indigo-900' 
-                    : 'border-slate-200 hover:bg-slate-50 text-slate-700'
+                    ? 'border-indigo-300 bg-indigo-50 dark:bg-indigo-500/10 shadow-sm text-indigo-900 dark:text-indigo-200' 
+                    : 'border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300'
                 }`}
               >
                 <div className="font-bold text-sm">{tool.label}</div>
@@ -136,17 +136,17 @@ export const ImageToolsFeature = () => {
         </div>
 
         {/* Tool Options */}
-        <div className="liquid-glass-surface rounded-2xl shadow-sm border border-slate-200/80 p-5">
-          <h3 className="font-bold text-slate-900 mb-4">Configuration</h3>
+        <div className="liquid-glass-surface rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 p-5">
+          <h3 className="font-bold text-slate-900 dark:text-slate-100 mb-4">Configuration</h3>
           
           {activeTool === 'convert' && (
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Target Format</label>
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">Target Format</label>
                 <select 
                   value={format} 
                   onChange={(e) => setFormat(e.target.value)}
-                  className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition"
+                  className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition"
                 >
                   <option value="jpeg">JPG / JPEG</option>
                   <option value="png">PNG</option>
@@ -156,9 +156,9 @@ export const ImageToolsFeature = () => {
               </div>
               {(format === 'jpeg' || format === 'jpg' || format === 'webp') && (
                 <div>
-                  <label className="flex justify-between text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                  <label className="flex justify-between text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
                     <span>Quality</span>
-                    <span className="text-indigo-600">{quality}%</span>
+                    <span className="text-indigo-600 dark:text-indigo-400">{quality}%</span>
                   </label>
                   <input 
                     type="range" min="1" max="100" value={quality} 
@@ -173,16 +173,16 @@ export const ImageToolsFeature = () => {
           {activeTool === 'compress' && (
             <div className="space-y-4">
               <div>
-                <label className="flex justify-between text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                <label className="flex justify-between text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
                   <span>Compression Quality</span>
-                  <span className="text-indigo-600">{quality}%</span>
+                  <span className="text-indigo-600 dark:text-indigo-400">{quality}%</span>
                 </label>
                 <input 
                   type="range" min="1" max="100" value={quality} 
                   onChange={(e) => setQuality(parseInt(e.target.value))}
                   className="w-full accent-indigo-600"
                 />
-                <p className="text-xs text-slate-500 mt-2">Lower quality = smaller file size.</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-2">Lower quality = smaller file size.</p>
               </div>
             </div>
           )}
@@ -190,26 +190,26 @@ export const ImageToolsFeature = () => {
           {activeTool === 'resize' && (
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Width (px)</label>
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">Width (px)</label>
                 <input 
                   type="number" 
                   placeholder="Auto"
                   value={width}
                   onChange={(e) => setWidth(e.target.value ? parseInt(e.target.value) : '')}
-                  className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition"
+                  className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition"
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Height (px)</label>
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">Height (px)</label>
                 <input 
                   type="number" 
                   placeholder="Auto"
                   value={height}
                   onChange={(e) => setHeight(e.target.value ? parseInt(e.target.value) : '')}
-                  className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition"
+                  className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition"
                 />
               </div>
-              <p className="text-xs text-slate-500">Leave one empty to maintain aspect ratio.</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Leave one empty to maintain aspect ratio.</p>
             </div>
           )}
         </div>
@@ -219,14 +219,14 @@ export const ImageToolsFeature = () => {
       <div className="lg:col-span-2 flex flex-col gap-6">
         <div className="flex flex-col md:flex-row gap-6 h-full">
           {/* Original Image Pane */}
-          <div className="flex-1 liquid-glass-surface rounded-2xl shadow-sm border border-slate-200/80 flex flex-col overflow-hidden min-h-[400px]">
-            <div className="bg-slate-50 border-b border-slate-200 px-5 py-4 flex justify-between items-center">
-              <h3 className="font-bold text-slate-800 flex items-center gap-2 text-sm">
+          <div className="flex-1 liquid-glass-surface rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 flex flex-col overflow-hidden min-h-[400px]">
+            <div className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700 px-5 py-4 flex justify-between items-center">
+              <h3 className="font-bold text-slate-800 dark:text-slate-300 flex items-center gap-2 text-sm">
                 <ImageIcon className="w-4 h-4 text-indigo-500" />
                 Original Image
               </h3>
               {file && (
-                <button onClick={clearFile} className="text-xs font-bold text-rose-500 hover:text-rose-700 bg-rose-50 px-2.5 py-1 rounded-md transition-colors">
+                <button onClick={clearFile} className="text-xs font-bold text-rose-500 hover:text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-500/10 px-2.5 py-1 rounded-md transition-colors">
                   Clear
                 </button>
               )}
@@ -235,7 +235,7 @@ export const ImageToolsFeature = () => {
             <div className="flex-1 flex flex-col p-5 relative">
               {!file ? (
                 <div 
-                  className="absolute inset-4 border-2 border-dashed border-slate-300 rounded-xl flex flex-col items-center justify-center text-center hover:bg-slate-50/50 transition-colors cursor-pointer"
+                  className="absolute inset-4 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-xl flex flex-col items-center justify-center text-center hover:bg-slate-50/50 dark:bg-slate-800/50 transition-colors cursor-pointer"
                   onDragOver={(e) => e.preventDefault()}
                   onDrop={handleDrop}
                   onClick={() => fileInputRef.current?.click()}
@@ -247,15 +247,15 @@ export const ImageToolsFeature = () => {
                     accept="image/*"
                     onChange={handleFileChange}
                   />
-                  <div className="w-16 h-16 bg-indigo-50 rounded-full flex items-center justify-center mb-4">
-                    <UploadCloud className="w-8 h-8 text-indigo-600" />
+                  <div className="w-16 h-16 bg-indigo-50 dark:bg-indigo-500/10 rounded-full flex items-center justify-center mb-4">
+                    <UploadCloud className="w-8 h-8 text-indigo-600 dark:text-indigo-400" />
                   </div>
-                  <h3 className="text-sm font-bold text-slate-900 mb-1">Click or drag to upload</h3>
-                  <p className="text-slate-500 text-xs">JPG, PNG, WebP, GIF</p>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-1">Click or drag to upload</h3>
+                  <p className="text-slate-500 dark:text-slate-400 text-xs">JPG, PNG, WebP, GIF</p>
                 </div>
               ) : (
                 <div className="absolute inset-4 flex flex-col items-center justify-center">
-                  <div className="w-full h-full bg-slate-100 rounded-xl overflow-hidden flex items-center justify-center border border-slate-200">
+                  <div className="w-full h-full bg-slate-100 dark:bg-slate-800 rounded-xl overflow-hidden flex items-center justify-center border border-slate-200 dark:border-slate-700">
                     <img src={preview!} alt="Original" className="max-w-full max-h-full object-contain p-2" />
                   </div>
                   <div className="absolute bottom-2 left-2 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded">
@@ -272,12 +272,12 @@ export const ImageToolsFeature = () => {
               <button
                 onClick={processImage}
                 disabled={isProcessing || !file}
-                className="flex items-center justify-center w-12 h-12 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 text-white rounded-full transition-all shadow-md shadow-indigo-500/20 active:scale-95"
+                className="flex items-center justify-center w-12 h-12 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-200 dark:disabled:bg-slate-800 disabled:text-slate-400 dark:disabled:text-slate-500 dark:text-slate-400 text-white rounded-full transition-all shadow-md shadow-indigo-500/20 active:scale-95"
                 title="Process Image"
               >
                 {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : <ArrowRight className="w-5 h-5" />}
               </button>
-              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Process</span>
+              <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Process</span>
             </div>
 
             {file && (
@@ -285,12 +285,12 @@ export const ImageToolsFeature = () => {
                 <button
                   onClick={clearFile}
                   disabled={isProcessing}
-                  className="flex items-center justify-center w-12 h-12 bg-white border border-rose-200 text-rose-500 hover:bg-rose-50 rounded-full transition-all shadow-sm active:scale-95"
+                  className="flex items-center justify-center w-12 h-12 bg-white dark:bg-slate-900 border border-rose-200 text-rose-500 hover:bg-rose-50 dark:bg-rose-500/10 rounded-full transition-all shadow-sm active:scale-95"
                   title="Reset/Clear Tool"
                 >
                   <RotateCcw className="w-5 h-5" />
                 </button>
-                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Clear</span>
+                <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Clear</span>
               </div>
             )}
           </div>
@@ -300,16 +300,16 @@ export const ImageToolsFeature = () => {
             <button
               onClick={processImage}
               disabled={isProcessing || !file}
-              className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 text-white px-6 py-3 rounded-xl text-sm font-bold transition-all shadow-md active:scale-95 w-full justify-center"
+              className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-200 dark:disabled:bg-slate-800 disabled:text-slate-400 dark:disabled:text-slate-500 dark:text-slate-400 text-white px-6 py-3 rounded-xl text-sm font-bold transition-all shadow-md active:scale-95 w-full justify-center"
             >
               {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Process Image'}
             </button>
           </div>
 
           {/* Processed Result Pane */}
-          <div className="flex-1 liquid-glass-surface rounded-2xl shadow-sm border border-slate-200/80 flex flex-col overflow-hidden min-h-[400px]">
-            <div className="bg-slate-50 border-b border-slate-200 px-5 py-4 flex justify-between items-center">
-              <h3 className="font-bold text-slate-800 flex items-center gap-2 text-sm">
+          <div className="flex-1 liquid-glass-surface rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 flex flex-col overflow-hidden min-h-[400px]">
+            <div className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700 px-5 py-4 flex justify-between items-center">
+              <h3 className="font-bold text-slate-800 dark:text-slate-300 flex items-center gap-2 text-sm">
                 <ImageIcon className="w-4 h-4 text-emerald-500" />
                 Processed Result
               </h3>
@@ -318,7 +318,7 @@ export const ImageToolsFeature = () => {
             <div className="flex-1 flex flex-col p-5 relative">
               {!resultUrl ? (
                 <div className="absolute inset-4 flex flex-col items-center justify-center">
-                  <div className="w-full h-full rounded-xl overflow-hidden flex items-center justify-center relative bg-slate-50/50 border-2 border-dashed border-slate-200">
+                  <div className="w-full h-full rounded-xl overflow-hidden flex items-center justify-center relative bg-slate-50 dark:bg-slate-800/50 dark:bg-slate-900/50 border-2 border-dashed border-slate-200 dark:border-slate-700">
                     <span className="text-slate-400 text-xs font-medium text-center px-4">
                       {isProcessing ? "Processing..." : "Select options and process to see result"}
                     </span>
@@ -326,10 +326,10 @@ export const ImageToolsFeature = () => {
                 </div>
               ) : (
                 <div className="flex flex-col h-full gap-4">
-                  <div className="flex-1 bg-slate-50 border border-slate-200 rounded-xl overflow-hidden flex items-center justify-center relative">
+                  <div className="flex-1 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden flex items-center justify-center relative">
                     <img src={resultUrl} alt="Result" className="max-w-full max-h-full object-contain p-2 drop-shadow-md" />
                     {resultSize && (
-                      <div className="absolute bottom-2 right-2 bg-emerald-500/90 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded">
+                      <div className="absolute bottom-2 right-2 bg-emerald-50 dark:bg-emerald-500/100/90 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded">
                         {(resultSize / 1024 / 1024).toFixed(2)} MB
                       </div>
                     )}
@@ -338,7 +338,7 @@ export const ImageToolsFeature = () => {
                   <a 
                     href={resultUrl} 
                     download={resultFileName || 'processed-image'}
-                    className="w-full flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-3 rounded-xl text-sm font-bold transition-all shadow-md active:scale-[0.98]"
+                    className="w-full flex items-center justify-center gap-2 bg-emerald-50 dark:bg-emerald-500/100 hover:bg-emerald-600 text-white px-5 py-3 rounded-xl text-sm font-bold transition-all shadow-md active:scale-[0.98]"
                   >
                     <Download className="w-5 h-5" />
                     Download Processed Image
@@ -353,3 +353,10 @@ export const ImageToolsFeature = () => {
     </div>
   );
 };
+
+
+
+
+
+
+

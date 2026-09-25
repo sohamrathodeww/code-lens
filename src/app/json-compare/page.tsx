@@ -61,7 +61,7 @@ const jsonLdSchema = {
 
 export default function JsonComparePage() {
   return (
-    <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden font-sans bg-[#f8fafc] text-slate-900">
+    <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden font-sans bg-[#f8fafc] dark:bg-[#0f172a] text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <FluidCanvas />
 
       <script
@@ -74,42 +74,42 @@ export default function JsonComparePage() {
         <JsonCompareFeature />
 
         {/* High-Ranking SEO Information Section */}
-        <section className="liquid-glass-surface p-8 space-y-6 text-slate-700 text-sm leading-relaxed border border-white/80">
+        <section className="liquid-glass-surface p-8 space-y-6 text-slate-700 dark:text-slate-300 text-sm leading-relaxed border border-white dark:border-slate-700/80 dark:border-slate-700/80">
           <div className="space-y-2">
-            <h2 className="text-2xl font-bold text-slate-950 tracking-tight">
+            <h2 className="text-2xl font-bold text-slate-950 dark:text-white tracking-tight">
               Free Online JSON Compare & Diff Tool
             </h2>
-            <p className="text-slate-600">
+            <p className="text-slate-600 dark:text-slate-400">
               CodeLens JSON Compare is a specialized utility designed to identify differences between two JSON payloads. By automatically formatting and structuring raw JSON strings, it provides highly accurate line-by-line and character-level comparisons for debugging APIs, configs, and application states.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-            <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/80 space-y-2">
-              <h3 className="font-bold text-slate-950 text-base">✨ Auto JSON Formatting</h3>
-              <p className="text-xs text-slate-600">
+            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 space-y-2">
+              <h3 className="font-bold text-slate-950 dark:text-white text-base">✨ Auto JSON Formatting</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400">
                 Instantly parse and beautify raw JSON data on both sides simultaneously. This guarantees that your diff reflects structural changes rather than arbitrary whitespace or minification differences.
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/80 space-y-2">
-              <h3 className="font-bold text-slate-950 text-base">↔️ Swap & Sync</h3>
-              <p className="text-xs text-slate-600">
+            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 space-y-2">
+              <h3 className="font-bold text-slate-950 dark:text-white text-base">↔️ Swap & Sync</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400">
                 Easily swap your original and modified JSON objects with a single click to reverse the comparison direction. Edit directly in the Monaco editor panels and watch the diff compute in real time.
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-white/80 border border-slate-200/80 space-y-2">
-              <h3 className="font-bold text-slate-950 text-base">🔒 100% Client-Side Privacy</h3>
-              <p className="text-xs text-slate-600">
+            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 space-y-2">
+              <h3 className="font-bold text-slate-950 dark:text-white text-base">🔒 100% Client-Side Privacy</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400">
                 Your JSON payloads are completely secure. The JSON parsing, stringification, and differential computation all execute directly inside your browser memory without backend servers.
               </p>
             </div>
           </div>
           
-          <div className="pt-4 border-t border-slate-100 flex gap-4 text-xs font-semibold">
-            <Link href="/json-viewer" className="text-indigo-600 hover:underline">JSON Viewer</Link>
-            <Link href="/code-compare" className="text-indigo-600 hover:underline">Code Compare</Link>
+          <div className="pt-4 border-t border-slate-100 dark:border-slate-700/50 flex gap-4 text-xs font-semibold">
+            <Link href="/json-viewer" className="text-indigo-600 dark:text-indigo-300 hover:underline">JSON Viewer</Link>
+            <Link href="/code-compare" className="text-indigo-600 dark:text-indigo-300 hover:underline">Code Compare</Link>
           </div>
         </section>
       </main>
@@ -118,3 +118,6 @@ export default function JsonComparePage() {
     </div>
   );
 }
+
+
+

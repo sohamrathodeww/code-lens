@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
     } else if (action === 'compress') {
       // Auto compress keeping same format
       const metadata = await sharpInstance.metadata();
-      if (metadata.format === 'jpeg' || metadata.format === 'jpg') {
+      if (metadata.format === 'jpeg') {
         sharpInstance = sharpInstance.jpeg({ quality });
       } else if (metadata.format === 'png') {
         sharpInstance = sharpInstance.png({ quality });

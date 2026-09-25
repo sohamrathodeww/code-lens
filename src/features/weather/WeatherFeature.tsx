@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Search, MapPin, Wind, ThermometerSun, ThermometerSnow, Droplets, Sun, CloudRain, Cloud, Snowflake, Loader2, CloudLightning } from 'lucide-react';
+import { Search, MapPin, Wind, ThermometerSun, Droplets, Sun, CloudRain, Cloud, Snowflake, Loader2, CloudLightning } from 'lucide-react';
 
 export const WeatherFeature = () => {
   const [searchQuery, setSearchQuery] = useState('');

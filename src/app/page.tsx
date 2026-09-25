@@ -14,8 +14,6 @@ import { SlideUp, FadeIn, ScaleIn, Stagger } from "@/components/motion/MotionPri
 import { TOOLS_REGISTRY } from "@/lib/tools-registry";
 import { APP_URL } from "@/lib/constants";
 
-import { HomeWeatherWidget } from "@/components/weather/HomeWeatherWidget";
-
 export const metadata: Metadata = {
   title: "CodeLens — Next-Gen Developer Utilities",
   description:
@@ -64,8 +62,7 @@ export default function Home() {
         <section className="max-w-6xl mx-auto pt-20 pb-32 flex flex-col items-center text-center space-y-8 relative">
           
           <div className="flex flex-col items-center gap-4">
-            <HomeWeatherWidget />
-            
+
             <ScaleIn delay={0.1}>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200/60 shadow-sm transition-transform hover:scale-105 cursor-default mt-4">
                 <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />

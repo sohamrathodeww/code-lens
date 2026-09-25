@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { 
   ArrowRight, FileJson, Code2, Database, KeyRound, 
   Regex, Sparkles, Languages, Terminal, 
-  Cpu, Wrench, Banknote, Search, Globe, Binary, CloudSun
+  Cpu, Wrench, Banknote, Search, Globe, Binary, CloudSun, FileText
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 };
 
 const ICON_MAP: Record<string, React.ElementType> = {
-  FileJson, Code2, Database, KeyRound, Regex, Sparkles, Languages, Terminal, Banknote, Globe, Binary, CloudSun
+  FileJson, Code2, Database, KeyRound, Regex, Sparkles, Languages, Terminal, Banknote, Globe, Binary, CloudSun, FileText
 };
 
 export default function AllToolsPage() {

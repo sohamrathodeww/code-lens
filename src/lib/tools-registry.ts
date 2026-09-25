@@ -148,6 +148,24 @@ export const TOOLS_REGISTRY: ToolDefinition[] = [
     ],
   },
   {
+    id: "document-tools",
+    name: "Online Document Tools Hub",
+    shortDescription: "Merge PDFs, convert Excel to CSV, and organize files.",
+    description: "Professional online document tools. Merge multiple PDFs, split PDF pages, convert Excel files to CSV, and merge multiple spreadsheets effortlessly and securely in your browser.",
+    category: "Converters",
+    route: "/document-tools",
+    iconName: "FileText",
+    status: "active",
+    tags: [
+      "merge pdf",
+      "split pdf",
+      "excel to csv",
+      "merge excel",
+      "pdf tools",
+      "document tools"
+    ],
+  },
+  {
     id: "find-my-ip",
     name: "Find My IP Address",
     shortDescription: "Check your public IP address, geolocation, and ISP instantly.",

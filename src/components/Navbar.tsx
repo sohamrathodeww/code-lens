@@ -100,16 +100,8 @@ export const Navbar: React.FC = () => {
                 <div className="space-y-1 pt-1">
                   {featuredTools.map((tool: ToolDefinition) => {
                     const isToolActive = pathname === tool.route;
-                    const IconComponent =
-                      tool.id === "code-compare"
-                        ? Code2
-                        : tool.id === "jwt-decoder"
-                          ? KeyRound
-                          : tool.id === "online-translator"
-                            ? Languages
-                            : tool.id === "code-playground"
-                              ? Terminal
-                              : FileJson;
+                    const IconName = tool.iconName || "FileJson";
+                    const IconComponent = (require("lucide-react") as any)[IconName] || FileJson;
 
                     return (
                       <Link

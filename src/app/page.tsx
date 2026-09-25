@@ -14,6 +14,8 @@ import { SlideUp, FadeIn, ScaleIn, Stagger } from "@/components/motion/MotionPri
 import { TOOLS_REGISTRY } from "@/lib/tools-registry";
 import { APP_URL } from "@/lib/constants";
 
+import { HomeWeatherWidget } from "@/components/weather/HomeWeatherWidget";
+
 export const metadata: Metadata = {
   title: "CodeLens — Next-Gen Developer Utilities",
   description:
@@ -59,16 +61,20 @@ export default function Home() {
       <main className="relative z-10 w-full mx-auto px-4 sm:px-8 flex-1">
         
         {/* Powerful Hero Section */}
-        <section className="max-w-6xl mx-auto pt-24 pb-32 flex flex-col items-center text-center space-y-10 relative">
+        <section className="max-w-6xl mx-auto pt-20 pb-32 flex flex-col items-center text-center space-y-8 relative">
           
-          <ScaleIn delay={0.1}>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200/60 shadow-sm mb-4 transition-transform hover:scale-105 cursor-default">
-              <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[11px] font-bold uppercase tracking-widest text-slate-600 font-mono">
-                CodeLens v2.0 is Live
-              </span>
-            </div>
-          </ScaleIn>
+          <div className="flex flex-col items-center gap-4">
+            <HomeWeatherWidget />
+            
+            <ScaleIn delay={0.1}>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200/60 shadow-sm transition-transform hover:scale-105 cursor-default mt-4">
+                <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-[11px] font-bold uppercase tracking-widest text-slate-600 font-mono">
+                  CodeLens v2.0 is Live
+                </span>
+              </div>
+            </ScaleIn>
+          </div>
 
           <div className="space-y-6 max-w-4xl relative">
             <SlideUp delay={0.2} className="relative">
@@ -133,7 +139,9 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {TOOLS_REGISTRY.slice(0, 6).map((tool, idx) => {
+            {TOOLS_REGISTRY.filter(t => 
+              ['json-viewer', 'code-compare', 'image-tools', 'base64-converter', 'currency-converter', 'weather'].includes(t.id)
+            ).slice(0, 6).map((tool, idx) => {
               const Icon = ICON_MAP[tool.iconName] || Code2;
               const isActive = tool.status === "active";
               // Calculate a staggered delay based on index for the grid items

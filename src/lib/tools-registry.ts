@@ -128,6 +128,78 @@ export const TOOLS_REGISTRY: ToolDefinition[] = [
       "fiat converter",
     ],
   },
+  {
+    id: "image-tools",
+    name: "Online Image Tools Hub",
+    shortDescription: "Convert, compress, and resize images instantly with high quality.",
+    description: "Professional online image tools. Convert PNG to JPG, compress image size, resize graphics, and process transparent images directly in your browser with high performance.",
+    category: "Converters",
+    route: "/image-tools",
+    iconName: "Sparkles",
+    status: "active",
+    tags: [
+      "image converter",
+      "png to jpg",
+      "jpg to png",
+      "image resizer",
+      "image compressor",
+      "transparent imager",
+      "webp converter"
+    ],
+  },
+  {
+    id: "find-my-ip",
+    name: "Find My IP Address",
+    shortDescription: "Check your public IP address, geolocation, and ISP instantly.",
+    description: "Detect your public IPv4/IPv6 address securely. Provides detailed network information including geolocation (city, country), ISP details, and ASN without logging your data.",
+    category: "Encoders",
+    route: "/find-my-ip",
+    iconName: "Globe",
+    status: "active",
+    tags: [
+      "what is my ip",
+      "find my ip",
+      "ip checker",
+      "ip address location",
+      "public ip",
+      "ipv4 address"
+    ],
+  },
+  {
+    id: "base64-converter",
+    name: "Base64 Encoder & Decoder",
+    shortDescription: "Encode text to Base64 or decode Base64 back to plain text instantly.",
+    description: "Fast, secure, and privacy-focused Base64 encoding and decoding utility. Operates completely client-side in real-time with full UTF-8 character support.",
+    category: "Encoders",
+    route: "/base64-converter",
+    iconName: "Binary",
+    status: "active",
+    tags: [
+      "base64 encoder",
+      "base64 decoder",
+      "base64 converter",
+      "encode base64",
+      "decode base64",
+      "base64 string"
+    ],
+  },
+  {
+    id: "weather",
+    name: "Online Weather & Forecast",
+    shortDescription: "Check live local weather conditions and multi-day forecasts for any area.",
+    description: "Instantly detect your local weather or search for any city, state, or country worldwide to view live temperature, humidity, wind speed, and accurate 4-day forecasts.",
+    category: "Converters",
+    route: "/weather",
+    iconName: "CloudSun",
+    status: "active",
+    tags: [
+      "weather",
+      "forecast",
+      "local weather",
+      "live weather",
+      "weather checker"
+    ],
+  },
 ];
 
 

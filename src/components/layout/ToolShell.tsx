@@ -26,7 +26,7 @@ export const ToolHeader: React.FC<{
           <div className="flex items-center gap-2.5">
             <h2 className="font-extrabold text-base sm:text-lg text-slate-900 dark:text-slate-100 tracking-tight">{title}</h2>
             {badge && (
-              <span className="px-2.5 py-0.5 text-xs font-mono font-semibold rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">
+              <span className="px-2.5 py-0.5 text-xs font-mono font-semibold rounded-md bg-emerald-50 dark:bg-emerald-900/10 text-emerald-700 dark:text-emerald-200 border border-emerald-200">
                 {badge}
               </span>
             )}
@@ -50,7 +50,7 @@ export const ToolStatus: React.FC<{ children: React.ReactNode; variant?: "info" 
   const variantStyles = {
     info: "bg-indigo-50 border-indigo-200 text-indigo-800",
     error: "bg-rose-50 border-rose-200 text-rose-800",
-    success: "bg-emerald-50 border-emerald-200 text-emerald-800",
+    success: "bg-emerald-50 dark:bg-emerald-900/10 border-emerald-200 text-emerald-800 dark:text-emerald-100",
   };
 
   return (
@@ -59,4 +59,5 @@ export const ToolStatus: React.FC<{ children: React.ReactNode; variant?: "info" 
     </div>
   );
 };
+
 

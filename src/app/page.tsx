@@ -45,7 +45,7 @@ export default function Home() {
   const activeTools = TOOLS_REGISTRY.filter((t) => t.status === "active");
 
   return (
-    <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden font-sans bg-[#fbfcfd] dark:bg-[#0f172a] text-slate-900 dark:text-slate-100 selection:bg-indigo-500/30 transition-colors duration-300">
+    <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden font-sans bg-[#fbfcfd] dark:bg-[#0f172a] text-slate-900 dark:text-slate-100 selection:bg-indigo-50 dark:selection:bg-indigo-900/30 transition-colors duration-300">
       {/* Dynamic Background */}
       <FluidCanvas />
       
@@ -90,10 +90,10 @@ export default function Home() {
               {/* Subtle ambient glow behind the container */}
               <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10 blur-xl opacity-50 rounded-3xl" />
               
-              <div className="relative grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 p-3 sm:p-4 rounded-3xl bg-white dark:bg-slate-900/50 dark:bg-slate-800/50/50 backdrop-blur-2xl border border-white dark:border-slate-700/80 dark:border-slate-700/80 dark:border-slate-800/80 shadow-[0_8px_32px_rgba(15,23,42,0.04)] dark:shadow-none ring-1 ring-slate-900/5 dark:ring-slate-100/5">
+              <div className="relative grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 p-3 sm:p-4 rounded-3xl bg-white dark:bg-slate-900/50 backdrop-blur-2xl border border-white dark:border-slate-800/80 shadow-[0_8px_32px_rgba(15,23,42,0.04)] dark:shadow-none ring-1 ring-slate-900/5 dark:ring-slate-100/5">
                 {FEATURES.map((feature, idx) => (
-                  <div key={idx} className="group relative flex flex-col items-center text-center gap-3 p-5 rounded-2xl hover:bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 dark:hover:bg-slate-800/50 transition-all duration-300">
-                    <div className="p-3 rounded-2xl bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 shadow-sm text-slate-700 dark:text-slate-300 group-hover:text-indigo-600 dark:text-indigo-300 dark:group-hover:text-indigo-400 group-hover:shadow-md group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300">
+                  <div key={idx} className="group relative flex flex-col items-center text-center gap-3 p-5 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all duration-300">
+                    <div className="p-3 rounded-2xl bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700/80 shadow-sm text-slate-700 dark:text-slate-300 group-hover:text-indigo-600 dark:text-indigo-300 dark:group-hover:text-indigo-400 group-hover:shadow-md group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300">
                       <feature.icon className="w-5 h-5" />
                     </div>
                     <div className="space-y-1.5 z-10">
@@ -121,7 +121,7 @@ export default function Home() {
               </p>
             </SlideUp>
             <SlideUp delay={0.1}>
-              <div className="flex items-center gap-2 bg-indigo-50 px-4 py-2 rounded-full border border-indigo-100">
+              <div className="flex items-center gap-2 bg-indigo-50 dark:bg-indigo-900/20 px-4 py-2 rounded-full border border-indigo-100 dark:border-indigo-500/20">
                 <Cpu className="w-4 h-4 text-indigo-600 dark:text-indigo-300" />
                 <span className="text-sm font-bold text-indigo-700 dark:text-indigo-200">{activeTools.length} Platform Tools</span>
               </div>
@@ -155,7 +155,7 @@ export default function Home() {
                         <div
                           className={`p-3.5 rounded-2xl border transition-all duration-300 ${
                             isActive
-                              ? "bg-indigo-50/50 dark:bg-slate-800/50 border-indigo-100 dark:border-slate-700 text-indigo-600 dark:text-slate-300 group-hover:bg-indigo-600 dark:group-hover:bg-slate-700 group-hover:text-white dark:group-hover:text-white group-hover:scale-110 shadow-sm"
+                              ? "bg-indigo-50 dark:bg-indigo-900/10/50 dark:bg-slate-800/50 border-indigo-100 dark:border-slate-700 text-indigo-600 dark:text-slate-300 group-hover:bg-indigo-600 dark:group-hover:bg-slate-700 group-hover:text-white dark:group-hover:text-white group-hover:scale-110 shadow-sm"
                               : "bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 text-slate-400"
                           }`}
                         >
@@ -165,7 +165,7 @@ export default function Home() {
                         <span
                           className={`px-3 py-1.5 text-[10px] uppercase tracking-widest font-bold rounded-full border ${
                             isActive
-                              ? "bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 group-hover:bg-indigo-50 dark:group-hover:bg-slate-800 group-hover:text-indigo-700 dark:text-indigo-200 dark:group-hover:text-slate-300 group-hover:border-indigo-200 dark:group-hover:border-slate-600 transition-colors duration-300"
+                              ? "bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 group-hover:bg-indigo-50 dark:bg-indigo-900/10 dark:group-hover:bg-slate-800 group-hover:text-indigo-700 dark:text-indigo-200 dark:group-hover:text-slate-300 group-hover:border-indigo-200 dark:group-hover:border-slate-600 transition-colors duration-300"
                               : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-700"
                           }`}
                         >
@@ -186,7 +186,7 @@ export default function Home() {
                     <div className="pt-8 relative z-10 mt-auto">
                       {isActive ? (
                         <Link href={tool.route} className="w-full block cursor-pointer">
-                          <button className="w-full py-3 px-4 rounded-xl font-bold text-sm flex items-center justify-between bg-slate-50 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 hover:text-indigo-700 dark:text-indigo-200 dark:hover:text-white border border-slate-200 dark:border-slate-700/80 dark:border-slate-700 hover:border-indigo-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer">
+                          <button className="w-full py-3 px-4 rounded-xl font-bold text-sm flex items-center justify-between bg-slate-50 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:bg-indigo-900/10 dark:hover:bg-slate-800 hover:text-indigo-700 dark:text-indigo-200 dark:hover:text-white border border-slate-200 dark:border-slate-700/80 dark:border-slate-700 hover:border-indigo-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer">
                             Launch Tool
                             <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-indigo-600 dark:text-indigo-300 dark:group-hover:text-white group-hover:translate-x-1.5 transition-all duration-300" />
                           </button>
@@ -233,7 +233,7 @@ export default function Home() {
             
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
               <div className="space-y-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 dark:bg-slate-900/10 border border-white/10 dark:border-slate-700/10 backdrop-blur-md">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/10 backdrop-blur-md">
                   <ShieldCheck className="w-4 h-4 text-emerald-400" />
                   <span className="text-[11px] font-bold uppercase tracking-widest text-emerald-100 font-mono">
                     Security First
@@ -247,7 +247,7 @@ export default function Home() {
                 </p>
                 <div className="pt-4">
                   <Link href="/json-viewer">
-                    <Button variant="primary" size="lg" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:bg-slate-800 border-transparent shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                    <Button variant="primary" size="lg" className="bg-white text-slate-900 hover:bg-slate-100 border-transparent shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                       Start Formatting
                     </Button>
                   </Link>
@@ -261,7 +261,7 @@ export default function Home() {
                   { title: "Payload Decoders", desc: "JWT verification & base64 transforms." },
                   { title: "Compiler", desc: "Multi-language online playground." },
                 ].map((item, i) => (
-                  <div key={i} className="p-5 rounded-2xl bg-white dark:bg-slate-900/5 border border-white/10 dark:border-slate-700/10 backdrop-blur-md hover:bg-white/10 dark:bg-slate-900/10 transition-colors">
+                  <div key={i} className="p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-colors">
                     <h4 className="font-bold text-white mb-2">{item.title}</h4>
                     <p className="text-sm text-slate-400">{item.desc}</p>
                   </div>
@@ -322,5 +322,7 @@ export default function Home() {
     </div>
   );
 }
+
+
 
 

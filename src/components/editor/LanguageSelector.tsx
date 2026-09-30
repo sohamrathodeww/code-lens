@@ -56,11 +56,11 @@ export default function LanguageSelector({ language, onSelect }: LanguageSelecto
             className={`flex items-center gap-2 pr-4 pl-1.5 py-1.5 rounded-lg transition-all duration-200 ease-in-out text-sm font-semibold
               ${language === lang.name 
                 ? 'bg-white dark:bg-slate-900 text-indigo-600 shadow-sm border border-slate-200 dark:border-slate-700' 
-                : 'text-slate-600 dark:text-slate-400 hover:text-indigo-600 hover:bg-white/50 dark:bg-slate-800/50 border border-transparent'
+                : 'text-slate-600 dark:text-slate-400 hover:text-indigo-600 hover:bg-white dark:bg-slate-900/50 dark:bg-slate-800/50 border border-transparent'
               }`}
           >
             <div className={`w-7 h-7 rounded flex items-center justify-center
-              ${language === lang.name ? 'bg-indigo-100 text-indigo-700' : 'bg-slate-200 text-slate-500'}`}
+              ${language === lang.name ? 'bg-indigo-100 text-indigo-700' : 'bg-slate-200 text-slate-500 dark:text-slate-400'}`}
             >
               {getIcon(lang.name)}
             </div>
@@ -85,7 +85,7 @@ export default function LanguageSelector({ language, onSelect }: LanguageSelecto
             </>
           ) : (
             <>
-              <div className="w-7 h-7 rounded flex items-center justify-center bg-slate-200 text-slate-500">
+              <div className="w-7 h-7 rounded flex items-center justify-center bg-slate-200 text-slate-500 dark:text-slate-400">
                 <FileCode2 className="w-4 h-4" />
               </div>
               <span>Select Language</span>
@@ -114,7 +114,7 @@ export default function LanguageSelector({ language, onSelect }: LanguageSelecto
                   >
                     <div className="flex items-center gap-3">
                       <div className={`w-6 h-6 rounded flex items-center justify-center
-                        ${isSelected ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'}`}
+                        ${isSelected ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'}`}
                       >
                         {getIcon(lang.name)}
                       </div>
@@ -133,4 +133,5 @@ export default function LanguageSelector({ language, onSelect }: LanguageSelecto
     </div>
   );
 }
+
 

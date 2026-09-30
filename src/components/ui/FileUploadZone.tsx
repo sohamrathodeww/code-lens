@@ -111,7 +111,7 @@ export const FileUploadZone: React.FC<FileUploadZoneProps> = ({
         whileHover={{ scale: 1.008 }}
         onClick={() => fileInputRef.current?.click()}
         className={clsx(
-          "relative group border-2 border-dashed rounded-3xl p-7 transition-all duration-300 cursor-pointer text-center flex flex-col items-center justify-center gap-3 overflow-hidden backdrop-blur-2xl bg-white/70 border-indigo-300/60 shadow-[inset_0_1.5px_2px_#ffffff,0_10px_25px_rgba(15,23,42,0.05)]",
+          "relative group border-2 border-dashed rounded-3xl p-7 transition-all duration-300 cursor-pointer text-center flex flex-col items-center justify-center gap-3 overflow-hidden backdrop-blur-2xl bg-white/70 dark:bg-slate-900/70 border-indigo-300/60 shadow-sm",
           isDragging
             ? "border-indigo-600 bg-indigo-50 shadow-[0_12px_32px_rgba(99,102,241,0.25)] scale-[1.01]"
             : "hover:border-indigo-500 hover:bg-white dark:bg-slate-900 hover:shadow-[0_16px_36px_rgba(99,102,241,0.15)]"
@@ -163,18 +163,18 @@ export const FileUploadZone: React.FC<FileUploadZoneProps> = ({
         <motion.div
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-3 p-3.5 rounded-2xl bg-emerald-500/15 border border-emerald-300 text-emerald-900 flex items-center justify-between text-xs font-sans shadow-sm backdrop-blur-xl"
+          className="mt-3 p-3.5 rounded-2xl bg-emerald-50 dark:bg-emerald-900/100/15 border border-emerald-300 text-emerald-900 flex items-center justify-between text-xs font-sans shadow-sm backdrop-blur-xl"
         >
           <div className="flex items-center gap-2.5 truncate">
-            <FileCode className="w-4 h-4 text-emerald-700 shrink-0" />
+            <FileCode className="w-4 h-4 text-emerald-700 dark:text-emerald-200 shrink-0" />
             <span className="font-mono font-bold truncate">{currentFile.name}</span>
-            <span className="text-[10px] px-2 py-0.5 rounded-md bg-white dark:bg-slate-900 text-emerald-800 font-mono font-bold border border-emerald-200">
+            <span className="text-[10px] px-2 py-0.5 rounded-md bg-white dark:bg-slate-900 text-emerald-800 dark:text-emerald-100 font-mono font-bold border border-emerald-200">
               {formatBytes(currentFile.size)}
             </span>
           </div>
           <button
             onClick={clearFile}
-            className="text-slate-500 hover:text-slate-900 dark:text-slate-100 transition-colors p-1 rounded-lg hover:bg-slate-200/50"
+            className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-slate-100 transition-colors p-1 rounded-lg hover:bg-slate-200/50"
           >
             <X className="w-3.5 h-3.5" />
           </button>
@@ -183,6 +183,7 @@ export const FileUploadZone: React.FC<FileUploadZoneProps> = ({
     </div>
   );
 };
+
 
 
 

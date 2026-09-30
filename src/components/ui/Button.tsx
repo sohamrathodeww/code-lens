@@ -54,21 +54,21 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantStyles = {
     primary:
-      "bg-white/90 dark:bg-slate-900/90 hover:bg-white dark:hover:bg-slate-800 text-slate-950 dark:text-white font-extrabold border-white dark:border-slate-700 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_8px_20px_rgba(0,0,0,0.5)] hover:shadow-[inset_0_2px_3px_#ffffff,0_12px_28px_rgba(99,102,241,0.18)] dark:hover:shadow-[inset_0_1px_2px_rgba(255,255,255,0.15),0_12px_28px_rgba(99,102,241,0.3)]",
+      "bg-white dark:bg-slate-900/90 dark:bg-slate-900/90 hover:bg-white dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-950 dark:text-white font-extrabold border-white dark:border-slate-700 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_8px_20px_rgba(0,0,0,0.5)] hover:shadow-[inset_0_2px_3px_#ffffff,0_12px_28px_rgba(99,102,241,0.18)] dark:hover:shadow-[inset_0_1px_2px_rgba(255,255,255,0.15),0_12px_28px_rgba(99,102,241,0.3)]",
     solid:
       "bg-slate-950 hover:bg-slate-900 text-white font-extrabold border-slate-950 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15),0_8px_20px_rgba(15,23,42,0.15)] hover:shadow-[0_12px_28px_rgba(15,23,42,0.25)]",
     secondary:
-      "bg-white/90 dark:bg-slate-900/90 hover:bg-white dark:hover:bg-slate-800 text-slate-950 dark:text-white font-extrabold border-white dark:border-slate-700 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_8px_20px_rgba(0,0,0,0.5)] hover:shadow-[inset_0_2px_3px_#ffffff,0_12px_28px_rgba(99,102,241,0.18)] dark:hover:shadow-[inset_0_1px_2px_rgba(255,255,255,0.15),0_12px_28px_rgba(99,102,241,0.3)]",
+      "bg-white dark:bg-slate-900/90 dark:bg-slate-900/90 hover:bg-white dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-950 dark:text-white font-extrabold border-white dark:border-slate-700 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_8px_20px_rgba(0,0,0,0.5)] hover:shadow-[inset_0_2px_3px_#ffffff,0_12px_28px_rgba(99,102,241,0.18)] dark:hover:shadow-[inset_0_1px_2px_rgba(255,255,255,0.15),0_12px_28px_rgba(99,102,241,0.3)]",
     ghost:
-      "bg-white/50 dark:bg-slate-800/50 hover:bg-white/90 dark:hover:bg-slate-700/80 text-slate-800 hover:text-slate-950 dark:text-white border-white/70 hover:border-white dark:border-slate-700 shadow-none",
+      "bg-white dark:bg-slate-900/50 dark:bg-slate-800/50 hover:bg-white/90 dark:bg-slate-900/90 dark:hover:bg-slate-700/80 text-slate-800 dark:text-slate-100 hover:text-slate-950 dark:text-white border-white/70 dark:border-slate-700/70 hover:border-white dark:border-slate-700 shadow-none",
     destructive:
       "bg-rose-50/95 hover:bg-rose-100 text-rose-700 font-extrabold border-rose-200 hover:border-rose-300 ",
     icon:
-      "p-2.5 bg-white/85 hover:bg-white dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-950 dark:text-white border-white dark:border-slate-700 rounded-full shadow-[inset_0_1.5px_2px_#ffffff,0_6px_16px_rgba(15,23,42,0.06)]",
+      "p-2.5 bg-white dark:bg-slate-900/85 hover:bg-white dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-950 dark:text-white border-white dark:border-slate-700 rounded-full shadow-sm",
     toolAction:
-      "bg-white/90 dark:bg-slate-900/90 hover:bg-white dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100 border-white dark:border-slate-700 font-mono text-xs rounded-xl ",
+      "bg-white dark:bg-slate-900/90 dark:bg-slate-900/90 hover:bg-white dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100 border-white dark:border-slate-700 font-mono text-xs rounded-xl ",
     floatingAction:
-      "bg-white/95 backdrop-blur-3xl text-slate-950 dark:text-white font-extrabold border-white dark:border-slate-700 shadow-[inset_0_2px_3px_#ffffff,0_16px_36px_rgba(15,23,42,0.1)]",
+      "bg-white/95 dark:bg-slate-900/95 backdrop-blur-3xl text-slate-950 dark:text-white font-extrabold border-white dark:border-slate-700 shadow-[inset_0_2px_3px_#ffffff,0_16px_36px_rgba(15,23,42,0.1)]",
   };
 
   return (
@@ -88,7 +88,7 @@ export const Button: React.FC<ButtonProps> = ({
       {/* Water Ripple Physics */}
       {isRippling && coords && (
         <span
-          className="absolute bg-white/60 rounded-full animate-ping pointer-events-none transform -translate-x-1/2 -translate-y-1/2"
+          className="absolute bg-white/60 dark:bg-slate-900/60 rounded-full animate-ping pointer-events-none transform -translate-x-1/2 -translate-y-1/2"
           style={{
             left: coords.x,
             top: coords.y,
@@ -113,6 +113,7 @@ export const Button: React.FC<ButtonProps> = ({
     </motion.button>
   );
 };
+
 
 
 

@@ -24,7 +24,7 @@ export default function OutputPanel({ output, error, isLoading, isSimulated, onR
           <button
             onClick={onRun}
             disabled={isLoading}
-            className="flex items-center px-4 py-1.5 bg-green-600 hover:bg-green-500 text-white rounded-md font-medium text-sm transition-all shadow-lg shadow-green-900/20 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center px-4 py-1.5 bg-green-600 hover:bg-green-50 dark:bg-green-900/100 text-white rounded-md font-medium text-sm transition-all shadow-lg shadow-green-900/20 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? (
               <>
@@ -66,5 +66,6 @@ export default function OutputPanel({ output, error, isLoading, isSimulated, onR
     </div>
   );
 }
+
 
 

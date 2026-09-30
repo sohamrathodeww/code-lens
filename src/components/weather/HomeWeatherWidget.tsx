@@ -71,9 +71,9 @@ export const HomeWeatherWidget = () => {
   if (error || !weather && !loading) return null;
 
   return (
-    <Link href="/weather" className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/70 backdrop-blur-md border border-slate-200/80 dark:border-slate-700/80 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all cursor-pointer group">
+    <Link href="/weather" className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all cursor-pointer group">
       {loading ? (
-        <div className="flex items-center gap-2 text-slate-500 text-xs font-bold uppercase tracking-wider">
+        <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
           <Loader2 className="w-4 h-4 animate-spin" />
           <span>Detecting Local Weather...</span>
         </div>
@@ -94,4 +94,5 @@ export const HomeWeatherWidget = () => {
     </Link>
   );
 };
+
 

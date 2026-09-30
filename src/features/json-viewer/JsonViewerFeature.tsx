@@ -64,7 +64,7 @@ const DEFAULT_SAMPLE_JSON = {
 type ViewMode = "tree" | "table" | "hierarchy" | "graph";
 
 export const JsonViewerFeature: React.FC = () => {
-  const { theme } = useTheme();
+  const { theme, resolvedTheme } = useTheme();
   const [jsonText, setJsonText] = useState<string>(
     JSON.stringify(DEFAULT_SAMPLE_JSON, null, 2)
   );
@@ -215,7 +215,7 @@ export const JsonViewerFeature: React.FC = () => {
             <Editor
               height="100%"
               defaultLanguage="json"
-              theme={theme === "dark" ? "vs-dark" : "vs"}
+              theme={resolvedTheme === "dark" ? "vs-dark" : "vs"}
               value={jsonText}
               onChange={handleEditorChange}
               loading={<ShimmerLoader variant="editor" />}
@@ -1074,6 +1074,7 @@ const JsonGraphView: React.FC<{ data: any; jsonText: string }> = ({ data, jsonTe
     </div>
   );
 };
+
 
 
 

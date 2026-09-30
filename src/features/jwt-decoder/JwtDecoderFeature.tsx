@@ -82,7 +82,7 @@ interface ParsedJwt {
 export const JwtDecoderFeature: React.FC = () => {
   const [jwtInput, setJwtInput] = useState<string>(SAMPLE_JWT_ACTIVE);
   const [secretKey, setSecretKey] = useState<string>("");
-  const { theme } = useTheme();
+  const { theme, resolvedTheme } = useTheme();
 
   const [copiedToken, setCopiedToken] = useState<boolean>(false);
   const [copiedHeader, setCopiedHeader] = useState<boolean>(false);
@@ -464,7 +464,7 @@ export const JwtDecoderFeature: React.FC = () => {
                       height="100%"
                       language="json"
                       value={parsedJwt.headerFormatted}
-                      theme={theme === "dark" ? "vs-dark" : "vs"}
+                      theme={resolvedTheme === "dark" ? "vs-dark" : "vs"}
                       loading={<ShimmerLoader variant="editor" />}
                       options={{
                         readOnly: true,
@@ -503,7 +503,7 @@ export const JwtDecoderFeature: React.FC = () => {
                       height="100%"
                       language="json"
                       value={parsedJwt.payloadFormatted}
-                      theme={theme === "dark" ? "vs-dark" : "vs"}
+                      theme={resolvedTheme === "dark" ? "vs-dark" : "vs"}
                       loading={<ShimmerLoader variant="editor" />}
                       options={{
                         readOnly: true,
@@ -538,6 +538,7 @@ export const JwtDecoderFeature: React.FC = () => {
     </SlideUp>
   );
 };
+
 
 
 

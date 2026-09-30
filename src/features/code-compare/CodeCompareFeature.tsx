@@ -185,7 +185,7 @@ export const CodeCompareFeature: React.FC = () => {
   const [modifiedCode, setModifiedCode] = useState<string>(SAMPLE_MODIFIED);
   const [originalFilename, setOriginalFilename] = useState<string>("Original Text");
   const [modifiedFilename, setModifiedFilename] = useState<string>("Modified Text");
-  const { theme } = useTheme();
+  const { theme, resolvedTheme } = useTheme();
 
   const [copiedOriginal, setCopiedOriginal] = useState<boolean>(false);
   const [copiedModified, setCopiedModified] = useState<boolean>(false);
@@ -478,7 +478,7 @@ export const CodeCompareFeature: React.FC = () => {
             language="typescript"
             original={originalCode}
             modified={modifiedCode}
-            theme={theme === "dark" ? "vs-dark" : "vs"}
+            theme={resolvedTheme === "dark" ? "vs-dark" : "vs"}
             onMount={handleDiffMount}
             loading={<ShimmerLoader variant="editor" />}
             options={{
@@ -503,6 +503,7 @@ export const CodeCompareFeature: React.FC = () => {
     </SlideUp>
   );
 };
+
 
 
 

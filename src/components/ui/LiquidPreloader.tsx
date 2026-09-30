@@ -81,8 +81,8 @@ export const LiquidPreloader: React.FC<LiquidPreloaderProps> = ({
             </span>
           </div>
 
-          <div className="flex items-center gap-2 text-xs font-mono font-bold text-slate-500">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+          <div className="flex items-center gap-2 text-xs font-mono font-bold text-slate-500 dark:text-slate-400">
+            <span className="w-2 h-2 rounded-full bg-emerald-50 dark:bg-emerald-900/100 animate-ping" />
             <span>System Initialization</span>
           </div>
         </div>
@@ -99,9 +99,9 @@ export const LiquidPreloader: React.FC<LiquidPreloaderProps> = ({
             />
 
             {/* Inner Pulsing Glass Orb with Official CodeLens Logo */}
-            <div className="liquid-glass-surface p-5 rounded-3xl bg-white/90 dark:bg-slate-900/90 border border-white dark:border-slate-700 shadow-[0_20px_50px_rgba(79,70,229,0.22),inset_0_2px_3px_#ffffff] relative z-10 flex items-center justify-center group">
+            <div className="liquid-glass-surface p-5 rounded-3xl bg-white dark:bg-slate-900/90 dark:bg-slate-900/90 border border-white dark:border-slate-700 shadow-[0_20px_50px_rgba(79,70,229,0.22),inset_0_2px_3px_#ffffff] relative z-10 flex items-center justify-center group">
               <span className="lens-sheen" />
-              <div className="w-14 h-14 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-700/80 shadow-md bg-white dark:bg-slate-900 p-0.5 relative z-10 transition-transform duration-300 group-hover:scale-105">
+              <div className="w-14 h-14 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700/80 dark:border-slate-700/80 shadow-md bg-white dark:bg-slate-900 p-0.5 relative z-10 transition-transform duration-300 group-hover:scale-105">
                 <img src="/logo-dark-medium.jpg" alt="CodeLens Logo" className="w-full h-full object-cover rounded-xl" />
               </div>
             </div>
@@ -112,7 +112,7 @@ export const LiquidPreloader: React.FC<LiquidPreloaderProps> = ({
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white font-sans">
               CodeLens
             </h2>
-            <p className="text-xs font-mono font-bold text-slate-500">
+            <p className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400">
               Code Inspection & Developer Suite
             </p>
           </div>
@@ -120,7 +120,7 @@ export const LiquidPreloader: React.FC<LiquidPreloaderProps> = ({
           {/* Liquid Glass Progress Bar & Anatomy Step Tracker */}
           <div className="w-full space-y-4">
             {/* Track */}
-            <div className="w-full h-3 rounded-full bg-white/80 dark:bg-slate-800/80 border border-white dark:border-slate-700 p-0.5 shadow-[inset_0_1.5px_2px_rgba(0,0,0,0.06)] relative overflow-hidden">
+            <div className="w-full h-3 rounded-full bg-white dark:bg-slate-900/80 dark:bg-slate-800/80 border border-white dark:border-slate-700 p-0.5 shadow-[inset_0_1.5px_2px_rgba(0,0,0,0.06)] relative overflow-hidden">
               <motion.div
                 className="h-full rounded-full bg-gradient-to-r from-indigo-600 via-indigo-500 to-violet-600 shadow-[inset_0_1px_1.5px_rgba(255,255,255,0.6),0_4px_12px_rgba(79,70,229,0.4)]"
                 style={{ width: `${progress}%` }}
@@ -141,18 +141,18 @@ export const LiquidPreloader: React.FC<LiquidPreloaderProps> = ({
 
         {/* Bottom Anatomy Architecture Badges */}
         <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-3 pb-2">
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/70 border border-white dark:border-slate-700 text-[11px] font-mono font-bold text-slate-600 dark:text-slate-400 shadow-sm">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/70 dark:bg-slate-900/70 border border-white dark:border-slate-700 text-[11px] font-mono font-bold text-slate-600 dark:text-slate-400 shadow-sm">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-300" />
             <span>Monaco Engine v0.52</span>
           </div>
 
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/70 border border-white dark:border-slate-700 text-[11px] font-mono font-bold text-slate-600 dark:text-slate-400 shadow-sm">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/70 dark:bg-slate-900/70 border border-white dark:border-slate-700 text-[11px] font-mono font-bold text-slate-600 dark:text-slate-400 shadow-sm">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-300" />
             <span>5MB Inline Validator</span>
           </div>
 
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/70 border border-white dark:border-slate-700 text-[11px] font-mono font-bold text-slate-600 dark:text-slate-400 shadow-sm">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/70 dark:bg-slate-900/70 border border-white dark:border-slate-700 text-[11px] font-mono font-bold text-slate-600 dark:text-slate-400 shadow-sm">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-300" />
             <span>Liquid Glass UI System</span>
           </div>
         </div>
@@ -160,4 +160,5 @@ export const LiquidPreloader: React.FC<LiquidPreloaderProps> = ({
     </AnimatePresence>
   );
 };
+
 

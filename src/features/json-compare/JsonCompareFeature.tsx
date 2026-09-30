@@ -203,7 +203,7 @@ export const JsonCompareFeature: React.FC = () => {
   const [modifiedCode, setModifiedCode] = useState<string>(SAMPLE_MODIFIED);
   const [originalFilename, setOriginalFilename] = useState<string>("Original JSON");
   const [modifiedFilename, setModifiedFilename] = useState<string>("Modified JSON");
-  const { theme } = useTheme();
+  const { theme, resolvedTheme } = useTheme();
 
   const [copiedOriginal, setCopiedOriginal] = useState<boolean>(false);
   const [copiedModified, setCopiedModified] = useState<boolean>(false);
@@ -504,7 +504,7 @@ export const JsonCompareFeature: React.FC = () => {
               language="json"
               value={originalCode}
               onChange={(v) => setOriginalCode(v || "")}
-              theme={theme === "dark" ? "vs-dark" : "vs"}
+              theme={resolvedTheme === "dark" ? "vs-dark" : "vs"}
               onMount={handleOrigMount}
               loading={<ShimmerLoader variant="editor" />}
               options={{
@@ -582,7 +582,7 @@ export const JsonCompareFeature: React.FC = () => {
               language="json"
               value={modifiedCode}
               onChange={(v) => setModifiedCode(v || "")}
-              theme={theme === "dark" ? "vs-dark" : "vs"}
+              theme={resolvedTheme === "dark" ? "vs-dark" : "vs"}
               onMount={handleModMount}
               loading={<ShimmerLoader variant="editor" />}
               options={{
@@ -605,6 +605,7 @@ export const JsonCompareFeature: React.FC = () => {
     </SlideUp>
   );
 };
+
 
 
 

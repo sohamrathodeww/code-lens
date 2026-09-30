@@ -38,7 +38,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 ? "border-rose-300 focus:border-rose-500 focus:ring-rose-500/15"
                 : successMessage
                 ? "border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500/15"
-                : "border-slate-200 dark:border-slate-700 hover:border-slate-300 focus:border-indigo-500 focus:ring-indigo-500/15 shadow-sm",
+                : "border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:border-slate-600 focus:border-indigo-500 focus:ring-indigo-500/15 shadow-sm",
               disabled && "bg-slate-50 dark:bg-slate-800/50 text-slate-400 cursor-not-allowed",
               className
             )}
@@ -49,9 +49,9 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {errorMessage ? (
           <p className="text-[11px] font-semibold text-rose-600 font-sans">{errorMessage}</p>
         ) : successMessage ? (
-          <p className="text-[11px] font-semibold text-emerald-600 font-sans">{successMessage}</p>
+          <p className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-300 font-sans">{successMessage}</p>
         ) : helperText ? (
-          <p className="text-[11px] text-slate-500 font-sans">{helperText}</p>
+          <p className="text-[11px] text-slate-500 dark:text-slate-400 font-sans">{helperText}</p>
         ) : null}
       </div>
     );
@@ -59,4 +59,5 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 );
 
 Input.displayName = "Input";
+
 

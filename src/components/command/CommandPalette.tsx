@@ -125,7 +125,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                       className={`flex items-center justify-between p-3 rounded-xl cursor-pointer transition-colors duration-150 ${
                         isSelected
                           ? "bg-indigo-50 border border-indigo-200/80 text-indigo-900"
-                          : "hover:bg-slate-50 dark:bg-slate-800/50 border border-transparent text-slate-800"
+                          : "hover:bg-slate-50 dark:bg-slate-800/50 border border-transparent text-slate-800 dark:text-slate-100"
                       }`}
                     >
                       <div className="flex items-center gap-3">
@@ -142,14 +142,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                             <span
                               className={`text-[10px] font-mono px-2 py-0.5 rounded font-semibold ${
                                 tool.status === "active"
-                                  ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                                  : "bg-slate-100 dark:bg-slate-800 text-slate-500 border border-slate-200 dark:border-slate-700"
+                                  ? "bg-emerald-50 dark:bg-emerald-900/10 text-emerald-700 dark:text-emerald-200 border border-emerald-200"
+                                  : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700"
                               }`}
                             >
                               {tool.status === "active" ? "Active" : "Planned"}
                             </span>
                           </div>
-                          <p className="text-xs text-slate-500 line-clamp-1">{tool.shortDescription}</p>
+                          <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1">{tool.shortDescription}</p>
                         </div>
                       </div>
 
@@ -171,7 +171,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
             </div>
 
             {/* Modal Footer Controls */}
-            <div className="px-4 py-2 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between text-[11px] font-mono text-slate-500">
+            <div className="px-4 py-2 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400">
               <div className="flex items-center gap-2">
                 <span className="px-1.5 py-0.5 rounded bg-slate-200 font-semibold">↑↓</span> to navigate
                 <span className="px-1.5 py-0.5 rounded bg-slate-200 font-semibold">↵</span> to select
@@ -186,4 +186,5 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     </AnimatePresence>
   );
 };
+
 

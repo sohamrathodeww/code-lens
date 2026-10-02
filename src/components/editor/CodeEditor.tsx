@@ -5,10 +5,11 @@ import Editor from '@monaco-editor/react';
 interface CodeEditorProps {
   language: string;
   value: string;
-  onChange: (value: string | undefined) => void;
+  onChange?: (value: string | undefined) => void;
+  readOnly?: boolean;
 }
 
-export default function CodeEditor({ language, value, onChange }: CodeEditorProps) {
+export default function CodeEditor({ language, value, onChange, readOnly = false }: CodeEditorProps) {
   const { theme, resolvedTheme } = useTheme();
   return (
     <div className="w-full h-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
@@ -31,6 +32,7 @@ export default function CodeEditor({ language, value, onChange }: CodeEditorProp
           scrollbar: {
             alwaysConsumeMouseWheel: false,
           },
+          readOnly: readOnly,
         }}
         loading={
           <div className="flex items-center justify-center h-full text-slate-500 dark:text-slate-400 bg-[#1e1e1e]/5 rounded-xl font-mono text-sm">

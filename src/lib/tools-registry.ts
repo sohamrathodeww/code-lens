@@ -218,6 +218,59 @@ export const TOOLS_REGISTRY: ToolDefinition[] = [
       "weather checker"
     ],
   },
+  {
+    id: "qr-generator",
+    name: "Online QR Code Generator",
+    shortDescription: "Generate customizable QR codes with logos, colors, and varying sizes.",
+    description: "Professional online QR code generator. Create highly customizable QR codes for URLs, text, Wi-Fi, and more. Supports logo embedding, color customization, and instant high-quality downloads.",
+    category: "Converters",
+    route: "/qr-generator",
+    iconName: "QrCode",
+    status: "active",
+    tags: [
+      "qr code",
+      "qr generator",
+      "online qr code maker",
+      "qr code with logo",
+      "generate qr code"
+    ],
+  },
+  {
+    id: "encryption-generator",
+    name: "Online Encryption & Hash Generator",
+    shortDescription: "Generate MD5, SHA hashes and Encrypt/Decrypt using AES, DES, and more.",
+    description: "Professional online cryptographic tool. Generate secure hashes (MD5, SHA-1, SHA-256) and perform symmetric encryption/decryption (AES, DES, Rabbit) directly in your browser with no server tracking.",
+    category: "Encoders",
+    route: "/encryption-generator",
+    iconName: "Lock",
+    status: "active",
+    tags: [
+      "md5 generator",
+      "sha256 hash",
+      "aes encryption",
+      "online decrypter",
+      "hash generator",
+      "crypto tools"
+    ],
+  },
+  {
+    id: "api-tester",
+    name: "Online API Tester",
+    shortDescription: "Test REST APIs, send HTTP requests, and inspect responses instantly.",
+    description: "Professional online API testing tool similar to Postman. Configure methods, headers, and request bodies to test REST endpoints. Inspect status codes, response times, and payloads directly in the browser.",
+    category: "Code & Diff",
+    route: "/api-tester",
+    iconName: "Network",
+    status: "active",
+    tags: [
+      "api tester",
+      "postman clone",
+      "test api online",
+      "http client",
+      "rest api tester",
+      "api request"
+    ],
+  },
 ];
 
 
